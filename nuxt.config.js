@@ -23,7 +23,7 @@ export default {
   css: [
     'primevue/resources/primevue.min.css',
     'primeicons/primeicons.css',
-    '~/assets/font/gilroy/stylesheet.css',
+    '~/assets/font/montserrat/stylesheet.css',
     '~/assets/css/null.css',
     '~/assets/css/custom.scss',
     '~/assets/css/bootstrap.scss',
