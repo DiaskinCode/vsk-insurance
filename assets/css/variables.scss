@@ -1,71 +1,67 @@
-$text: #495057;
-$secondary-text: #6C757D;
+$text: #222222;
+$secondary-text: #333333;
 
-$border-radius: 3px;
-$disabled-opacity: .6;
+$primary: #0071B7;
 
-$primary: #2196F3;
-$primaty-text: #FFFFFF;
-$highlight-background: #E3F2FD;
-$highlight-text: #495057;
-$hover-background: #E9ECEF;
-$focus-outline: #A6D5FA;
+$gray: #F5F6F9;
+$gray-light: #FBFCFD;
+$gray-heavy: #DDDEE1;
+$gray-footer-1: #E9EBEC;
+$gray-footer-2: #DBDEE1;
 
 $error: #F44336;
 $success: #689F38;
 
-$white: #fff;
-
-$gray0: #F5F5F5;
-$gray1: #E5E5E5;
-$gray2: #CCCCCC;
-$gray3: #B2B2B2;
-$gray4: #999999;
-$gray5: #7F7F7F;
-$gray6: #666666;
-$gray7: #4C4C4C;
-$gray8: #333333;
-$gray9: #191919;
-
 $black: #000;
-
-$primary-hover: #0d89ec;
-
-$secondary: #607D8B;
-$secondary-hover: #607D8B;
+$white: #fff;
 
 $box-shadow-1: 0px 4px 8px rgb(0, 0, 0, 0.07);
 $box-shadow-2: 0px 4px 10px rgba(0, 0, 0, 0.11);
 
 // utilities
 
-// $text-colors: (
-//   t: $text,
-//   st: $secondary-text,
-//   pt: $primaty-text,
-//   ht: $highlight-text,
-//   wt: $white-text,
-//   p: $primary,
-//   e: $error,
-//   g: $gray3,
-// );
+$text-colors: (
+  t: $text,
+  st: $secondary-text,
+  p: $primary,
+);
 
-// $background-colors: (
-//   p: $primary,
-//   s: $secondary,
-//   w: $white,
-//   g0: $gray0,
-//   g1: $gray1,
-//   g2: $gray2,
-//   g3: $gray3,
-//   g4: $gray4,
-//   g5: $gray5,
-//   g6: $gray6,
-//   g7: $gray7,
-//   g8: $gray8,
-//   g9: $gray9,
-//   h: $highlight-background,
-// );
+$background-colors: (
+  p: $primary,
+  w: $white,
+  g: $gray,
+  gl: $gray-light,
+  gh: $gray-heavy,
+  gf1: $gray-footer-1,
+  gf2: $gray-footer-1,
+);
+
+$line-heights: (
+  110: 120%,
+  120: 120%,
+  130: 130%,
+  140: 140%,
+  180: 180%,
+  190: 190%,
+);
+
+$font-sizes: (
+  10: 1.0rem,
+  12: 1.2rem,
+  14: 1.4rem,
+  15: 1.5rem,
+  16: 1.6rem,
+  17: 1.7rem,
+  20: 2.0rem,
+  22: 2.2rem,
+  25: 2.5rem,
+  28: 2.8rem,
+  30: 3.0rem,
+  35: 3.5rem,
+  40: 3.5rem,
+);
+
+
 
 // $border-colors: $background-colors;
 
@@ -74,57 +70,12 @@ $box-shadow-2: 0px 4px 10px rgba(0, 0, 0, 0.11);
 //   2: $box-shadow-2,
 // );
 
-// $font-sizes: (
-//   10: 0.625rem,
-//   11: 0.6875rem,
-//   12: 0.75rem,
-//   13: 0.8125rem,
-//   14: 0.875rem,
-//   15: 0.9375rem,
-//   16: 1rem,
-//   18: 1.125rem,
-//   20: 1.25rem,
-//   22: 1.375rem,
-//   24: 1.5rem,
-//   26: 1.625rem,
-//   28: 1.75rem,
-//   30: 1.875rem,
-// );
+
 
 // $spacers: (
-//   0: 0rem,
-//   5: 0.3125rem,
-//   10: 0.625rem,
-//   15: 0.9375rem,
-//   20: 1.25rem,
-//   25: 1.5625rem,
-//   30: 1.875rem,
-//   35: 2.1875rem,
-//   40: 2.5rem,
-//   45: 2.8125rem,
-//   50: 3.125rem,
-//   55: 3.4375rem,
-//   60: 3.75rem,
-//   65: 4.0625rem,
-//   70: 4.375rem,
-//   75: 4.6875rem,
-//   80: 5rem,
-//   85: 5.3125rem,
-//   90: 5.625rem,
-//   95: 5.9375rem,
-//   100: 6.25rem,
 // );
 
 // $border-radiuses: (
-//   0: 0rem,
-//   3: 0.1875rem,
-//   6: 0.375rem,
-//   9: 0.5625rem,
-//   12: 0.75rem,
-//   15: 0.9375rem,
-//   18: 1.125rem,
-//   21: 1.3125rem,
-//   c: 50%,
 // );
 
 // $borders: (
