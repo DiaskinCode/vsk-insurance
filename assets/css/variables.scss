@@ -1,10 +1,11 @@
 $text: #222222;
-$secondary-text: #333333;
+$text-1b: #1B1F3B;
+$text-15: #151618;
 
 $primary: #007BFF;
 
 $gray: #FAFAFA;
-$gray-light: #CECECE;
+$gray-ce: #CECECE;
 
 $error: #F44336;
 $success: #689F38;
@@ -18,18 +19,19 @@ $box-shadow-1: 0px .4rem 5rem rgba(0, 0, 0, 0.05);
 
 $text-colors: (
   t: $text,
-  st: $secondary-text,
+  t00: $text-00,
+  t1b: $text-1b,
+  t15: $text-15,
   p: $primary,
+  w: $white,
+  b: $black,
 );
 
 $background-colors: (
   p: $primary,
-  w: $white,
   g: $gray,
-  gl: $gray-light,
-  gh: $gray-heavy,
-  gf1: $gray-footer-1,
-  gf2: $gray-footer-1,
+  gce: $gray-ce,
+  w: $white,
 );
 
 $line-heights: (
