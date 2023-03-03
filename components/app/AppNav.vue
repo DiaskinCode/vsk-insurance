@@ -1,8 +1,9 @@
 <template>
-  <nav class="app-nav d-f ai-c fd-c-mb row gx-40">
+  <nav class="app-nav d-f ai-c fd-c-mb">
     <AppNavLink
       v-for="(link, i) in links"
       :key="i"
+      class="ml-40"
       :label="link.label"
       :href="link.href"
       :button="link.button"
