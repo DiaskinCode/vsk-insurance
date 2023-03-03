@@ -1,5 +1,6 @@
 <template>
-  <div class="page-index">
+  <div class="page-index d-f fd-c ai-c">
+    <TheTop />
   </div>
 </template>
 
