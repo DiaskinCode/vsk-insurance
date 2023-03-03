@@ -1,13 +1,10 @@
 $text: #222222;
 $secondary-text: #333333;
 
-$primary: #0071B7;
+$primary: #007BFF;
 
-$gray: #F5F6F9;
-$gray-light: #FBFCFD;
-$gray-heavy: #DDDEE1;
-$gray-footer-1: #E9EBEC;
-$gray-footer-2: #DBDEE1;
+$gray: #FAFAFA;
+$gray-light: #CECECE;
 
 $error: #F44336;
 $success: #689F38;
@@ -15,8 +12,7 @@ $success: #689F38;
 $black: #000;
 $white: #fff;
 
-$box-shadow-1: 0px 4px 8px rgb(0, 0, 0, 0.07);
-$box-shadow-2: 0px 4px 10px rgba(0, 0, 0, 0.11);
+$box-shadow-1: 0px .4rem 5rem rgba(0, 0, 0, 0.05);
 
 // utilities
 
@@ -61,22 +57,19 @@ $font-sizes: (
   40: 3.5rem,
 );
 
-
-
 // $border-colors: $background-colors;
 
-// $box-shadows: (
-//   1: $box-shadow-1,
-//   2: $box-shadow-2,
-// );
-
-
+$box-shadows: (
+  1: $box-shadow-1,
+);
 
 // $spacers: (
 // );
 
-// $border-radiuses: (
-// );
+$border-radiuses: (
+  10: 1rem,
+  15: 1.5rem,
+);
 
 // $borders: (
 //   0: 0rem,

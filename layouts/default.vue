@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-default bg-g">
+  <div class="layout-default">
     <TheHeader />
     <Nuxt />
   </div>
