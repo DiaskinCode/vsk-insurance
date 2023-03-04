@@ -1,13 +1,13 @@
 <template>
-  <div class="step container py-100 fd-c ai-c">
+  <div class="step container py-100 fd-c ai-c pt-50-mb pb-0-mb">
     <h2 class="header-text ta-c">
       Полис оформить просто<br class="d-n-mb">
       в течение 2-х минут в 4 шага:
     </h2>
-    <div class="mt-60">
+    <div class="mt-60 mw-100 ove-h">
       <AppTimeline
-        class="pl-130 pr-0 fs-20 lh-140"
-        layout="horizontal"
+        class="pl-130 pr-0 fs-20 lh-140 pl-0-mb fs-16-mb"
+        :layout="layout"
         :value="steps"
       >
         <template v-slot:marker="{ index }">
@@ -18,7 +18,7 @@
           </div>
         </template>
         <template v-slot:content="{ item }">
-          <div class="step__content ta-c px-35">
+          <div class="step__content ta-c px-35 ta-l-mb pl-20-mb">
             <div
               v-for="(text, i) in item"
               :key="i"
@@ -58,7 +58,11 @@ export default {
       ],
     ],
   }),
-  computed: {},
+  computed: {
+    layout() {
+      return this.$mq === 'mb' ? 'vertical' : 'horizontal';
+    },
+  },
   methods: {},
 }
 </script>
@@ -75,15 +79,27 @@ export default {
   /* .step__content */
   &__content {
     transform: translateX(-42%);
+    @media (max-width: 600px) {
+      transform: none;
+    }
   }
 
   .p-timeline-event:last-child {
     .step__content {
       transform: translateX(-40%);
+      @media (max-width: 600px) {
+        transform: none;
+      }
     }
   }
   .p-timeline-event-separator {
     min-width: 25rem;
+    @media (max-width: 600px) {
+      min-width: unset;
+    }
+    @media (max-width: 600px) {
+      min-height: 10rem;
+    }
   }
 }
 </style>
