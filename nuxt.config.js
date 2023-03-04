@@ -56,8 +56,18 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    'nuxt-mq'
   ],
+
+  mq: {
+    defaultBreakpoint: 'lg',
+    breakpoints: {
+      mb: 600,
+      // sm: 1400,
+      lg: Infinity,
+    }
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
