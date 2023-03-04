@@ -1,13 +1,14 @@
 <template>
-  <div class="page-index d-f fd-c ai-c">
-    <TheTop />
-    <TheInclude />
+  <div class="include-list-item">
+    <div class="p-50 bs-1 br-30 h-100 d-f ai-c">
+      <slot />
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'PageIndex',
+  name: 'IncludeListItem',
   props: {},
   data: () => ({
   }),
