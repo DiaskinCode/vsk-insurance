@@ -6,7 +6,7 @@
     </h2>
     <div class="mt-60">
       <AppTimeline
-        class="pl-100 pr-0 fs-20 lh-140"
+        class="pl-130 pr-0 fs-20 lh-140"
         layout="horizontal"
         :value="steps"
       >
@@ -76,10 +76,14 @@ export default {
   &__content {
     transform: translateX(-42%);
   }
+
   .p-timeline-event:last-child {
     .step__content {
-      transform: translateX(-41%);
+      transform: translateX(-40%);
     }
+  }
+  .p-timeline-event-separator {
+    min-width: 25rem;
   }
 }
 </style>

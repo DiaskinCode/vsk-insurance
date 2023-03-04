@@ -36,13 +36,13 @@ export default {
 <style lang="scss">
 .app-timeline {
   &.p-timeline.p-timeline-horizontal .p-timeline-event-connector {
-      height: 0.3rem;
+    height: 0.3rem;
   }
   &.p-timeline.p-timeline-vertical .p-timeline-event-connector {
     width: 2px;
   }
   &.p-timeline .p-timeline-event-connector {
-      background-color: #F5F6F9;
+    background-color: #F5F6F9;
   }
 
   &.p-timeline.p-timeline-vertical .p-timeline-event-content {
