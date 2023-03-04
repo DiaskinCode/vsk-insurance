@@ -1,8 +1,8 @@
 <template>
-  <div class="include container fd-c ai-c py-100">
+  <div class="include container fd-c ai-c py-100 ai-fs-mb py-50-mb">
     <h2 class="header-text">Что включает полис</h2>
-    <div class="fw-5 fs-30 lh-140 mt-10">Риски:</div>
-    <div class="row gx-25 fs-25 lh-140 mt-50">
+    <div class="fw-5 fs-30 lh-140 mt-10 fs-25-mb">Риски:</div>
+    <div class="row gx-25 gy-10 fs-25 lh-140 mt-40 fs-16-mb lh-120-mb">
       <IncludeListItem class="col">
         <h3>
           <span class="fw-7">Смерть</span>
