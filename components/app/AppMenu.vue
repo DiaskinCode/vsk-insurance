@@ -2,7 +2,7 @@
   <transition name="height">
     <div
       v-if="isOpen"
-      class="app-menu bg-w d-f fd-c"
+      class="app-menu bg-w d-n d-f-mb fd-c"
     >
       <div class="app-menu__wrapper f-1 px-20 pt-5 pb-40 d-f fd-c jc-sb">
         <AppNav
