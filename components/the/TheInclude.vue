@@ -1,6 +1,6 @@
 <template>
   <div class="include container fd-c ai-c py-100">
-    <h2 class="fw-7 fs-40 lh-110 c-t1b">Что включает полис</h2>
+    <h2 class="header-text">Что включает полис</h2>
     <div class="fw-5 fs-30 lh-140 mt-10">Риски:</div>
     <div class="row gx-25 fs-25 lh-140 mt-50">
       <IncludeListItem class="col">
