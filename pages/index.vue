@@ -2,6 +2,7 @@
   <div class="page-index d-f fd-c ai-c">
     <TheTop />
     <TheInclude />
+    <TheBenefit />
   </div>
 </template>
 
