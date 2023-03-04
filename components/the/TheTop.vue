@@ -1,5 +1,5 @@
 <template>
-  <div class="top container py-60 d-f ai-c jc-sb">
+  <div class="top container py-60 d-f ai-c jc-sb bs-1">
     <div class="d-f fd-c ai-fs">
       <h1 class="c-t1b fw-7 fs-35 lh-120">
         Защита для вас и вашего ребенка<br>
