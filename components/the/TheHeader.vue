@@ -1,11 +1,21 @@
 <template>
   <header class="header container-wrapper bb-1 bg-w pos-f">
-    <div class="header__content container jc-sb py-20">
+    <div class="header__content container jc-sb ai-c py-20 py-15-mb">
       <AppLogo
         class="header__logo"
       />
       <AppNav
+        class="d-n-mb"
         :links="links"
+      />
+      <AppMenuButton
+        :is-open="isOpen"
+        @click="openMenu"
+      />
+      <AppMenu
+        :links="links"
+        :is-open="isOpen"
+        @close="openMenu"
       />
     </div>
   </header>
@@ -16,6 +26,7 @@ export default {
   name: 'TheHeader',
   props: {},
   data: () => ({
+    isOpen: false,
     links: [
       {
         href: '#include',
@@ -37,7 +48,15 @@ export default {
     ]
   }),
   computed: {},
-  methods: {},
+  methods: {
+    openMenu() {
+      this.isOpen = !this.isOpen;
+      this.setBodyOverflow(this.isOpen);
+    },
+    setBodyOverflow(hidden) {
+      document.body.style.overflow = hidden ? 'hidden' : '';
+    },
+  },
 }
 </script>
 
@@ -47,6 +66,9 @@ export default {
   /* .header__logo */
   &__logo {
     margin: -1rem 0;
+    @media (max-width: 600px) {
+      margin: 0;
+    }
   }
 }
 </style>
