@@ -11,7 +11,6 @@
         />
         <AppButtonLink
           label="Выбрать пакет"
-          paddingY="1.6rem"
           href="#packet"
           @click="closeMenu"
         />

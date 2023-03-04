@@ -7,7 +7,6 @@ import Timeline from 'primevue/timeline';
 import Toast from 'primevue/toast';
 import ToastService from 'primevue/toastservice';
 
-
 Vue.component('Button', Button);
 Vue.component('Timeline', Timeline);
 Vue.component('Toast', Toast);
