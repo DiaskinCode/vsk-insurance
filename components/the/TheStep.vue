@@ -1,0 +1,85 @@
+<template>
+  <div class="step container py-100 fd-c ai-c">
+    <h2 class="header-text ta-c">
+      Полис оформить просто<br class="d-n-mb">
+      в течение 2-х минут в 4 шага:
+    </h2>
+    <div class="mt-60">
+      <AppTimeline
+        class="pl-100 pr-0 fs-20 lh-140"
+        layout="horizontal"
+        :value="steps"
+      >
+        <template v-slot:marker="{ index }">
+          <div
+            class="step__marker bg-gf5 br-c d-f ai-c jc-c fw-6 fs-25"
+          >
+            {{ index }}
+          </div>
+        </template>
+        <template v-slot:content="{ item }">
+          <div class="step__content ta-c px-35">
+            <div
+              v-for="(text, i) in item"
+              :key="i"
+              class="ws-nw"
+            >
+              {{ text }}
+            </div>
+          </div>
+        </template>
+      </AppTimeline>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'TheStep',
+  props: {},
+  data: () => ({
+    steps: [
+      [
+        'Заполнить данные',
+        'по Застрахованному',
+        'и Страхователю',
+      ],
+      [
+        'Выбрать вид спорта',
+        'из доступного перечня',
+        '(более 20 наименований)',
+      ],
+      [
+        'Выбрать срок',
+        'страхования',
+      ],
+      [
+        'Оплатить полис',
+      ],
+    ],
+  }),
+  computed: {},
+  methods: {},
+}
+</script>
+
+<style lang="scss">
+.step {
+  /* .step__marker */
+  &__marker {
+    width: 4.4rem;
+    min-width: 4.4rem;
+    height: 4.4rem;
+    min-height: 4.4rem;
+  }
+  /* .step__content */
+  &__content {
+    transform: translateX(-42%);
+  }
+  .p-timeline-event:last-child {
+    .step__content {
+      transform: translateX(-41%);
+    }
+  }
+}
+</style>

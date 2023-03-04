@@ -3,6 +3,7 @@
     <TheTop />
     <TheInclude />
     <TheBenefit />
+    <TheStep />
   </div>
 </template>
 

@@ -6,6 +6,7 @@ $primary: #007BFF;
 
 $gray: #FAFAFA;
 $gray-ce: #CECECE;
+$gray-f5: #F5F6F9;
 
 $error: #F44336;
 $success: #689F38;
@@ -30,6 +31,7 @@ $background-colors: (
   p: $primary,
   g: $gray,
   gce: $gray-ce,
+  gf5: $gray-f5,
   w: $white,
 );
 
@@ -69,6 +71,7 @@ $box-shadows: (
 // );
 
 $border-radiuses: (
+  c: 50%,
   10: 1rem,
   15: 1.5rem,
   30: 3rem,
