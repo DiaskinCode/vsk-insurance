@@ -2,7 +2,7 @@
   <a
     class="nav-link us-n"
     :class="{
-      'nav-link--button lh-120 fw-7 c-p py-5 px-15 br-10': button,
+      'nav-link--button': button,
     }"
     :href="href"
   >
@@ -49,9 +49,6 @@ export default {
 <style lang="scss">
 .nav-link {
   cursor: pointer;
-  /* .nav-link--button */
-  &--button {
-  }
   /* .nav-link__button */
   &__button {
     background: none;
