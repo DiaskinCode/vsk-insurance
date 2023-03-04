@@ -1,5 +1,5 @@
 <template>
-  <header class="header container-wrapper bb-1">
+  <header class="header container-wrapper bb-1 bg-w pos-f">
     <div class="header__content container jc-sb py-20">
       <AppLogo
         class="header__logo"
