@@ -7,7 +7,6 @@
       :label="link.label"
       :href="link.href"
       :button="link.button"
-      @click="onClick"
     />
   </nav>
 </template>
@@ -24,7 +23,8 @@ export default {
   data: () => ({
   }),
   computed: {},
-  methods: {},
+  methods: {
+  },
 }
 </script>
 
