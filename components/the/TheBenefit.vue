@@ -1,5 +1,8 @@
 <template>
-  <div class="benefit container-wrapper bg-g">
+  <div
+    id="benefit"
+    class="benefit container-wrapper bg-g"
+  >
     <div class="container fd-c ai-c py-100 ai-fs-mb py-50-mb">
       <h2 class="header-text">Преимущества</h2>
       <div class="row gy-30 fs-20 lh-140 mt-50 gy-50-mb mt-5-mb fs-16-mb lh-130">

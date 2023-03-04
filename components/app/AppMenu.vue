@@ -8,7 +8,7 @@
         <AppNav
           class="app-menu__nav"
           :links="links"
-          @close="closeMenu"
+          @click="closeMenu"
         />
       </div>
     </div>
@@ -33,7 +33,7 @@ export default {
   computed: {},
   methods: {
     closeMenu() {
-      this.$emit('close');
+      this.$emit('close-menu');
     },
   },
 

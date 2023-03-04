@@ -5,6 +5,7 @@
       'nav-link--button': button,
     }"
     :href="href"
+    @click="onClick"
   >
     <AppButton
       class="nav-link__button"
@@ -12,7 +13,6 @@
         'nav-link__button--primary': button,
       }"
       :label="label"
-      @click="onClick"
     />
   </a>
 </template>

@@ -15,7 +15,7 @@
       <AppMenu
         :links="links"
         :is-open="isOpen"
-        @close="openMenu"
+        @close-menu="openMenu"
       />
     </div>
   </header>

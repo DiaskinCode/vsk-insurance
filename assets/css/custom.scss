@@ -19,12 +19,12 @@ html {
   scroll-behavior: smooth;
   font-size: 13.33px;
   color: $black;
-  scroll-padding-top: 11.1rem;
+  scroll-padding-top: 7.8rem;
   @media (max-width: 1920px) {
     @include font-size-a(10);
   }
   @media (max-width: 600px) {
-    scroll-padding-top: 7.1rem;
+    scroll-padding-top: 6.1rem;
     @include font-size-am(10);
   }
 }

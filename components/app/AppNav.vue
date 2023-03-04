@@ -7,6 +7,7 @@
       :label="link.label"
       :href="link.href"
       :button="link.button"
+      @click="onClick"
     />
   </nav>
 </template>
@@ -24,6 +25,9 @@ export default {
   }),
   computed: {},
   methods: {
+    onClick() {
+      this.$emit('click');
+    },
   },
 }
 </script>
