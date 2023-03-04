@@ -63,6 +63,7 @@ export default {
 <style lang="scss">
 .header {
   border-color: #F3F3F5;
+  z-index: 1001;
   /* .header__logo */
   &__logo {
     margin: -1rem 0;

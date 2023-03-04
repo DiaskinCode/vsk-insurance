@@ -1,7 +1,7 @@
 <template>
   <div class="layout-default">
     <TheHeader />
-    <div class="pt-80">
+    <div class="pt-80 pt-60-mb">
       <Nuxt />
     </div>
   </div>

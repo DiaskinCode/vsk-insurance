@@ -1,12 +1,14 @@
 <template>
   <div class="container-wrapper bs-1">
-    <div class="top container py-60 d-f ai-c jc-sb">
+    <div class="top container py-60 d-f ai-c jc-sb py-40-mb fd-cr-mb">
       <div class="d-f fd-c ai-fs">
-        <h1 class="c-t1b fw-7 fs-35 lh-120">
-          Защита для вас и вашего ребенка<br>
-          на случай непредвиденных событий
+        <h1 class="c-t1b fw-7 fs-35 lh-120 fs-20-mb mt-10-mb ord-1-mb">
+          Защита для вас и вашего<br class="d-n d-b-mb">
+          ребенка <br class="d-n-mb">
+          на случай<br class="d-n d-b-mb">
+          непредвиденных событий
         </h1>
-        <div class="d-f fd-c fs-22 lh-140 mt-35 row gy-30">
+        <div class="d-f fd-c fs-22 lh-140 mt-35 row gy-30 ord-4-mb fs-20-mb">
           <TopListItem>
             <h2>
               Возраст Застрахованного <span class="fw-7">от 4 до 70 лет</span>
@@ -22,7 +24,7 @@
               Срок страхования <span class="fw-7">от 1 дня до 1 года</span>
             </h2>
           </TopListItem>
-          <TopListItem>
+          <TopListItem class="d-n-mb">
             <h2>
               Полис
               <span class="fw-7">
@@ -34,9 +36,16 @@
           </TopListItem>
         </div>
         <AppButton
-          class="mt-40"
+          class="mt-40 ord-2-mb w-100-mb mt-15-mb"
           label="Рассчитать и оформить"
         />
+        <div class="d-n d-f-mb ord-3-mb o-50 fs-14 lh-120 mt-10">
+          <div class="mr-5">*</div>
+          <div>
+            Полис начинает действовать
+            на следующий день после оформления
+          </div>
+        </div>
       </div>
       <div>
         <img
@@ -74,6 +83,10 @@ export default {
   &__img {
     width: 47.4rem;
     height: 53.141rem;
+    @media (max-width: 600px) {
+      width: 24.4rem;
+      height: 27.356rem;
+    }
   }
 }
 </style>
