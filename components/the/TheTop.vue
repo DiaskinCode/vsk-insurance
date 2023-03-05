@@ -35,10 +35,15 @@
             </h2>
           </TopListItem>
         </div>
-        <AppButton
+        <a
           class="mt-40 ord-2-mb w-100-mb mt-15-mb"
-          label="Рассчитать и оформить"
-        />
+          href="#calculate"
+        >
+          <AppButton
+            class="w-100-mb"
+            label="Рассчитать и оформить"
+          />
+        </a>
         <div class="d-n d-f-mb ord-3-mb o-50 fs-14 lh-120 mt-10">
           <div class="mr-5">*</div>
           <div>

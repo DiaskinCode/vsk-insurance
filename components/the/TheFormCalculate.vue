@@ -41,6 +41,59 @@
               />
             </AppFormField>
           </div>
+          <div class="lh-140 fs-16-mb">
+            <div class="fw-6 fs-25 lh-140 my-20 ws-nw mt-50-mb">
+              Риски
+            </div>
+            <AppFormField
+              vid="risks"
+            >
+              <AppCheckbox
+                id="risks-1"
+                classCheckbox="mt-5"
+                valueLabel="Смерть"
+                v-model="data.risks"
+              >
+                <label
+                  for="risks-1"
+                  class="ml-10"
+                >
+                  Смерть Застрахованного в результате несчастного случая,<br>
+                  происшедшего в период страхования
+                </label>
+              </AppCheckbox>
+              <AppCheckbox
+                id="risks-2"
+                class="mt-10"
+                classCheckbox="mt-5"
+                valueLabel="Инвалидность"
+                v-model="data.risks"
+              >
+                <label
+                  for="risks-2"
+                  class="ml-10"
+                >
+                  Установление Застрахованному I или II или III группы инвалидности<br>
+                  в результате несчастного случая, происшедшего в период страхования
+                </label>
+              </AppCheckbox>
+              <AppCheckbox
+                id="risks-3"
+                class="mt-10"
+                classCheckbox="mt-5"
+                valueLabel="Нетрудоспособность"
+                v-model="data.risks"
+              >
+                <label
+                  for="risks-3"
+                  class="ml-10"
+                >
+                  Временная нетрудоспособность Застрахованного в результате<br>
+                  несчастного случая, произошедшего в период страхования
+                </label>
+              </AppCheckbox>
+            </AppFormField>
+          </div>
         </AppForm>
       </div>
     </div>
@@ -73,7 +126,7 @@ export default {
     loading: false,
     data: {
       term: 1,
-      risks: '',
+      risks: [],
       sport: '',
       promo: '',
       professional: false,
