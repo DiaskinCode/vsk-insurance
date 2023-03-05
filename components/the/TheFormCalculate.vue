@@ -98,17 +98,31 @@
             <div class="fw-6 fs-25 lh-140 mb-10 ws-nw">
               Категория спорта
             </div>
-            <AppFormField
-              vid="sport"
-            >
-              <AppDropdown
-                id="sport"
-                v-model="data.sport"
-                class="form-calculate__dropdown"
-                placeholder="Выбрать категорию"
-                :options="optionsSport"
-              />
-            </AppFormField>
+            <div class="d-f ai-c fd-c-mb w-100-mb ai-fs-mb">
+              <AppFormField
+                class="w-100-mb"
+                vid="sport"
+              >
+                <AppDropdown
+                  id="sport"
+                  v-model="data.sport"
+                  class="form-calculate__dropdown w-100-mb"
+                  placeholder="Выбрать категорию"
+                  :options="optionsSport"
+                />
+              </AppFormField>
+              <AppFormField
+                vid="sport"
+                class="ml-20 ml-0-mb mt-15-mb"
+              >
+                <AppInputSwitch
+                  id="proffesional"
+                  name="proffesional"
+                  v-model="data.professional"
+                  label="Я профессионал"
+                />
+              </AppFormField>
+            </div>
           </div>
         </AppForm>
       </div>
