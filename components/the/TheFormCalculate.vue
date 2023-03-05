@@ -181,6 +181,15 @@
               </AppFormField>
             </div>
           </div>
+          <div class="d-f fd-c fs-25 lh-140 fs-22-mb lh-120-mb">
+            <div>Предварительная стоимость Вашего полиса:</div>
+            <div class="fs-40 c-p fw-7 mt-15-mb">
+              {{ priceString }}
+            </div>
+            <div class="fs-16 o-50 mt-10 fs-12-mb lh-120-mb">
+              Предварительный расчет.<br class="d-n d-b-mb">Не является публичной офертой
+            </div>
+          </div>
         </AppForm>
       </div>
     </div>
@@ -220,6 +229,7 @@ export default {
       partner: false,
       rules: false,
     },
+    price: 12735.62,
     optionsSport: [
       {
         label: 'Категория 1',
@@ -258,6 +268,9 @@ export default {
     },
     termString() {
       return `${this.data.term} ${this.termDay}`;
+    },
+    priceString() {
+      return `${this.price.toLocaleString()} ₽`
     },
   },
   methods: {
