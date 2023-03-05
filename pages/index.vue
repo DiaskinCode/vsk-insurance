@@ -5,6 +5,7 @@
     <TheBenefit />
     <TheStep />
     <TheFormOrder />
+    <TheQuestion />
   </div>
 </template>
 
