@@ -94,6 +94,22 @@
               </AppCheckbox>
             </AppFormField>
           </div>
+          <div>
+            <div class="fw-6 fs-25 lh-140 mb-10 ws-nw">
+              Категория спорта
+            </div>
+            <AppFormField
+              vid="sport"
+            >
+              <AppDropdown
+                id="sport"
+                v-model="data.sport"
+                class="form-calculate__dropdown"
+                placeholder="Выбрать категорию"
+                :options="optionsSport"
+              />
+            </AppFormField>
+          </div>
         </AppForm>
       </div>
     </div>
@@ -133,6 +149,20 @@ export default {
       partner: false,
       rules: false,
     },
+    optionsSport: [
+      {
+        label: 'Категория 1',
+        value: 'Категория 1',
+      },
+      {
+        label: 'Категория 2',
+        value: 'Категория 2',
+      },
+      {
+        label: 'Категория 3',
+        value: 'Категория 3',
+      },
+    ],
   }),
   computed: {
     termDay() {
@@ -211,6 +241,14 @@ export default {
       transform: translateX(40%);
     }
   }
+  /* .form-calculate__dropdown */
+  &__dropdown {
+    width: 40rem;
+    @media (max-width: 600px) {
+      width: 100%;
+    }
+  }
+
   .app-slider {
     color: #444444;
     &::before {

@@ -9,6 +9,7 @@ import AccordionTab from 'primevue/accordiontab';
 import Slider from 'primevue/slider';
 import InputNumber from 'primevue/inputnumber';
 import Checkbox from 'primevue/checkbox';
+import Dropdown from 'primevue/dropdown';
 
 import Toast from 'primevue/toast';
 import ToastService from 'primevue/toastservice';
@@ -21,6 +22,7 @@ Vue.component('AccordionTab', AccordionTab);
 Vue.component('Slider', Slider);
 Vue.component('InputNumber', InputNumber);
 Vue.component('Checkbox', Checkbox);
+Vue.component('Dropdown', Dropdown);
 
 Vue.component('Toast', Toast);
 
