@@ -3,8 +3,9 @@
     class="
       app-button
       c-w bg-p py-15 px-30 br-15 fw-7 fs-22 lh-120
-      fs-16-mb
+      fs-16-mb px-15-mb
     "
+    :class="{ 'app-button--secondary': secondary }"
     v-bind="$attrs"
     v-on="$listeners"
   />
@@ -14,6 +15,10 @@
 export default {
   name: 'AppButton',
   props: {
+    secondary: {
+      type: Boolean,
+      default: false,
+    },
   },
   data: () => ({
   }),
@@ -25,4 +30,8 @@ export default {
 </script>
 
 <style lang="scss">
+.app-button--secondary {
+  color: $primary;
+  background: $white;
+}
 </style>
