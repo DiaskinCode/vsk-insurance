@@ -13,10 +13,12 @@
             <AppAccordion
               class="w-100 row gy-25 gx-0 gy-5-mb"
               multiple
+              :activeIndex="activeLeft"
             >
               <AccordionTab
                 class="col-12"
                 header="Зачем мне страховаться от несчастного случая?"
+                :disabled="disabled"
               >
                 При наступлении страхового случая страховая компания произведет денежную
                 выплату, чтобы обеспечить финансовую поддержку вам и вашей семье
@@ -24,6 +26,7 @@
               <AccordionTab
                 class="col-12"
                 header="Куда обращаться в случае страхового события?"
+                :disabled="disabled"
               >
                 <ul>
                   <li>
@@ -38,6 +41,7 @@
               <AccordionTab
                 class="col-12"
                 header="Какая территория покрытия по моему полису?"
+                :disabled="disabled"
               >
                 Полис действует по всему миру,
                 за исключением зон вооруженных конфликтов, зон ведения военных, боевых действий
@@ -54,10 +58,12 @@
             <AppAccordion
               class="w-100 row gy-25 gx-0 gy-5-mb"
               multiple
+              :activeIndex="activeRight"
             >
               <AccordionTab
                 class="col-12"
                 header="Какие документы я получу после оплаты полиса?"
+                :disabled="disabled"
               >
                 Сразу после оплаты Вы получите на e-mail: полис страхования, правила
                 страхования и чек об оплате.
@@ -65,6 +71,7 @@
               <AccordionTab
                 class="col-12"
                 header="Что делать в случае страхового события?"
+                :disabled="disabled"
               >
                 <p class="mb-5">
                   1.Застрахованному необходимо в течение 24 часов с момента несчастного
@@ -97,8 +104,22 @@ export default {
   name: 'TheQuestion',
   props: {},
   data: () => ({
+    activeLeftDesk: [0, 1, 2],
+    activeRightDesk: [0, 1],
+    activeLeftMobile: [],
+    activeRightMobile: [],
   }),
-  computed: {},
+  computed: {
+    activeLeft() {
+      return this.$mq === 'mb' ? this.activeLeftMobile : this.activeLeftDesk;
+    },
+    activeRight() {
+      return this.$mq === 'mb' ? this.activeRightMobile : this.activeRightDesk;
+    },
+    disabled() {
+      return this.$mq !== 'mb';
+    },
+  },
   methods: {},
 }
 </script>
