@@ -4,6 +4,7 @@
     <TheInclude />
     <TheBenefit />
     <TheStep />
+    <TheFormOrder />
   </div>
 </template>
 
