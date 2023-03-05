@@ -1,20 +1,20 @@
 <template>
   <footer class="footer container fd-c py-50 c-t15">
-    <div class="d-f jc-sb">
-      <div>
+    <div class="d-f jc-sb fd-c-mb">
+      <div class="ord-1-mb">
         <AppLogo
           src="\logo-bw.png"
         />
-        <div class="fs-16 lh-140">
+        <div class="fs-16 lh-140 mt-20-mb d-n-mb">
           © Страховое акционерное общество “ВСК”, 2002–2022
         </div>
         <AppLinkInner
-          class="fs-16 lh-140"
+          class="fs-16 lh-140 d-n-mb"
           href="\"
           text="Политика в отношении обработки персональных данных"
         />
       </div>
-      <div class="d-f fd-c fs-16 lh-140">
+      <div class="d-f fd-c fs-16 lh-140 ord-3-mb mt-20-mb">
         <a
           v-for="(link, i) in links"
           :key="i"
@@ -23,7 +23,7 @@
           :href="link.href"
         >{{link.label}}</a>
       </div>
-      <div>
+      <div class="ord-2-mb mt-25-mb">
         <a
           class="fw-6 fs-25 lh-140 c-t15"
           href="tel:8-800-775-15-75"
@@ -47,22 +47,33 @@
           </a>
         </div>
       </div>
+      <div class="d-n d-b-mb ord-4-mb">
+        <AppLinkInner
+          class="fs-16 lh-140 mt-20 d-b"
+          href="\"
+          text="Политика в отношении обработки персональных данных"
+        />
+        <div class="fs-16 lh-140 mt-10">
+          © Страховое акционерное общество “ВСК”, 2002–2022
+        </div>
+      </div>
     </div>
-    <div class="d-f mt-50">
-      <div>
+    <div class="d-f mt-50 fd-c-mb mt-25-mb">
+      <div class="mr-15 mr-0-mb mb-10-mb">
         <img
-          class="footer__icon mr-15"
+          class="footer__icon"
           src="/warning.svg"
           alt="warning"
         >
       </div>
-      <div class="fs-12 lh-130 footer__text">
+      <div class="footer__text fs-12 lh-130 fs-10-mb">
         ИНФОРМАЦИЮ, ПОДЛЕЖАЩУЮ РАСКРЫТИЮ В СООТВЕТСТВИИ С ТРЕБОВАНИЯМИ ФЕДЕРАЛЬНОГО ЗАКОНА
         «О РЫНКЕ ЦЕННЫХ БУМАГ» (ОТ 22.04.1996 N 39-ФЗ) И ПОЛОЖЕНИЯ О РАСКРЫТИИ ИНФОРМАЦИИ
         ЭМИТЕНТАМИ ЭМИССИОННЫХ ЦЕННЫХ БУМАГ (УТВ. БАНКОМ РОССИИ 30.12.2014 N 454-П),
         САО «ВСК» РАСКРЫВАЕТ НА СТРАНИЦЕ В СЕТИ ИНТЕРНЕТ ООО «ИНТЕРФАКС-ЦРКИ» – ИНФОРМАЦИОННОГО
         АГЕНТСТВА, АККРЕДИТОВАННОГО ЦБ РФ НА РАСКРЫТИЕ ИНФОРМАЦИИ, ПО АДРЕСУ:
         <AppLinkInner
+          class="ws-nw fs-9-mb"
           text="HTTP://WWW.E-DISCLOSURE.RU/PORTAL/COMPANY.ASPX?ID=1968"
           href="HTTP://WWW.E-DISCLOSURE.RU/PORTAL/COMPANY.ASPX?ID=1968"
         />
@@ -141,10 +152,21 @@ export default {
   &__icon {
     width: 5.9rem;
     height: 5.9rem;
+    @media (max-width: 600px) {
+      width: 3.3rem;
+      height: 3.3rem;
+    }
   }
   /* .footer__text */
   &__text {
     letter-spacing: .04rem;
+  }
+
+  .app-logo {
+    @media (max-width: 600px) {
+      width: 17.8rem;
+      height: 4.813rem;
+    }
   }
 }
 </style>
