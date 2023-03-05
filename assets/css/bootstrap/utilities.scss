@@ -104,6 +104,16 @@ $utilities: map-merge(
         s: sticky,
       )
     ),
+    "z-index": (
+      property: z-index,
+      responsive: true,
+      class: z,
+      values: (
+        1: 1,
+        2: 2,
+        3: 3,
+      )
+    ),
     "top": (
       property: top,
       class: t,
@@ -526,6 +536,7 @@ $utilities: map-merge(
       values: $text-colors,
     ),
     "background-color": (
+      responsive: true,
       property: background-color,
       class: bg,
       values: $background-colors,

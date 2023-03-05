@@ -4,25 +4,35 @@
     class="form-calculate container-wrapper bg-g"
   >
     <div class="container fd-c ai-c py-100 py-50-mb">
-      <h2 class="header-text">
+      <h2 class="header-text z-1 mb-35-mb">
         Страхование несчастных случаев
       </h2>
       <div class="w-100 px-100 px-0-mb">
         <AppForm
-          class="w-100 bg-w bs-1 br-30 p-55"
+          class="w-100 bg-w bs-1 br-30 p-55 bg-g-mb bs-n-mb p-0-mb"
           ref="observer"
           :gy="50"
           :gy-mb="25"
           @submit="validateForm"
         >
           <div>
-            <div class="fw-6 fs-25 lh-140 mb-15 ws-nw">
+            <div class="fw-6 fs-25 lh-140 mb-70 ws-nw">
               Срок страхования
             </div>
             <AppFormField
               class="px-20"
               vid="term"
             >
+              <AppInput
+                id="termInput"
+                type="tel"
+                v-if="$mq === 'mb'"
+                v-model="data.term"
+                class="form-calculate__term form-calculate__term--input"
+                component="InputNumber"
+                :min="1"
+                :max="365"
+              />
               <AppSlider
                 id="term"
                 v-model="data.term"
@@ -38,13 +48,16 @@
       <Teleport
         to=".form-calculate .p-slider-handle"
       >
-        <div class="form-calculate__term bg-w b-1 br-5 py-10 d-f jc-c">
+        <div class="form-calculate__term bg-w b-1 br-5 py-10 d-f jc-c d-n-mb">
           {{ termString }}
         </div>
       </Teleport>
       <Teleport
         to="#term"
       >
+        <div class="form-calculate__term--mobile d-n d-b-mb">
+          {{ termDay }}
+        </div>
         <div class="form-calculate__circle pos-a l-0 br-c" />
         <div class="form-calculate__circle pos-a r-0 br-c" />
       </Teleport>
@@ -69,7 +82,7 @@ export default {
     },
   }),
   computed: {
-    termString() {
+    termDay() {
       const div = (val, by) => {
         return (val - val % by) / by;
       }
@@ -82,12 +95,15 @@ export default {
         mod(this.data.term, 10) > 4 ||
         mod(this.data.term, 10) === 0
       ) {
-        return `${this.data.term} дней`;
+        return 'дней';
       }
       if (mod(this.data.term, 10) > 1) {
-        return `${this.data.term} дня`;
+        return 'дня';
       }
-      return `${this.data.term} день`;
+      return 'день';
+    },
+    termString() {
+      return `${this.data.term} ${this.termDay}`;
     },
   },
   methods: {
@@ -109,9 +125,26 @@ export default {
     position: absolute;
     white-space: nowrap;
     border-color: #D2D2D2;
-    width: 13rem;
+    width: 12rem;
     transform: translateX(-40%);
     top: -5rem;
+    &--input {
+      left: 0;
+      top: -6rem;
+      transform: none;
+      padding: .5rem 1rem;
+      border-radius: .5rem;
+      width: 6rem;
+      .p-inputnumber-input {
+        font-size: 2rem;
+        text-align: center;
+      }
+    }
+    &--mobile {
+      position: absolute;
+      top: -5rem;
+      left: 5rem;
+    }
   }
   /* .form-calculate__circle */
   &__circle {

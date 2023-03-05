@@ -7,6 +7,7 @@ import InputText from 'primevue/inputtext';
 import Accordion from 'primevue/accordion';
 import AccordionTab from 'primevue/accordiontab';
 import Slider from 'primevue/slider';
+import InputNumber from 'primevue/inputnumber';
 
 import Toast from 'primevue/toast';
 import ToastService from 'primevue/toastservice';
@@ -17,6 +18,7 @@ Vue.component('InputText', InputText);
 Vue.component('Accordion', Accordion);
 Vue.component('AccordionTab', AccordionTab);
 Vue.component('Slider', Slider);
+Vue.component('InputNumber', InputNumber);
 
 Vue.component('Toast', Toast);
 
