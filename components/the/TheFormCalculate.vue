@@ -34,14 +34,15 @@
         </AppForm>
       </div>
     </div>
-    <Teleport
-      v-if="mounted"
-      to=".form-calculate .p-slider-handle"
-    >
-      <div class="form-calculate__term bg-w b-1 br-5 py-10 d-f jc-c">
-        {{ termString }}
-      </div>
-    </Teleport>
+    <ClientOnly>
+      <Teleport
+        to=".form-calculate .p-slider-handle"
+      >
+        <div class="form-calculate__term bg-w b-1 br-5 py-10 d-f jc-c">
+          {{ termString }}
+        </div>
+      </Teleport>
+    </ClientOnly>
   </div>
 </template>
 
@@ -51,7 +52,6 @@ export default {
   props: {},
   data: () => ({
     loading: false,
-    mounted: false,
     data: {
       term: 1,
       risks: '',
@@ -83,9 +83,6 @@ export default {
       }
       return `${this.data.term} день`;
     },
-  },
-  mounted() {
-    this.mounted = true;
   },
   methods: {
     async validateForm() {
