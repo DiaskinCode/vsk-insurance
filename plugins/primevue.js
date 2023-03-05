@@ -1,19 +1,35 @@
 import Vue from 'vue';
 import PrimeVue from 'primevue/config';
 
-// import Button from 'primevue/button';
-// import SelectButton from 'primevue/selectbutton';
-// import InputText from 'primevue/inputtext';
-// import Toast from 'primevue/toast';
+import Button from 'primevue/button';
+import Timeline from 'primevue/timeline';
+import InputText from 'primevue/inputtext';
+import Accordion from 'primevue/accordion';
+import AccordionTab from 'primevue/accordiontab';
+import Slider from 'primevue/slider';
+import InputNumber from 'primevue/inputnumber';
+import Checkbox from 'primevue/checkbox';
+import Dropdown from 'primevue/dropdown';
+import InputSwitch from 'primevue/inputswitch';
 
-// import ToastService from 'primevue/toastservice';
+import Toast from 'primevue/toast';
+import ToastService from 'primevue/toastservice';
 
-// Vue.component('Button', Button);
-// Vue.component('SelectButton', SelectButton);
-// Vue.component('InputText', InputText);
-// Vue.component('Toast', Toast);
+Vue.component('Button', Button);
+Vue.component('Timeline', Timeline);
+Vue.component('InputText', InputText);
+Vue.component('Accordion', Accordion);
+Vue.component('AccordionTab', AccordionTab);
+Vue.component('Slider', Slider);
+Vue.component('InputNumber', InputNumber);
+Vue.component('Checkbox', Checkbox);
+Vue.component('Dropdown', Dropdown);
+Vue.component('InputSwitch', InputSwitch);
 
-// Vue.use(ToastService);
+Vue.component('Toast', Toast);
+
+Vue.use(ToastService);
+
 Vue.use(PrimeVue, {
   ripple: true
 });

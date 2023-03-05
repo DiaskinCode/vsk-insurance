@@ -19,11 +19,15 @@ export default {
     ]
   },
 
+  server: {
+    host: '0.0.0.0',
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     'primevue/resources/primevue.min.css',
     'primeicons/primeicons.css',
-    '~/assets/font/gilroy/stylesheet.css',
+    '~/assets/font/montserrat/stylesheet.css',
     '~/assets/css/null.css',
     '~/assets/css/custom.scss',
     '~/assets/css/bootstrap.scss',
@@ -37,6 +41,7 @@ export default {
   plugins: [
     '~/plugins/primevue.js',
     '~/plugins/vee-validate.js',
+    '~/plugins/teleport.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -52,8 +57,18 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    'nuxt-mq'
   ],
+
+  mq: {
+    defaultBreakpoint: 'lg',
+    breakpoints: {
+      mb: 600,
+      // sm: 1400,
+      lg: Infinity,
+    }
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
@@ -66,6 +81,7 @@ export default {
     transpile: [
       'primevue',
       'vee-validate',
+      'vue2-teleport',
     ],
   }
 }

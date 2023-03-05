@@ -1,6 +1,10 @@
 <template>
   <div class="layout-default">
-    <Nuxt />
+    <TheHeader />
+    <div class="pt-80 pt-60-mb">
+      <Nuxt />
+    </div>
+    <TheFooter />
   </div>
 </template>
 

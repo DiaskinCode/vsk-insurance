@@ -1,5 +1,12 @@
 <template>
-  <div class="page-index">
+  <div class="page-index d-f fd-c ai-c">
+    <TheTop />
+    <TheInclude />
+    <TheBenefit />
+    <TheStep />
+    <TheFormCalculate />
+    <TheFormOrder />
+    <TheQuestion />
   </div>
 </template>
 
