@@ -4,6 +4,7 @@
     <div class="pt-80 pt-60-mb">
       <Nuxt />
     </div>
+    <TheFooter />
   </div>
 </template>
 

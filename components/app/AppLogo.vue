@@ -1,7 +1,7 @@
 <template>
   <img
     class="app-logo"
-    src="/logo.png"
+    :src="src"
     alt="ВСК"
   >
 </template>
