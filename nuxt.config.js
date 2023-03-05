@@ -41,6 +41,7 @@ export default {
   plugins: [
     '~/plugins/primevue.js',
     '~/plugins/vee-validate.js',
+    '~/plugins/teleport.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -80,6 +81,7 @@ export default {
     transpile: [
       'primevue',
       'vee-validate',
+      'vue2-teleport',
     ],
   }
 }
