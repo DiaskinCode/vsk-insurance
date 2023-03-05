@@ -21,6 +21,14 @@ export default {
       type: Number,
       default: 0,
     },
+    gyMb: {
+      type: Number,
+      default: 0,
+    },
+    gxMb: {
+      type: Number,
+      default: 0,
+    },
     innerClass: {
       type: String,
       default: '',
@@ -33,6 +41,8 @@ export default {
       return [
         `gx-${this.gx}`,
         `gy-${this.gy}`,
+        `gy-${this.gyMb || this.gy}-mb`,
+        `gx-${this.gxMb || this.gx}-mb`,
         this.innerClass,
       ];
     },

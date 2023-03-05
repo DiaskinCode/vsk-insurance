@@ -27,6 +27,14 @@ export default {
       type: Number,
       default: 0,
     },
+    gyMb: {
+      type: Number,
+      default: 0,
+    },
+    gxMb: {
+      type: Number,
+      default: 0,
+    },
   },
   data: () => ({
   }),
@@ -35,6 +43,8 @@ export default {
       return [
         `gy-${this.gy}`,
         `gx-${this.gx}`,
+        `gy-${this.gyMb || this.gy}-mb`,
+        `gx-${this.gxMb || this.gx}-mb`,
       ];
     },
   },

@@ -1,12 +1,13 @@
 <template>
-  <div class="form-order container fd-c ai-c py-100">
-    <h2 class="header-text mb-50">
+  <div class="form-order container fd-c ai-c py-100 py-50-mb">
+    <h2 class="header-text mb-50 mb-25-mb">
       Оформить заявку
     </h2>
     <AppForm
       class="w-100"
       ref="observer"
       :gy="45"
+      :gy-mb="25"
       @submit="validateForm"
     >
       <div>
