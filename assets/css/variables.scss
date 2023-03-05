@@ -15,7 +15,7 @@ $black: #000;
 $white: #fff;
 
 $box-shadow-1: 0px .4rem 5rem rgba(0, 0, 0, 0.05);
-
+$box-shadow-2: 0px .4rem 1.5rem rgba(0, 0, 0, 0.04);
 // utilities
 
 $text-colors: (
@@ -25,6 +25,7 @@ $text-colors: (
   p: $primary,
   w: $white,
   b: $black,
+  e: $error,
 );
 
 $background-colors: (
@@ -65,6 +66,7 @@ $font-sizes: (
 
 $box-shadows: (
   1: $box-shadow-1,
+  2: $box-shadow-2,
 );
 
 // $spacers: (
@@ -77,12 +79,12 @@ $border-radiuses: (
   30: 3rem,
 );
 
-// $borders: (
-//   0: 0rem,
-//   1: solid 0.0625rem,
-//   2: solid 0.125rem,
-//   3: solid 0.1875rem,
-// );
+$borders: (
+  0: 0rem,
+  1: solid 0.1rem,
+  2: solid 0.2rem,
+  3: solid 0.3rem,
+);
 
 $grid-breakpoints: (
   xs: 0,
