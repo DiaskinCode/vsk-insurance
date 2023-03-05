@@ -6,6 +6,7 @@ import Timeline from 'primevue/timeline';
 import InputText from 'primevue/inputtext';
 import Accordion from 'primevue/accordion';
 import AccordionTab from 'primevue/accordiontab';
+import Slider from 'primevue/slider';
 
 import Toast from 'primevue/toast';
 import ToastService from 'primevue/toastservice';
@@ -15,8 +16,10 @@ Vue.component('Timeline', Timeline);
 Vue.component('InputText', InputText);
 Vue.component('Accordion', Accordion);
 Vue.component('AccordionTab', AccordionTab);
+Vue.component('Slider', Slider);
 
 Vue.component('Toast', Toast);
+
 Vue.use(ToastService);
 
 Vue.use(PrimeVue, {
