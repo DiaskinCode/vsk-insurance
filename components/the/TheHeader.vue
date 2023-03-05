@@ -41,7 +41,7 @@ export default {
         label: 'FAQ',
       },
       {
-        href: '#insurance',
+        href: '#calculate',
         label: 'Рассчитать',
         button: true,
       },

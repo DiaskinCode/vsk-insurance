@@ -4,7 +4,7 @@
       Оформить заявку
     </h2>
     <AppForm
-      class="w-100"
+      class="w-100 px-100 px-0-mb"
       ref="observer"
       :gy="45"
       :gy-mb="25"
