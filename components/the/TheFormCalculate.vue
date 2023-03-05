@@ -42,6 +42,12 @@
           {{ termString }}
         </div>
       </Teleport>
+      <Teleport
+        to="#term"
+      >
+        <div class="form-calculate__circle pos-a l-0 br-c" />
+        <div class="form-calculate__circle pos-a r-0 br-c" />
+      </Teleport>
     </ClientOnly>
   </div>
 </template>
@@ -107,6 +113,18 @@ export default {
     transform: translateX(-40%);
     top: -5rem;
   }
+  /* .form-calculate__circle */
+  &__circle {
+    width: 1.8rem;
+    height: 1.8rem;
+    background: $primary;
+    top: -.6rem;
+    transform: translateX(-40%);
+    & + & {
+      background: $gray-dd;
+      transform: translateX(40%);
+    }
+  }
   .app-slider {
     color: #444444;
     &::before {
@@ -125,6 +143,7 @@ export default {
     }
   }
   .p-slider-handle {
+    z-index: 1;
     &::before {
       position: absolute;
     }
