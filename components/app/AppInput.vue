@@ -42,6 +42,8 @@ export default {
 
 <style lang="scss">
 .app-input {
+  padding-top: 1.8rem;
+  padding-bottom: 1.8rem;
   & > * {
     width: 100%;
   }

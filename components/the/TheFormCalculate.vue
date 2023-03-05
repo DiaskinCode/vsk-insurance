@@ -4,7 +4,7 @@
     class="form-calculate container-wrapper bg-g"
   >
     <div class="container fd-c ai-c py-100 py-50-mb">
-      <h2 class="header-text z-1 mb-35-mb">
+      <h2 class="header-text z-1 mb-50 mb-35-mb">
         Страхование несчастных случаев
       </h2>
       <div class="w-100 px-100 px-0-mb">
@@ -124,6 +124,63 @@
               </AppFormField>
             </div>
           </div>
+          <div>
+            <div class="fw-6 fs-25 lh-140 mb-10 ws-nw">
+              Промокод
+            </div>
+            <div class="d-f ai-c fd-c-mb w-100-mb ai-fs-mb">
+              <AppFormField
+                vid="sport"
+              >
+                <AppInputGroup>
+                  <AppInput
+                    id="promocode"
+                    placeholder="00000000"
+                    component="InputText"
+                  />
+                  <AppButton
+                    icon="pi pi-check"
+                  />
+                </AppInputGroup>
+              </AppFormField>
+              <AppButton
+                class="ml-20 ml-0-mb mt-15-mb ord-3-mb w-100-mb"
+                label="Рассчитать"
+                type="submit"
+              />
+              <AppFormField
+                vid="sport"
+                class="ml-20 ml-0-mb mt-15-mb"
+              >
+                <AppInputSwitch
+                  id="partner"
+                  name="partner"
+                  v-model="data.partner"
+                  label="Я партнёр"
+                />
+              </AppFormField>
+            </div>
+            <div class="mt-25 mt-35-mb">
+              <AppFormField
+                vid="rules"
+                class=""
+              >
+                <AppCheckbox
+                  id="rules"
+                  binary
+                  class="ai-c"
+                  v-model="data.rules"
+                >
+                  <label
+                    for="rules"
+                    class="ml-10 fs-16-mb"
+                  >
+                    Я согласен с <AppLinkInner>правилами пользования</AppLinkInner>
+                  </label>
+                </AppCheckbox>
+              </AppFormField>
+            </div>
+          </div>
         </AppForm>
       </div>
     </div>
@@ -209,7 +266,7 @@ export default {
       if (!isValidForm) {
         return;
       }
-      this.$emit('fetch-order', this.data);
+      this.$emit('fetch-calculate', this.data);
     },
   },
 }
