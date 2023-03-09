@@ -7,7 +7,7 @@
       <h2 class="header-text mb-50 mb-25-mb">
         Ответы на вопросы
       </h2>
-      <div class="row w-100 gy-0 gy-5-mb">
+      <div class="row w-100 gy-0 gy-5-mb gx-25">
         <div class="col-6 col-12-mb">
           <div class="w-100">
             <AppAccordion
