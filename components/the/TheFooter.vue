@@ -6,7 +6,7 @@
           <AppLogo
             src="\logo-bw.png"
           />
-          <div class="fs-16 lh-140 mt-20-mb d-n-mb">
+          <div class="fs-16 lh-140 mt-10 mt-20-mb d-n-mb">
             © Страховое акционерное общество “ВСК”, 2002–2022
           </div>
           <AppLinkInner
@@ -22,7 +22,7 @@
             class="c-t15"
             :class="{'mt-10': i !== 0}"
             :href="link.href"
-          >{{link.label}}</a>
+          >{{ link.label }}</a>
         </div>
         <div class="ord-2-mb mt-25-mb">
           <a
@@ -81,7 +81,6 @@
         </div>
       </div>
     </div>
-
   </footer>
 </template>
 
