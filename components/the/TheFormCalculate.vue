@@ -9,8 +9,8 @@
       </h2>
       <div class="w-100 px-100 px-0-mb">
         <AppForm
-          class="w-100 bg-w bs-1 br-30 p-55 bg-g-mb bs-n-mb p-0-mb"
           ref="observer"
+          class="w-100 bg-w bs-1 br-30 p-55 bg-g-mb bs-n-mb p-0-mb"
           :gy="50"
           :gy-mb="25"
           @submit="validateForm"
@@ -24,10 +24,10 @@
               vid="term"
             >
               <AppInput
-                id="termInput"
-                type="tel"
                 v-if="$mq === 'mb'"
+                id="termInput"
                 v-model="data.term"
+                type="tel"
                 class="form-calculate__term form-calculate__term--input"
                 component="InputNumber"
                 :min="1"
@@ -38,6 +38,7 @@
                 v-model="data.term"
                 :min="1"
                 :max="365"
+                @change="changeSlider"
               />
             </AppFormField>
           </div>
@@ -50,9 +51,9 @@
             >
               <AppCheckbox
                 id="risks-1"
-                classCheckbox="mt-5"
-                valueLabel="Смерть"
                 v-model="data.risks"
+                class-checkbox="mt-5"
+                value-label="Смерть"
               >
                 <label
                   for="risks-1"
@@ -64,10 +65,10 @@
               </AppCheckbox>
               <AppCheckbox
                 id="risks-2"
-                class="mt-10"
-                classCheckbox="mt-5"
-                valueLabel="Инвалидность"
                 v-model="data.risks"
+                class="mt-10"
+                class-checkbox="mt-5"
+                value-label="Инвалидность"
               >
                 <label
                   for="risks-2"
@@ -79,10 +80,10 @@
               </AppCheckbox>
               <AppCheckbox
                 id="risks-3"
-                class="mt-10"
-                classCheckbox="mt-5"
-                valueLabel="Нетрудоспособность"
                 v-model="data.risks"
+                class="mt-10"
+                class-checkbox="mt-5"
+                value-label="Нетрудоспособность"
               >
                 <label
                   for="risks-3"
@@ -117,8 +118,8 @@
               >
                 <AppInputSwitch
                   id="proffesional"
-                  name="proffesional"
                   v-model="data.professional"
+                  name="proffesional"
                   label="Я профессионал"
                 />
               </AppFormField>
@@ -154,8 +155,8 @@
               >
                 <AppInputSwitch
                   id="partner"
-                  name="partner"
                   v-model="data.partner"
+                  name="partner"
                   label="Я партнёр"
                 />
               </AppFormField>
@@ -167,9 +168,9 @@
               >
                 <AppCheckbox
                   id="rules"
-                  binary
-                  class="ai-c"
                   v-model="data.rules"
+                  class="ai-c"
+                  binary
                 >
                   <label
                     for="rules"
@@ -195,9 +196,12 @@
     </div>
     <ClientOnly>
       <Teleport
-        to=".form-calculate .p-slider-handle"
+        to=".form-calculate .app-slider"
       >
-        <div class="form-calculate__term bg-w b-1 br-5 py-10 d-f jc-c d-n-mb">
+        <div
+          ref="term"
+          class="form-calculate__term bg-w b-1 br-5 py-10 d-f jc-c d-n-mb"
+        >
           {{ termString }}
         </div>
       </Teleport>
@@ -244,6 +248,7 @@ export default {
         value: 'Категория 3',
       },
     ],
+    sliderHandleEl: null,
   }),
   computed: {
     termDay() {
@@ -273,7 +278,20 @@ export default {
       return `${this.price.toLocaleString()} ₽`
     },
   },
+  mounted() {
+    this.sliderHandleEl = document.querySelector('.p-slider-handle');
+  },
   methods: {
+    changeSlider() {
+      let left = Number(this.sliderHandleEl.style.left.replace('%', ''));
+      if (left < 4.7) {
+        left = 4.7;
+      }
+      if (left > 95.3) {
+        left = 95.3;
+      }
+      this.$refs.term.style.left = left + '%';
+    },
     async validateForm() {
       const isValidForm = await this.$refs.observer.validate();
       if (!isValidForm) {
@@ -293,8 +311,9 @@ export default {
     white-space: nowrap;
     border-color: #D2D2D2;
     width: 12rem;
-    transform: translateX(-40%);
-    top: -5rem;
+    left: 4.7%;
+    top: -6rem;
+    transform: translateX(-50%);
     &--input {
       left: 0;
       top: -6rem;
@@ -339,14 +358,14 @@ export default {
       position: absolute;
       left: 0;
       top: 2rem;
-      transform: translateX(-50%);
+      transform: translateX(-29%);
       content: '1 день';
     }
     &::after {
       position: absolute;
       right: 0;
       top: 2rem;
-      transform: translateX(50%);
+      transform: translateX(20%);
       content: '365 дней';
     }
   }
