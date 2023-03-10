@@ -18,7 +18,7 @@
           </div>
         </template>
         <template v-slot:content="{ item }">
-          <div class="step__content ta-c px-35 ta-l-mb pl-20-mb">
+          <div class="step__content ta-c px-20 ta-l-mb pl-20-mb">
             <div
               v-for="(text, i) in item"
               :key="i"
@@ -84,6 +84,10 @@ export default {
     }
   }
 
+  .p-timeline-event {
+    min-width: 30.8rem;
+    width: 30.8rem;
+  }
   .p-timeline-event:last-child {
     .step__content {
       transform: translateX(-40%);
@@ -93,7 +97,8 @@ export default {
     }
   }
   .p-timeline-event-separator {
-    min-width: 25rem;
+    min-width: 30.8rem;
+    width: 30.8rem;
     @media (max-width: 600px) {
       min-width: unset;
     }

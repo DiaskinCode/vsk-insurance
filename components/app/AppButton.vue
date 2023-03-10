@@ -32,6 +32,6 @@ export default {
 <style lang="scss">
 .app-button--secondary {
   color: $primary;
-  background: $white;
+  background: $secondary;
 }
 </style>
