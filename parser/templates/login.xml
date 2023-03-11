@@ -1,0 +1,4 @@
+<ns2:loginRequest xmlns="http://www.vsk.ru/schema/partners/common" xmlns:ns2="http://www.vsk.ru/schema/partners/auth" xmlns:ns3="http://www.vsk.ru/schema/partners/model/calc" xmlns:ns4="http://www.vsk.ru/schema/partners/policy" xmlns:ns5="http://www.vsk.ru/schema/partners/user" xmlns:ns6="http://www.vsk.ru/schema/partners/model">
+    <messageId>(id)</messageId>
+    <ns2:partnerClientId>(phone)</ns2:partnerClientId>
+</ns2:loginRequest>
