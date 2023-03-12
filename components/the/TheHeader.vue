@@ -13,7 +13,7 @@
         @click="openMenu"
       />
       <AppMenu
-        :links="links"
+        :links="headerLinks"
         :is-open="isOpen"
         @close-menu="openMenu"
       />
@@ -45,9 +45,35 @@ export default {
         label: 'Рассчитать',
         button: true,
       },
-    ]
+    ],
+    linksMobile: [
+      {
+        href: '#include',
+        label: 'Что включает полис',
+      },
+      {
+        href: '#benefit',
+        label: 'Преимущества',
+      },
+      {
+        href: '#calculate',
+        label: 'Калькулятор',
+      },
+      {
+        href: '#question',
+        label: 'Ответы на вопросы',
+      },
+      {
+        href: '/logo.svg',
+        label: 'Политика в отношении обработки персональных данных',
+      },
+    ],
   }),
-  computed: {},
+  computed: {
+    headerLinks() {
+      return this.$mq === 'mb' ? this.linksMobile : 'this.links';
+    },
+  },
   methods: {
     openMenu() {
       this.isOpen = !this.isOpen;

@@ -34,7 +34,7 @@
           <div class="fs-20 mt-5">
             г. Москва, ул. Островная, 4
           </div>
-          <div class="d-f mt-20">
+          <div class="d-f mt-20 ai-c">
             <a
               v-for="(link, i) in linksSocial"
               :key="i"
@@ -123,7 +123,7 @@ export default {
         icon: '/link-icons/ok.svg',
         class: 'footer__link-social--ok',
       },
-    ]
+    ],
   }),
   computed: {},
   methods: {},
