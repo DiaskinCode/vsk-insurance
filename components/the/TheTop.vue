@@ -1,14 +1,14 @@
 <template>
   <div class="container-wrapper bs-1">
-    <div class="top container py-60 d-f ai-c jc-sb py-40-mb fd-cr-mb">
+    <div class="top container py-60 d-f ai-c jc-sb pb-40-mb pt-0-mb fd-cr-mb">
       <div class="d-f fd-c ai-fs">
-        <h1 class="c-t1b fw-7 fs-35 lh-120 fs-20-mb mt-10-mb ord-1-mb">
+        <h1 class="c-t1b fw-7 fs-35 lh-120 fs-20-mb ord-1-mb">
           Защита для вас и вашего<br class="d-n d-b-mb">
           ребенка <br class="d-n-mb">
           на случай<br class="d-n d-b-mb">
           непредвиденных событий
         </h1>
-        <div class="d-f fd-c fs-22 lh-140 mt-35 row gy-30 ord-4-mb fs-20-mb">
+        <div class="d-f fd-c fs-22 lh-140 mt-35 row gy-30 ord-4-mb fs-20-mb mt-0-mb">
           <TopListItem>
             <h2>
               Возраст Застрахованного <span class="fw-7">от 4 до 70 лет</span>
@@ -16,12 +16,16 @@
           </TopListItem>
           <TopListItem>
             <h2>
-              Фиксированная страховая сумма <span class="fw-7">200 000 рублей</span>
+              Фиксированная страховая сумма
+              <br class="d-n d-b-mb">
+              <span class="fw-7">
+                200 000 рублей
+              </span>
             </h2>
           </TopListItem>
           <TopListItem>
             <h2>
-              Срок страхования <span class="fw-7">от 1 дня до 1 года</span>
+              Срок страхования <span class="fw-7"><br class="d-n d-b-mb">от 1 дня до 1 года</span>
             </h2>
           </TopListItem>
           <TopListItem class="d-n-mb">
