@@ -2,11 +2,11 @@
   <div
     class="
       benefit-list-item
-      d-f ai-c bg-w bs-1 br-30 p-30
+      d-f ai-c bg-w bs-1 br-30 p-30 py-10
       fd-c-mb ai-fs-mb br-10-mb p-20-mb
     "
   >
-    <div class="benefit-list-item__img-wrapper mr-20 mb-10-mb">
+    <div class="benefit-list-item__img-wrapper mr-40 mb-10-mb">
       <img
         class="benefit-list-item__img"
         :src="src"
@@ -39,17 +39,18 @@ export default {
 .benefit-list-item {
   /* .benefit-list-item__img-wrapper */
   &__img-wrapper {
+    margin-top: -2.5rem;
     @media (max-width: 600px) {
-      margin-top: -5rem;
+      margin-top: -5.5rem;
     }
   }
   /* .benefit-list-item__img */
   &__img {
-    width: 16.835rem;
-    height: 13.013rem;
+    width: 15rem;
+    height: 16.75rem;
     @media (max-width: 600px) {
-      width: 9.6rem;
-      height: 7.42rem;
+      width: 9.5rem;
+      height: 10.5rem;
     }
   }
 }
