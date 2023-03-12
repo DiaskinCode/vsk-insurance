@@ -4,7 +4,7 @@
       Полис оформить просто<br class="d-n-mb">
       в течение 2-х минут в 4 шага:
     </h2>
-    <div class="mt-60 mw-100 ove-h">
+    <div class="mt-60 mw-100 mt-30-mb ove-h">
       <AppTimeline
         class="pl-130 pr-0 fs-20 lh-140 pl-0-mb fs-16-mb"
         :layout="layout"
