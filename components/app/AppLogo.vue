@@ -12,7 +12,7 @@ export default {
   props: {
     src: {
       type: String,
-      default: '/logo.png'
+      default: '/logo.svg'
     }
   },
   data: () => ({

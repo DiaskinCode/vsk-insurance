@@ -4,7 +4,7 @@
       <div class="d-f jc-sb fd-c-mb">
         <div class="ord-1-mb">
           <AppLogo
-            src="\logo-bw.png"
+            src="\logo-bw.svg"
           />
           <div class="fs-16 lh-140 mt-10 mt-20-mb d-n-mb">
             © Страховое акционерное общество “ВСК”, 2002–2022
