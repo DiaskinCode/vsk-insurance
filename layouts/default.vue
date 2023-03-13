@@ -5,6 +5,7 @@
       <Nuxt />
     </div>
     <TheFooter />
+    <AppToast />
   </div>
 </template>
 
