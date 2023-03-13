@@ -112,24 +112,36 @@
           label="Оформить"
           type="submit"
           :loading="loading"
-          :disabled="loading"
+          :disabled="loading || !isEnabled"
         />
         <AppButton
           class="ml-25 ml-5-mb fg-1-mb"
           secondary
           label="Предпросмотр"
           :loading="loading"
-          :disabled="loading"
+          :disabled="loading || !isEnabled"
         />
       </div>
     </AppForm>
+    <div
+      v-if="!isEnabled"
+      class="fs-16 o-50 as-fs pl-100 mt-20 fs-12-mb pl-0-mb"
+    >
+      Сначала необходимо<br class="d-n d-b-mb">
+      рассчитать стоимость полиса.
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'TheFormOrder',
-  props: {},
+  props: {
+    isEnabled: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data: () => ({
     loading: false,
     data: {
