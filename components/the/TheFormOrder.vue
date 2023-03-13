@@ -21,49 +21,49 @@
           >
             <AppFormField
               class="col-6 col-12-mb"
-              vid="insurerFio"
+              vid="fio_policyholder"
               rules="required"
               label="ФИО страхователя"
             >
               <AppInput
-                id="insurerFio"
-                v-model="data.insurerFio"
+                id="fio_policyholder"
+                v-model="data.fio_policyholder"
                 component="InputText"
               />
             </AppFormField>
             <AppFormField
               class="col-6 col-12-mb"
-              vid="insurerBirthday"
+              vid="birth_policyholder"
               rules="required"
               label="Дата рождения страхователя"
             >
               <AppInput
-                id="insurerBirthday"
-                v-model="data.insurerBirthday"
+                id="birth_policyholder"
+                v-model="data.birth_policyholder"
                 component="InputText"
               />
             </AppFormField>
             <AppFormField
               class="col-6 col-12-mb"
-              vid="personFio"
+              vid="fio_insured_person"
               rules="required"
               label="ФИО застрахованного лица"
             >
               <AppInput
-                id="personFioe"
-                v-model="data.personFio"
+                id="fio_insured_person"
+                v-model="data.fio_insured_person"
                 component="InputText"
               />
             </AppFormField>
             <AppFormField
               class="col-6 col-12-mb"
-              vid="personBirthday"
+              vid="birth_insured_person"
               rules="required"
               label="Дата рождения застрахованного лица"
             >
               <AppInput
-                id="personBirthday"
-                v-model="data.personBirthday"
+                id="birth_insured_person"
+                v-model="data.birth_insured_person"
                 component="InputText"
               />
             </AppFormField>
@@ -81,25 +81,25 @@
           >
             <AppFormField
               class="col-6 col-12-mb"
-              vid="phone"
+              vid="phone_policyholder"
               rules="required"
-              label="ФИО страхователя"
+              label="Телефон страхователя"
             >
               <AppInput
-                id="phone"
-                v-model="data.phone"
+                id="phone_policyholder"
+                v-model="data.phone_policyholder"
                 component="InputText"
               />
             </AppFormField>
             <AppFormField
               class="col-6 col-12-mb"
-              vid="email"
+              vid="email_policyholder"
               rules="required"
-              label="Дата рождения страхователя"
+              label="Email страхователя"
             >
               <AppInput
-                id="email"
-                v-model="data.email"
+                id="email_policyholder"
+                v-model="data.email_policyholder"
                 component="InputText"
               />
             </AppFormField>
@@ -133,12 +133,14 @@ export default {
   data: () => ({
     loading: false,
     data: {
-      insurerFio: '',
-      insurerBirthday: '',
-      personFio: '',
-      personBirthday: '',
-      phone: '',
-      email: '',
+      fio_policyholder: '',
+      birth_policyholder: '',
+
+      fio_insured_person: '',
+      birth_insured_person: '',
+
+      phone_policyholder: '',
+      email_policyholder: '',
     },
   }),
   computed: {},
