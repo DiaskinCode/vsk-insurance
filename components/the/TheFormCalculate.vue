@@ -26,7 +26,7 @@
               <AppInput
                 v-if="$mq === 'mb'"
                 id="termInput"
-                v-model="data.term"
+                v-model="data.count_days"
                 type="tel"
                 class="form-calculate__term form-calculate__term--input"
                 component="InputNumber"
@@ -35,7 +35,7 @@
               />
               <AppSlider
                 id="term"
-                v-model="data.term"
+                v-model="data.count_days"
                 :min="1"
                 :max="365"
                 @change="changeSlider"
@@ -225,7 +225,7 @@ export default {
   data: () => ({
     loading: false,
     data: {
-      term: 1,
+      count_days: 1,
       risks: [],
       sport: '',
       promo: '',
@@ -260,19 +260,19 @@ export default {
       }
 
       if (
-        div(mod(this.data.term, 100), 10) === 1 ||
-        mod(this.data.term, 10) > 4 ||
-        mod(this.data.term, 10) === 0
+        div(mod(this.data.count_days, 100), 10) === 1 ||
+        mod(this.data.count_days, 10) > 4 ||
+        mod(this.data.count_days, 10) === 0
       ) {
         return 'дней';
       }
-      if (mod(this.data.term, 10) > 1) {
+      if (mod(this.data.count_days, 10) > 1) {
         return 'дня';
       }
       return 'день';
     },
     termString() {
-      return `${this.data.term} ${this.termDay}`;
+      return `${this.data.count_days} ${this.termDay}`;
     },
     priceString() {
       return `${this.price.toLocaleString()} ₽`
