@@ -68,6 +68,9 @@ export default {
   }
   .p-dropdown-items-wrapper {
     max-height: 30rem !important;
+    @media (max-width: 600px) {
+      max-height: 24vh !important;
+    }
   }
   .p-dropdown-filter-icon {
     font-size: 1.6rem;
