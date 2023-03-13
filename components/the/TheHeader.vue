@@ -71,7 +71,7 @@ export default {
   }),
   computed: {
     headerLinks() {
-      return this.$mq === 'mb' ? this.linksMobile : 'this.links';
+      return this.$mq === 'mb' ? this.linksMobile : this.links;
     },
   },
   methods: {
