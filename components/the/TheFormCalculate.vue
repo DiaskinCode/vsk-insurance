@@ -108,6 +108,9 @@
                   id="sport"
                   v-model="data.sport"
                   class="form-calculate__dropdown w-100-mb"
+                  filter
+                  filterPlaceholder="Найти вид спорта"
+                  emptyFilterMessage="Вид спорта не найден"
                   placeholder="Выбрать категорию"
                   :options="optionsSport"
                 />
@@ -219,6 +222,7 @@
 </template>
 
 <script>
+import sportList from './sport-list';
 export default {
   name: 'TheFormCalculate',
   props: {},
@@ -234,20 +238,7 @@ export default {
       rules: false,
     },
     price: 12735.62,
-    optionsSport: [
-      {
-        label: 'Категория 1',
-        value: 'Категория 1',
-      },
-      {
-        label: 'Категория 2',
-        value: 'Категория 2',
-      },
-      {
-        label: 'Категория 3',
-        value: 'Категория 3',
-      },
-    ],
+    optionsSport: sportList,
     sliderHandleEl: null,
   }),
   computed: {

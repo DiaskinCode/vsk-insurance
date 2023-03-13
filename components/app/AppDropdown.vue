@@ -34,11 +34,11 @@ export default {
     },
     optionLabel: {
       type: [String, Function],
-      default: 'label',
+      default: '',
     },
     optionValue: {
       type: [String, Function],
-      default: 'value',
+      default: '',
     },
   },
   data: () => ({
@@ -49,6 +49,37 @@ export default {
 </script>
 
 <style lang="scss">
+#__nuxt .app-dropdown {
+  .p-dropdown-item {
+    white-space: normal;
+    font-size: 1.4rem;
+  }
+  .p-dropdown-filter-container {
+    display: flex;
+    align-items: center;
+  }
+  .p-dropdown-filter {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1.25rem;
+    padding-right: 3.25rem;
+    border-radius: .5rem;
+    font-size: 1.6rem;
+  }
+  .p-dropdown-items-wrapper {
+    max-height: 30rem !important;
+  }
+  .p-dropdown-filter-icon {
+    font-size: 1.6rem;
+    top: 1.7rem;
+    right: 1.2rem;
+  }
+  .p-dropdown-empty-message {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+}
+
 .app-dropdown {
   &.p-dropdown {
     background: $white;
