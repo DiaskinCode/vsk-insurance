@@ -30,8 +30,13 @@ export default {
 </script>
 
 <style lang="scss">
-.app-button--secondary {
-  color: $primary;
-  background: $secondary;
+.app-button {
+  &:disabled {
+    opacity: .5;
+  }
+  &--secondary {
+    color: $primary;
+    background: $secondary;
+  }
 }
 </style>
