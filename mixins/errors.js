@@ -23,11 +23,14 @@ export default {
       summary = 'Запрос успешно отправлен',
       life = 3000,
       closable = false,
+      src = '/success.svg',
     }) {
       this.$toast.add({
+        src,
         summary,
         detail,
         life,
+        closable,
         severity: 'success',
       });
     },

@@ -48,6 +48,10 @@ export default {
 
 <style lang="scss">
 .app-toast {
+  &__icon {
+    width: 6rem;
+    height: 6rem;
+  }
   &.p-toast {
     opacity: 0.95;
     width: 50rem;
@@ -129,7 +133,7 @@ export default {
 }
 .p-toast .p-toast-message.p-toast-message-success {
   background: #C8E6C9;
-  border: solid #439446;
+  border: solid #5ed60d;
   border-width: 0 0 0 6px;
   color: #224a23;
 }
