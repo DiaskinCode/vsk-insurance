@@ -21,49 +21,49 @@
           >
             <AppFormField
               class="col-6 col-12-mb"
-              vid="insurerFio"
+              vid="fio_policyholder"
               rules="required"
               label="ФИО страхователя"
             >
               <AppInput
-                id="insurerFio"
-                v-model="data.insurerFio"
+                id="fio_policyholder"
+                v-model="data.fio_policyholder"
                 component="InputText"
               />
             </AppFormField>
             <AppFormField
               class="col-6 col-12-mb"
-              vid="insurerBirthday"
+              vid="birth_policyholder"
               rules="required"
               label="Дата рождения страхователя"
             >
               <AppInput
-                id="insurerBirthday"
-                v-model="data.insurerBirthday"
+                id="birth_policyholder"
+                v-model="data.birth_policyholder"
                 component="InputText"
               />
             </AppFormField>
             <AppFormField
               class="col-6 col-12-mb"
-              vid="personFio"
+              vid="fio_insured_person"
               rules="required"
               label="ФИО застрахованного лица"
             >
               <AppInput
-                id="personFioe"
-                v-model="data.personFio"
+                id="fio_insured_person"
+                v-model="data.fio_insured_person"
                 component="InputText"
               />
             </AppFormField>
             <AppFormField
               class="col-6 col-12-mb"
-              vid="personBirthday"
+              vid="birth_insured_person"
               rules="required"
               label="Дата рождения застрахованного лица"
             >
               <AppInput
-                id="personBirthday"
-                v-model="data.personBirthday"
+                id="birth_insured_person"
+                v-model="data.birth_insured_person"
                 component="InputText"
               />
             </AppFormField>
@@ -81,25 +81,25 @@
           >
             <AppFormField
               class="col-6 col-12-mb"
-              vid="phone"
+              vid="phone_policyholder"
               rules="required"
-              label="ФИО страхователя"
+              label="Телефон страхователя"
             >
               <AppInput
-                id="phone"
-                v-model="data.phone"
+                id="phone_policyholder"
+                v-model="data.phone_policyholder"
                 component="InputText"
               />
             </AppFormField>
             <AppFormField
               class="col-6 col-12-mb"
-              vid="email"
+              vid="email_policyholder"
               rules="required"
-              label="Дата рождения страхователя"
+              label="Email страхователя"
             >
               <AppInput
-                id="email"
-                v-model="data.email"
+                id="email_policyholder"
+                v-model="data.email_policyholder"
                 component="InputText"
               />
             </AppFormField>
@@ -112,33 +112,47 @@
           label="Оформить"
           type="submit"
           :loading="loading"
-          :disabled="loading"
+          :disabled="loading || !isEnabled"
         />
         <AppButton
           class="ml-25 ml-5-mb fg-1-mb"
           secondary
           label="Предпросмотр"
           :loading="loading"
-          :disabled="loading"
+          :disabled="loading || !isEnabled"
         />
       </div>
     </AppForm>
+    <div
+      v-if="!isEnabled"
+      class="fs-16 o-50 as-fs pl-100 mt-20 fs-12-mb pl-0-mb"
+    >
+      Сначала необходимо<br class="d-n d-b-mb">
+      рассчитать стоимость полиса.
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'TheFormOrder',
-  props: {},
+  props: {
+    isEnabled: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data: () => ({
     loading: false,
     data: {
-      insurerFio: '',
-      insurerBirthday: '',
-      personFio: '',
-      personBirthday: '',
-      phone: '',
-      email: '',
+      fio_policyholder: '',
+      birth_policyholder: '',
+
+      fio_insured_person: '',
+      birth_insured_person: '',
+
+      phone_policyholder: '',
+      email_policyholder: '',
     },
   }),
   computed: {},
