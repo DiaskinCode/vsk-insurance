@@ -191,7 +191,8 @@
               {{ priceString }}
             </div>
             <div class="fs-16 o-50 mt-10 fs-12-mb lh-120-mb">
-              Предварительный расчет.<br class="d-n d-b-mb">Не является публичной офертой
+              Предварительный расчет.<br class="d-n d-b-mb">
+              Не является публичной офертой
             </div>
           </div>
         </AppForm>
@@ -225,7 +226,12 @@
 import sportList from './sport-list';
 export default {
   name: 'TheFormCalculate',
-  props: {},
+  props: {
+    price: {
+      type: Number,
+      default: null,
+    },
+  },
   data: () => ({
     loading: false,
     data: {
@@ -238,7 +244,6 @@ export default {
       partner: false,
       rules: false,
     },
-    price: null,
     optionsSport: sportList,
     sliderHandleEl: null,
   }),

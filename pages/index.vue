@@ -5,6 +5,7 @@
     <TheBenefit />
     <TheStep />
     <TheFormCalculate
+      :price="price"
       @fetch-calculate="fetchCalculate"
     />
     <TheFormOrder />
@@ -21,6 +22,7 @@ export default {
   ],
   props: {},
   data: () => ({
+    price: null,
   }),
   computed: {},
   methods: {
@@ -30,7 +32,8 @@ export default {
         this.showError({ detail: response.data });
         return;
       }
-      this.showSuccess({ detail: response.data });
+      this.showSuccess({ detail: 'Стоимость полиса рассчитана' });
+      this.price = Number(response.data.total);
     },
     async fetchCalculateAction(data) {
       const responseObject = await this.$axios.post('calculator/', data)
