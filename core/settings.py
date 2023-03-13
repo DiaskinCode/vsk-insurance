@@ -150,4 +150,4 @@ SPECTACULAR_SETTINGS = {
 # CORS
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
-CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1', 'https://ns.vsk-ns.ru/swagger/']
+CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1', 'https://ns.vsk-ns.ru']
