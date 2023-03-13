@@ -315,6 +315,19 @@ export default {
 <style lang="scss">
 .form-calculate {
   /* .form-calculate__term */
+  .app-input.form-calculate__term--input {
+    left: 0;
+    top: -6rem;
+    transform: none;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    width: 6rem;
+    .p-inputnumber-input {
+      font-size: 2rem;
+      text-align: center;
+    }
+  }
+
   &__term {
     position: absolute;
     white-space: nowrap;
@@ -323,18 +336,6 @@ export default {
     left: 4.7%;
     top: -6rem;
     transform: translateX(-50%);
-    &--input {
-      left: 0;
-      top: -6rem;
-      transform: none;
-      padding: .5rem 1rem;
-      border-radius: .5rem;
-      width: 6rem;
-      .p-inputnumber-input {
-        font-size: 2rem;
-        text-align: center;
-      }
-    }
     &--mobile {
       position: absolute;
       top: -5rem;
