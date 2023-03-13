@@ -80,6 +80,7 @@ export default {
   build: {
     transpile: [
       'primevue',
+      'primeicons',
       'vee-validate',
       'vue2-teleport',
     ],
