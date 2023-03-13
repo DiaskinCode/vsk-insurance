@@ -53,7 +53,7 @@
                 id="risks-1"
                 v-model="data.risks"
                 class-checkbox="mt-5"
-                value-label="Смерть"
+                value-label="accident_death"
               >
                 <label
                   for="risks-1"
@@ -68,7 +68,7 @@
                 v-model="data.risks"
                 class="mt-10"
                 class-checkbox="mt-5"
-                value-label="Инвалидность"
+                value-label="accident_disability"
               >
                 <label
                   for="risks-2"
@@ -83,7 +83,7 @@
                 v-model="data.risks"
                 class="mt-10"
                 class-checkbox="mt-5"
-                value-label="Нетрудоспособность"
+                value-label="timedisability_accident"
               >
                 <label
                   for="risks-3"
@@ -106,7 +106,7 @@
               >
                 <AppDropdown
                   id="sport"
-                  v-model="data.sport"
+                  v-model="data.type_of_sport"
                   class="form-calculate__dropdown w-100-mb"
                   filter
                   filterPlaceholder="Найти вид спорта"
@@ -121,7 +121,7 @@
               >
                 <AppInputSwitch
                   id="proffesional"
-                  v-model="data.professional"
+                  v-model="data.is_professional"
                   name="proffesional"
                   label="Я профессионал"
                 />
@@ -185,7 +185,7 @@
               </AppFormField>
             </div>
           </div>
-          <div class="d-f fd-c fs-25 lh-140 fs-22-mb lh-120-mb">
+          <div class="d-f fd-c fs-25 lh-140 fs-22-mb lh-120-mb" v-if="priceString">
             <div>Предварительная стоимость Вашего полиса:</div>
             <div class="fs-40 c-p fw-7 mt-15-mb">
               {{ priceString }}
@@ -230,14 +230,15 @@ export default {
     loading: false,
     data: {
       count_days: 1,
+      type_of_sport: '',
+      is_professional: false,
       risks: [],
-      sport: '',
+
       promo: '',
-      professional: false,
       partner: false,
       rules: false,
     },
-    price: 12735.62,
+    price: null,
     optionsSport: sportList,
     sliderHandleEl: null,
   }),
@@ -266,7 +267,14 @@ export default {
       return `${this.data.count_days} ${this.termDay}`;
     },
     priceString() {
-      return `${this.price.toLocaleString()} ₽`
+      return this.price ? `${this.price.toLocaleString()} ₽` : null;
+    },
+    selectedRisks() {
+      return {
+        accident_death: this.data.risks.includes('accident_death'),
+        accident_disability: this.data.risks.includes('accident_disability'),
+        timedisability_accident: this.data.risks.includes('timedisability_accident'),
+      }
     },
   },
   mounted() {
@@ -288,7 +296,12 @@ export default {
       if (!isValidForm) {
         return;
       }
-      this.$emit('fetch-calculate', this.data);
+      const formData = { ...this.selectedRisks };
+      formData.is_professional = this.data.is_professional;
+      formData.count_days = this.data.count_days;
+      formData.type_of_sport = this.data.type_of_sport;
+
+      this.$emit('fetch-calculate', formData);
     },
   },
 }
