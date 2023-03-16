@@ -67,6 +67,10 @@ export default {
       height: 3rem;
     }
   }
+  .p-checkbox-disabled {
+    opacity: .5;
+    cursor: default;
+  }
   .p-checkbox .p-checkbox-box {
     border: 2px solid #ced4da;
     background: #ffffff;

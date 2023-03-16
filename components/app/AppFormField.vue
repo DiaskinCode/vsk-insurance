@@ -1,5 +1,6 @@
 <template>
   <ValidationProvider
+    ref="validationProvider"
     v-slot="{
       errors,
       failed,
@@ -32,6 +33,7 @@
     <div
       v-if="failed"
       class="app-form-field__error c-e pos-a fs-14"
+      :class="{ 'left': errorPosition === 'left' }"
     >
       {{ errors[0] }}
     </div>
@@ -60,7 +62,14 @@ export default {
       validator(value) {
         return ['top', 'left'].includes(value);
       },
-    }
+    },
+    errorPosition: {
+      type: String,
+      default: 'right',
+      validator(value) {
+        return ['right', 'left'].includes(value);
+      },
+    },
   },
   data: () => ({
   }),
@@ -72,7 +81,17 @@ export default {
       return this.labelPosition === 'left';
     },
   },
-  methods: {},
+  methods: {
+    validate() {
+      this.$refs.validationProvider.validate();
+    },
+    syncValue(val) {
+      this.$refs.validationProvider.syncValue(val);
+    },
+    setErrors(val) {
+      this.$refs.validationProvider.setErrors(val);
+    },
+  },
 
 }
 </script>
@@ -81,8 +100,8 @@ export default {
 .app-form-field {
   /* .app-form-field__content--error */
   &__content--error {
-    .app-input {
-      border: 1px solid $error;
+    .app-input, .p-checkbox-box {
+      border: 1px solid $error !important;
       box-shadow: 0px 0rem .3rem rgba(255, 0, 0, 0.4) ;
     }
   }
@@ -90,6 +109,9 @@ export default {
   &__error {
     bottom: -1.9rem;
     right: 2rem;
+    &.left {
+      left: 0;
+    }
   }
 }
 </style>

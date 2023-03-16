@@ -34,13 +34,16 @@
             <AppFormField
               class="col-6 col-12-mb"
               vid="birth_policyholder"
-              rules="required"
+              rules="required|date|pastdate"
               label="Дата рождения страхователя"
             >
               <AppInput
                 id="birth_policyholder"
                 v-model="data.birth_policyholder"
                 component="InputText"
+                v-mask="'##.##.####'"
+                type="tel"
+                placeholder="ДД.ММ.ГГГГ"
               />
             </AppFormField>
             <AppFormField
@@ -58,13 +61,16 @@
             <AppFormField
               class="col-6 col-12-mb"
               vid="birth_insured_person"
-              rules="required"
+              rules="required|date|pastdate"
               label="Дата рождения застрахованного лица"
             >
               <AppInput
                 id="birth_insured_person"
                 v-model="data.birth_insured_person"
                 component="InputText"
+                v-mask="'##.##.####'"
+                type="tel"
+                placeholder="ДД.ММ.ГГГГ"
               />
             </AppFormField>
           </AppFormRow>
@@ -89,17 +95,21 @@
                 id="phone_policyholder"
                 v-model="data.phone_policyholder"
                 component="InputText"
+                v-mask="'+7 (###) ###-##-##'"
+                type="tel"
+                placeholder="+7 (999) 999-99-99"
               />
             </AppFormField>
             <AppFormField
               class="col-6 col-12-mb"
               vid="email_policyholder"
-              rules="required"
+              rules="required|email"
               label="Email страхователя"
             >
               <AppInput
                 id="email_policyholder"
                 v-model="data.email_policyholder"
+                type="email"
                 component="InputText"
               />
             </AppFormField>
@@ -134,8 +144,12 @@
 </template>
 
 <script>
+import datetoolsMixin from '~/mixins/datetools';
 export default {
   name: 'TheFormOrder',
+  mixins: [
+    datetoolsMixin,
+  ],
   props: {
     isEnabled: {
       type: Boolean,
@@ -162,7 +176,13 @@ export default {
       if (!isValidForm) {
         return;
       }
-      this.$emit('fetch-order', this.data);
+      this.$emit('fetch-order', this.prepareFormData());
+    },
+    prepareFormData() {
+      const formData = { ...this.data };
+      formData.birth_policyholder = this.ruDateToISO(formData.birth_policyholder);
+      formData.birth_insured_person = this.ruDateToISO(formData.birth_insured_person);
+      return formData;
     },
   },
 }

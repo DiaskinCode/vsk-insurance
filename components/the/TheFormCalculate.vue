@@ -9,7 +9,7 @@
       </h2>
       <div class="w-100 px-100 px-0-mb">
         <AppForm
-          ref="observer"
+          ref="observerCalc"
           class="w-100 bg-w bs-1 br-30 p-55 bg-g-mb bs-n-mb p-0-mb"
           :gy="50"
           :gy-mb="25"
@@ -54,6 +54,7 @@
                 v-model="data.risks"
                 class-checkbox="mt-5"
                 value-label="accident_death"
+                :disabled="true"
               >
                 <label
                   for="risks-1"
@@ -93,6 +94,33 @@
                   несчастного случая, произошедшего в период страхования
                 </label>
               </AppCheckbox>
+              <div class="d-f ai-c pt-20 ">
+                <AppCheckbox
+                  id="risks-4"
+                  binary
+                  v-model="data.is_sporttime"
+                  class="ai-c"
+                >
+                  <label
+                    for="risks-4"
+                    class="ml-10"
+                  >
+                    НС во время занятий спортом
+                  </label>
+                </AppCheckbox>
+                <div
+                  class="ml-15 d-n-mb"
+                  v-tooltip="tooltipOptions"
+                >
+                  <i class="pi pi-question-circle fs-16 o-50" />
+                </div>
+                <div
+                  class="ml-15 d-n d-b-mb"
+                  v-tooltip="tooltipOptionsMobile"
+                >
+                  <i class="pi pi-question-circle fs-16 o-50" />
+                </div>
+              </div>
             </AppFormField>
           </div>
           <div>
@@ -104,20 +132,28 @@
                 class="w-100-mb"
                 vid="sport"
               >
-                <AppDropdown
+                <AppMultiSelect
                   id="sport"
                   v-model="data.type_of_sport"
                   class="form-calculate__dropdown w-100-mb"
+                  :class="{ 'error': isErrorSelect }"
                   filter
                   filterPlaceholder="Найти вид спорта"
                   emptyFilterMessage="Вид спорта не найден"
                   placeholder="Выбрать категорию"
                   :options="optionsSport"
+                  @input="onSelectInput"
                 />
+                <div
+                  v-if="isErrorSelect"
+                  class="app-form-field__error c-e pos-a fs-14 ws-nw l-0"
+                >
+                  Необходимо выбрать хотя бы 1 вид спорта
+                </div>
               </AppFormField>
               <AppFormField
-                vid="sport"
-                class="ml-20 ml-0-mb mt-15-mb"
+                vid="proffesional"
+                class="ml-20 ml-0-mb mt-30-mb"
               >
                 <AppInputSwitch
                   id="proffesional"
@@ -136,15 +172,11 @@
               <AppFormField
                 vid="sport"
               >
-                <AppInputGroup>
-                  <AppInput
-                    id="promocode"
-                    placeholder="00000000"
-                    component="InputText"
-                  />
-                  <AppButton
-                    icon="pi pi-check"
-                  />
+                <AppInput
+                  id="promocode"
+                  v-model="data.promo"
+                  component="InputText"
+                />
                 </AppInputGroup>
               </AppFormField>
               <AppButton
@@ -166,17 +198,19 @@
             </div>
             <div class="mt-25 mt-35-mb">
               <AppFormField
-                vid="rules"
+                vid="rulespol"
+                rules="istrue"
+                errorPosition="left"
                 class=""
               >
                 <AppCheckbox
-                  id="rules"
-                  v-model="data.rules"
+                  id="rulespol"
+                  v-model="data.rulespol"
                   class="ai-c"
                   binary
                 >
                   <label
-                    for="rules"
+                    for="rulespol"
                     class="ml-10 fs-16-mb"
                   >
                     Я согласен с <AppLinkInner>правилами пользования</AppLinkInner>
@@ -236,16 +270,38 @@ export default {
     loading: false,
     data: {
       count_days: 1,
-      type_of_sport: '',
+      type_of_sport: [],
       is_professional: false,
-      risks: [],
+      risks: ['accident_death'],
+      is_sporttime: false,
 
       promo: '',
       partner: false,
-      rules: false,
+      rulespol: false,
     },
     optionsSport: sportList,
     sliderHandleEl: null,
+    isErrorSelect: false,
+
+    tooltipOptions: {
+      content: `
+        «НС во время занятий спортом» означает, что страхование распространяется только на время,
+        когда спортсмен тренируется или участвует в соревнованиях. Если признак не установлен,
+        то страхование распространяется как на время тренировок/соревнований, так и другое время,
+        когда спортсмен не занимается спортом
+      `,
+      placement: 'right',
+    },
+    tooltipOptionsMobile: {
+      content: `
+        «НС во время занятий спортом» означает, что страхование распространяется только на время,
+        когда спортсмен тренируется или участвует в соревнованиях. Если признак не установлен,
+        то страхование распространяется как на время тренировок/соревнований, так и другое время,
+        когда спортсмен не занимается спортом
+      `,
+      trigger: 'click',
+      // placement: 'right',
+    },
   }),
   computed: {
     termDay() {
@@ -286,6 +342,9 @@ export default {
     this.sliderHandleEl = document.querySelector('.p-slider-handle');
   },
   methods: {
+    onSelectInput(val) {
+      this.validateSelect();
+    },
     changeSlider() {
       let left = Number(this.sliderHandleEl.style.left.replace('%', ''));
       if (left < 4.7) {
@@ -297,8 +356,9 @@ export default {
       this.$refs.term.style.left = left + '%';
     },
     async validateForm() {
-      const isValidForm = await this.$refs.observer.validate();
-      if (!isValidForm) {
+      const isValidForm = await this.$refs.observerCalc.validate();
+      this.validateSelect();
+      if (!isValidForm || this.isErrorSelect) {
         return;
       }
       const formData = { ...this.selectedRisks };
@@ -306,7 +366,19 @@ export default {
       formData.count_days = this.data.count_days;
       formData.type_of_sport = this.data.type_of_sport;
 
-      this.$emit('fetch-calculate', formData);
+      this.$emit('fetch-calculate', this.prepareFormData());
+    },
+    prepareFormData() {
+      const formData = { ...this.selectedRisks };
+      formData.is_sporttime = this.data.is_sporttime;
+      formData.is_professional = this.data.is_professional;
+      formData.count_days = this.data.count_days;
+      formData.type_of_sport = this.data.type_of_sport.join(';');
+      formData.promo = this.data.promo;
+      return formData;
+    },
+    validateSelect() {
+      this.isErrorSelect = this.data.type_of_sport.length === 0;
     },
   },
 }
@@ -361,7 +433,6 @@ export default {
       width: 100%;
     }
   }
-
   .app-slider {
     color: #444444;
     &::before {
@@ -385,5 +456,10 @@ export default {
       position: absolute;
     }
   }
+  .app-multi-select.error {
+    border: 1px solid $error;
+    box-shadow: 0px 0rem .3rem rgba(255, 0, 0, 0.4) ;
+  }
+
 }
 </style>

@@ -31,6 +31,7 @@ export default {
     '~/assets/css/null.css',
     '~/assets/css/custom.scss',
     '~/assets/css/bootstrap.scss',
+    '~/assets/css/tooltip.scss',
   ],
 
   styleResources: {
@@ -42,6 +43,8 @@ export default {
     '~/plugins/primevue.js',
     '~/plugins/vee-validate.js',
     '~/plugins/teleport.js',
+    '~/plugins/v-mask.js',
+    '~/plugins/tooltip.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
