@@ -146,14 +146,14 @@
                 />
                 <div
                   v-if="isErrorSelect"
-                  class="app-form-field__error c-e pos-a fs-14"
+                  class="app-form-field__error c-e pos-a fs-14 ws-nw l-0"
                 >
                   Необходимо выбрать хотя бы 1 вид спорта
                 </div>
               </AppFormField>
               <AppFormField
                 vid="proffesional"
-                class="ml-20 ml-0-mb mt-15-mb"
+                class="ml-20 ml-0-mb mt-30-mb"
               >
                 <AppInputSwitch
                   id="proffesional"
