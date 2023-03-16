@@ -104,7 +104,7 @@
                 class="w-100-mb"
                 vid="sport"
               >
-                <AppDropdown
+                <AppMultiSelect
                   id="sport"
                   v-model="data.type_of_sport"
                   class="form-calculate__dropdown w-100-mb"
@@ -236,7 +236,7 @@ export default {
     loading: false,
     data: {
       count_days: 1,
-      type_of_sport: '',
+      type_of_sport: [],
       is_professional: false,
       risks: [],
 

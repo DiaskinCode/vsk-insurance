@@ -11,6 +11,7 @@ import InputNumber from 'primevue/inputnumber';
 import Checkbox from 'primevue/checkbox';
 import Dropdown from 'primevue/dropdown';
 import InputSwitch from 'primevue/inputswitch';
+import MultiSelect from 'primevue/multiselect';
 
 import Toast from 'primevue/toast';
 import ToastService from 'primevue/toastservice';
@@ -25,6 +26,7 @@ Vue.component('InputNumber', InputNumber);
 Vue.component('Checkbox', Checkbox);
 Vue.component('Dropdown', Dropdown);
 Vue.component('InputSwitch', InputSwitch);
+Vue.component('MultiSelect', MultiSelect);
 
 Vue.component('Toast', Toast);
 
