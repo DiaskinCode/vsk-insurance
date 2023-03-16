@@ -77,7 +77,6 @@ def save(
     response = requests.post(full_url, data=body, **get_static_params())
     response_xml_as_string = response.text
     response_xml = ElementTree.fromstring(response_xml_as_string)
-    # return session_id.text
     amount = response_xml.find('{http://www.vsk.ru/schema/partners/policy}amount')
     if amount is not None:
         return True, amount.text
