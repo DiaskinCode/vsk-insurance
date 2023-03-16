@@ -42,6 +42,7 @@ export default {
     '~/plugins/primevue.js',
     '~/plugins/vee-validate.js',
     '~/plugins/teleport.js',
+    '~/plugins/v-mask.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
