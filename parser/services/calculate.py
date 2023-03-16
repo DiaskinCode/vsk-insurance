@@ -1,5 +1,6 @@
 import random
 from datetime import datetime, timedelta
+from typing import Tuple
 from xml.etree import ElementTree
 
 import requests
@@ -17,7 +18,7 @@ def calculate(
         accident_death: bool = False,
         accident_disability: bool = False,
         timedisability_accident: bool = False
-):
+) -> Tuple[bool, str]:
 
     full_url = f'{MAIN_URL}/cxf/rest/partners/api/Sync/Policy/CalculatePolicy'
 
@@ -30,7 +31,7 @@ def calculate(
         total_condition += get_conditions_calculate('timedisability_accident')
 
     date_start = datetime.today() + timedelta(days=1)
-    date_end = date_start + timedelta(days=count_days)
+    date_end = date_start + timedelta(days=count_days-1)
 
 
     body = xml_render(
@@ -49,5 +50,10 @@ def calculate(
     response = requests.post(full_url, data=body, **get_static_params())
     response_xml_as_string = response.text
     response_xml = ElementTree.fromstring(response_xml_as_string)
-    session_id = response_xml.find('{http://www.vsk.ru/schema/partners/policy}amount')
-    return session_id.text
+    amount = response_xml.find('{http://www.vsk.ru/schema/partners/policy}amount')
+    if amount is not None:
+        return True, amount.text
+
+    error = response_xml.find('{http://www.vsk.ru/schema/partners/common}error')
+    error = error.find('{http://www.vsk.ru/schema/partners/common}errorMessage')
+    return False, error.text

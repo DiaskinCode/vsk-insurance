@@ -85,7 +85,7 @@
             <model:classifierType>
                 <model:classifierTypeCode>PROMO_ACTION</model:classifierTypeCode>
             </model:classifierType>
-            <model:classifierValue>MARKETPLACE</model:classifierValue>
+            <model:classifierValue>(promo)</model:classifierValue>
         </model:classifiers>
     </policy:policy>
     <policy:isQuotation>false</policy:isQuotation>

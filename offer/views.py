@@ -15,11 +15,11 @@ from parser.services import save as save_service
 def calculate(request):
     serializer = CalculatorSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
-    try:
-        result = calculate_service(**serializer.validated_data)
-        return JsonResponse({'total': result}, status=200)
-    except:
-        return JsonResponse({'total': -1}, status=400)
+    success, result = calculate_service(**serializer.validated_data)
+    if success:
+        return JsonResponse({'total': result, 'detail': None}, status=200)
+    else:
+        return JsonResponse({'total': -1, 'detail': result}, status=400)
 
 
 @extend_schema(
@@ -30,8 +30,8 @@ def calculate(request):
 def save(request):
     serializer = SaveSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
-    try:
-        result = save_service(**serializer.validated_data)
-        return JsonResponse({'total': result}, status=200)
-    except:
-        return JsonResponse({'total': -1}, status=400)
+    success, result = save_service(**serializer.validated_data)
+    if success:
+        return JsonResponse({'total': result, 'detail': None}, status=200)
+    else:
+        return JsonResponse({'total': -1, 'detail': result}, status=400)

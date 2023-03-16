@@ -1,5 +1,6 @@
 import random
 from datetime import datetime, timedelta
+from typing import Tuple
 from xml.etree import ElementTree
 
 import requests
@@ -23,16 +24,21 @@ def save(
         phone_policyholder: str,
         email_policyholder: str,
 
+        promo: str,
+
         accident_death: bool = False,
         accident_disability: bool = False,
         timedisability_accident: bool = False
-):
+) -> Tuple[bool, str]:
+    success, session_id = login('7777777777')
+    if not success:
+        return False, session_id if session_id else 'Ошибка логина'
 
     full_url = f'{MAIN_URL}/cxf/rest/partners/api/Sync/Policy/CalculatePolicy'
 
     date_create = datetime.today()
     date_start = date_create + timedelta(days=1)
-    date_end = date_start + timedelta(days=count_days)
+    date_end = date_start + timedelta(days=count_days-1)
 
     date_create = date_create.strftime('%Y-%m-%d')
     date_start = date_start.strftime('%Y-%m-%d')
@@ -50,7 +56,7 @@ def save(
         template_name='parser/templates/savePolicy.xml',
         context={
             'message_id': str(random.randint(1, 999999)),
-            'session_id': login('7777777777'),
+            'session_id': session_id,
             'date_create': date_create,
             'date_start': date_start,
             'date_end': date_end,
@@ -63,12 +69,19 @@ def save(
             'fio_policyholder': fio_policyholder,
             'type_of_sport': str(type_of_sport),
             'is_professional': bool_to_str(is_professional),
-            'is_sporttime': bool_to_str(is_sporttime)
+            'is_sporttime': bool_to_str(is_sporttime),
+            'promo': promo
         }
     )
 
     response = requests.post(full_url, data=body, **get_static_params())
     response_xml_as_string = response.text
     response_xml = ElementTree.fromstring(response_xml_as_string)
-    session_id = response_xml.find('{http://www.vsk.ru/schema/partners/policy}amount')
-    return session_id.text
+    # return session_id.text
+    amount = response_xml.find('{http://www.vsk.ru/schema/partners/policy}amount')
+    if amount is not None:
+        return True, amount.text
+
+    error = response_xml.find('{http://www.vsk.ru/schema/partners/common}error')
+    error = error.find('{http://www.vsk.ru/schema/partners/common}errorMessage')
+    return False, error.text

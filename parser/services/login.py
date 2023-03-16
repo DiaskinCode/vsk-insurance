@@ -1,4 +1,5 @@
 import random
+from typing import Tuple
 
 from xml.etree import ElementTree
 
@@ -8,7 +9,7 @@ from core.settings import MAIN_URL
 from parser.services.helpers import xml_render, get_static_params
 
 
-def login(phone: str):
+def login(phone: str) -> Tuple[bool, str]:
     full_url = f'{MAIN_URL}/cxf/rest/partners/api/Sync/Policy/CalculatePolicy'
 
     body = xml_render(template_name='parser/templates/login.xml',
@@ -18,4 +19,9 @@ def login(phone: str):
     response_xml_as_string = response.text
     response_xml = ElementTree.fromstring(response_xml_as_string)
     session_id = response_xml.find('{http://www.vsk.ru/schema/partners/common}sessionId')
-    return session_id.text
+    if session_id is not None:
+        return True, session_id.text
+
+    error = response_xml.find('{http://www.vsk.ru/schema/partners/common}error')
+    error = error.find('{http://www.vsk.ru/schema/partners/common}errorMessage')
+    return False, error.text
