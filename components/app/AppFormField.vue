@@ -1,5 +1,6 @@
 <template>
   <ValidationProvider
+    ref="validationProvider"
     v-slot="{
       errors,
       failed,
@@ -72,7 +73,17 @@ export default {
       return this.labelPosition === 'left';
     },
   },
-  methods: {},
+  methods: {
+    validate() {
+      this.$refs.validationProvider.validate();
+    },
+    syncValue(val) {
+      this.$refs.validationProvider.syncValue(val);
+    },
+    setErrors(val) {
+      this.$refs.validationProvider.setErrors(val);
+    },
+  },
 
 }
 </script>

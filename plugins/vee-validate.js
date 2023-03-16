@@ -41,3 +41,18 @@ extend('pastdate', {
   },
   message: 'Введите корректную дату'
 });
+
+extend('containitem', {
+  validate: (value) => {
+    console.log(value.length)
+    return value.length;
+  },
+  message: 'Обязательное поле'
+});
+
+extend('istrue', {
+  validate: (value) => {
+    return value;
+  },
+  message: 'Обязательное поле'
+});

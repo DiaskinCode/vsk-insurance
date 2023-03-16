@@ -9,7 +9,7 @@
       </h2>
       <div class="w-100 px-100 px-0-mb">
         <AppForm
-          ref="observer"
+          ref="observerCalc"
           class="w-100 bg-w bs-1 br-30 p-55 bg-g-mb bs-n-mb p-0-mb"
           :gy="50"
           :gy-mb="25"
@@ -108,15 +108,23 @@
                   id="sport"
                   v-model="data.type_of_sport"
                   class="form-calculate__dropdown w-100-mb"
+                  :class="{ 'error': isErrorSelect }"
                   filter
                   filterPlaceholder="Найти вид спорта"
                   emptyFilterMessage="Вид спорта не найден"
                   placeholder="Выбрать категорию"
                   :options="optionsSport"
+                  @input="onSelectInput"
                 />
+                <div
+                  v-if="isErrorSelect"
+                  class="app-form-field__error c-e pos-a fs-14"
+                >
+                  Необходимо выбрать хотя бы 1 вид спорта
+                </div>
               </AppFormField>
               <AppFormField
-                vid="sport"
+                vid="proffesional"
                 class="ml-20 ml-0-mb mt-15-mb"
               >
                 <AppInputSwitch
@@ -166,17 +174,17 @@
             </div>
             <div class="mt-25 mt-35-mb">
               <AppFormField
-                vid="rules"
+                vid="rulespol"
                 class=""
               >
                 <AppCheckbox
-                  id="rules"
+                  id="rulespol"
                   v-model="data.rules"
                   class="ai-c"
                   binary
                 >
                   <label
-                    for="rules"
+                    for="rulespol"
                     class="ml-10 fs-16-mb"
                   >
                     Я согласен с <AppLinkInner>правилами пользования</AppLinkInner>
@@ -286,6 +294,9 @@ export default {
     this.sliderHandleEl = document.querySelector('.p-slider-handle');
   },
   methods: {
+    onSelectInput(val) {
+      this.validateSelect();
+    },
     changeSlider() {
       let left = Number(this.sliderHandleEl.style.left.replace('%', ''));
       if (left < 4.7) {
@@ -297,8 +308,9 @@ export default {
       this.$refs.term.style.left = left + '%';
     },
     async validateForm() {
-      const isValidForm = await this.$refs.observer.validate();
-      if (!isValidForm) {
+      const isValidForm = await this.$refs.observerCalc.validate();
+      this.validateSelect();
+      if (!isValidForm || this.isErrorSelect) {
         return;
       }
       const formData = { ...this.selectedRisks };
@@ -314,6 +326,9 @@ export default {
       formData.count_days = this.data.count_days;
       formData.type_of_sport = this.data.type_of_sport.join(';');
       return formData;
+    },
+    validateSelect() {
+      this.isErrorSelect = this.data.type_of_sport.length === 0;
     },
   },
 }
@@ -368,7 +383,6 @@ export default {
       width: 100%;
     }
   }
-
   .app-slider {
     color: #444444;
     &::before {
@@ -392,5 +406,10 @@ export default {
       position: absolute;
     }
   }
+  .app-multi-select.error {
+    border: 1px solid $error;
+    box-shadow: 0px 0rem .3rem rgba(255, 0, 0, 0.4) ;
+  }
+
 }
 </style>
