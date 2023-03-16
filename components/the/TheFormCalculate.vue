@@ -166,15 +166,11 @@
               <AppFormField
                 vid="sport"
               >
-                <AppInputGroup>
-                  <AppInput
-                    id="promocode"
-                    placeholder="00000000"
-                    component="InputText"
-                  />
-                  <AppButton
-                    icon="pi pi-check"
-                  />
+                <AppInput
+                  id="promocode"
+                  v-model="data.promo"
+                  component="InputText"
+                />
                 </AppInputGroup>
               </AppFormField>
               <AppButton
@@ -197,11 +193,13 @@
             <div class="mt-25 mt-35-mb">
               <AppFormField
                 vid="rulespol"
+                rules="istrue"
+                errorPosition="left"
                 class=""
               >
                 <AppCheckbox
                   id="rulespol"
-                  v-model="data.rules"
+                  v-model="data.rulespol"
                   class="ai-c"
                   binary
                 >
@@ -273,7 +271,7 @@ export default {
 
       promo: '',
       partner: false,
-      rules: false,
+      rulespol: false,
     },
     optionsSport: sportList,
     sliderHandleEl: null,
@@ -360,6 +358,7 @@ export default {
       formData.is_professional = this.data.is_professional;
       formData.count_days = this.data.count_days;
       formData.type_of_sport = this.data.type_of_sport.join(';');
+      formData.promo = this.data.promo;
       return formData;
     },
     validateSelect() {
