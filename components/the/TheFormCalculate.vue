@@ -54,6 +54,7 @@
                 v-model="data.risks"
                 class-checkbox="mt-5"
                 value-label="accident_death"
+                :disabled="true"
               >
                 <label
                   for="risks-1"
@@ -246,7 +247,7 @@ export default {
       count_days: 1,
       type_of_sport: [],
       is_professional: false,
-      risks: [],
+      risks: ['accident_death'],
 
       promo: '',
       partner: false,
@@ -254,6 +255,7 @@ export default {
     },
     optionsSport: sportList,
     sliderHandleEl: null,
+    isErrorSelect: false,
   }),
   computed: {
     termDay() {
