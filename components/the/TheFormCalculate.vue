@@ -306,7 +306,14 @@ export default {
       formData.count_days = this.data.count_days;
       formData.type_of_sport = this.data.type_of_sport;
 
-      this.$emit('fetch-calculate', formData);
+      this.$emit('fetch-calculate', this.prepareFormData());
+    },
+    prepareFormData() {
+      const formData = { ...this.selectedRisks };
+      formData.is_professional = this.data.is_professional;
+      formData.count_days = this.data.count_days;
+      formData.type_of_sport = this.data.type_of_sport.join(';');
+      return formData;
     },
   },
 }
