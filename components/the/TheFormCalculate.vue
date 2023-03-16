@@ -109,8 +109,14 @@
                   </label>
                 </AppCheckbox>
                 <div
-                  class="ml-15"
+                  class="ml-15 d-n-mb"
                   v-tooltip="tooltipOptions"
+                >
+                  <i class="pi pi-question-circle fs-16 o-50" />
+                </div>
+                <div
+                  class="ml-15 d-n d-b-mb"
+                  v-tooltip="tooltipOptionsMobile"
                 >
                   <i class="pi pi-question-circle fs-16 o-50" />
                 </div>
@@ -285,6 +291,16 @@ export default {
         когда спортсмен не занимается спортом
       `,
       placement: 'right',
+    },
+    tooltipOptionsMobile: {
+      content: `
+        «НС во время занятий спортом» означает, что страхование распространяется только на время,
+        когда спортсмен тренируется или участвует в соревнованиях. Если признак не установлен,
+        то страхование распространяется как на время тренировок/соревнований, так и другое время,
+        когда спортсмен не занимается спортом
+      `,
+      trigger: 'click',
+      // placement: 'right',
     },
   }),
   computed: {
