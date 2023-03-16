@@ -41,7 +41,7 @@ export default {
         return;
       }
       this.showSuccess({ detail: 'Стоимость полиса рассчитана' });
-      this.price = Number(response.data.total);
+      this.price = Number(response.data.total) / 100;
       this.calculateData = { ...data };
     },
     async fetchCalculateAction(data) {

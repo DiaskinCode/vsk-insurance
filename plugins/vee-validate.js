@@ -30,14 +30,14 @@ extend('length', {
 
 extend('date', {
   validate: (value) => {
-    return Date.parse(value.split('-').reverse().join('-'));
+    return Date.parse(value.split('.').reverse().join('-'));
   },
   message: 'Введите корректную дату'
 });
 
 extend('pastdate', {
   validate: (value) => {
-    return Date.parse(value.split('-').reverse().join('-')) < Date.now();
+    return Date.parse(value.split('.').reverse().join('-')) < Date.now();
   },
   message: 'Введите корректную дату'
 });
