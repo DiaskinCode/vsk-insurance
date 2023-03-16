@@ -94,6 +94,27 @@
                   несчастного случая, произошедшего в период страхования
                 </label>
               </AppCheckbox>
+              <div class="d-f ai-c pt-20 ">
+                <AppCheckbox
+                  id="risks-4"
+                  binary
+                  v-model="data.is_sporttime"
+                  class="ai-c"
+                >
+                  <label
+                    for="risks-4"
+                    class="ml-10"
+                  >
+                    НС во время занятий спортом
+                  </label>
+                </AppCheckbox>
+                <div
+                  class="ml-15"
+                  v-tooltip="tooltipOptions"
+                >
+                  <i class="pi pi-question-circle fs-16 o-50" />
+                </div>
+              </div>
             </AppFormField>
           </div>
           <div>
@@ -248,6 +269,7 @@ export default {
       type_of_sport: [],
       is_professional: false,
       risks: ['accident_death'],
+      is_sporttime: false,
 
       promo: '',
       partner: false,
@@ -256,6 +278,16 @@ export default {
     optionsSport: sportList,
     sliderHandleEl: null,
     isErrorSelect: false,
+
+    tooltipOptions: {
+      content: `
+        «НС во время занятий спортом» означает, что страхование распространяется только на время,
+        когда спортсмен тренируется или участвует в соревнованиях. Если признак не установлен,
+        то страхование распространяется как на время тренировок/соревнований, так и другое время,
+        когда спортсмен не занимается спортом
+      `,
+      placement: 'right',
+    },
   }),
   computed: {
     termDay() {
@@ -324,6 +356,7 @@ export default {
     },
     prepareFormData() {
       const formData = { ...this.selectedRisks };
+      formData.is_sporttime = this.data.is_sporttime;
       formData.is_professional = this.data.is_professional;
       formData.count_days = this.data.count_days;
       formData.type_of_sport = this.data.type_of_sport.join(';');
