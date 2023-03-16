@@ -144,8 +144,12 @@
 </template>
 
 <script>
+import datetoolsMixin from '~/mixins/datetools';
 export default {
   name: 'TheFormOrder',
+  mixins: [
+    datetoolsMixin,
+  ],
   props: {
     isEnabled: {
       type: Boolean,
@@ -172,7 +176,13 @@ export default {
       if (!isValidForm) {
         return;
       }
-      this.$emit('fetch-order', this.data);
+      this.$emit('fetch-order', this.prepareFormData());
+    },
+    prepareFormData() {
+      const formData = { ...this.data };
+      formData.birth_policyholder = this.ruDateToISO(formData.birth_policyholder);
+      formData.birth_insured_person = this.ruDateToISO(formData.birth_insured_person);
+      return formData;
     },
   },
 }
