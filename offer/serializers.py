@@ -14,6 +14,8 @@ class CalculatorSerializer(serializers.Serializer):
     is_professional = serializers.BooleanField(label='Профессиональность страхуемого', default=False, write_only=True)
     is_sporttime = serializers.BooleanField(label='НС во время занятия спортом', default=False, write_only=True)
 
+    promo = serializers.CharField(label='Промокод', write_only=True)
+
     total = serializers.IntegerField(label='Сумма расчета', read_only=True)
     detail = serializers.CharField(label='Подробности ошибки', read_only=True)
 
@@ -27,4 +29,3 @@ class SaveSerializer(CalculatorSerializer):
     phone_policyholder = serializers.CharField(label='Телефон страхователя', write_only=True)
     email_policyholder = serializers.CharField(label='Email страхователя', write_only=True)
 
-    promo = serializers.CharField(label='Промокод', write_only=True)

@@ -14,6 +14,7 @@ def calculate(
         type_of_sport: str or int,
         is_professional: str or bool,
         is_sporttime: str or bool,
+        promo: str,
 
         accident_death: bool = False,
         accident_disability: bool = False,
@@ -33,7 +34,6 @@ def calculate(
     date_start = datetime.today() + timedelta(days=1)
     date_end = date_start + timedelta(days=count_days-1)
 
-
     body = xml_render(
         template_name='parser/templates/calculatePolicy.xml',
         context={
@@ -43,7 +43,8 @@ def calculate(
             'conditions': total_condition,
             'type_of_sport': str(type_of_sport),
             'is_professional': bool_to_str(is_professional),
-            'is_sporttime': bool_to_str(is_sporttime)
+            'is_sporttime': bool_to_str(is_sporttime),
+            'promo': promo
         }
     )
 

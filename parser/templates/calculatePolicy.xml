@@ -34,7 +34,7 @@
             <model:classifierType>
                 <model:classifierTypeCode>PROMO_ACTION</model:classifierTypeCode>
             </model:classifierType>
-            <model:classifierValue>123</model:classifierValue>
+            <model:classifierValue>(promo)</model:classifierValue>
         </model:classifiers>
     </policy:policy>
 </policy:calculatePolicyRequest>
