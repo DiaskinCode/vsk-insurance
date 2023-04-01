@@ -55,6 +55,7 @@
                 class-checkbox="mt-5"
                 value-label="accident_death"
                 :disabled="true"
+                @input="checkCalculateProp('accident_death', data.risks.includes('accident_death'))"
               >
                 <label
                   for="risks-1"
@@ -70,6 +71,7 @@
                 class="mt-10"
                 class-checkbox="mt-5"
                 value-label="accident_disability"
+                @input="checkCalculateProp('accident_disability', data.risks.includes('accident_disability'))"
               >
                 <label
                   for="risks-2"
@@ -85,6 +87,8 @@
                 class="mt-10"
                 class-checkbox="mt-5"
                 value-label="timedisability_accident"
+                @input="checkCalculateProp('timedisability_accident',
+                  data.risks.includes('timedisability_accident'))"
               >
                 <label
                   for="risks-3"
@@ -100,6 +104,7 @@
                   binary
                   v-model="data.is_sporttime"
                   class="ai-c"
+                  @input="checkCalculateProp('is_sporttime', $event)"
                 >
                   <label
                     for="risks-4"
@@ -126,6 +131,9 @@
           <div>
             <div class="fw-6 fs-25 lh-140 mb-10 ws-nw">
               Категория спорта
+              <span class="fw-4 fs-12 o-50 ml-10 lh-110 d-b-mb ml-0-mb">
+                (до 5 видов спорта)
+              </span>
             </div>
             <div class="d-f ai-c fd-c-mb w-100-mb ai-fs-mb">
               <AppFormField
@@ -134,6 +142,7 @@
               >
                 <AppMultiSelect
                   id="sport"
+                  ref="select"
                   v-model="data.type_of_sport"
                   class="form-calculate__dropdown w-100-mb"
                   :class="{ 'error': isErrorSelect }"
@@ -142,6 +151,7 @@
                   emptyFilterMessage="Вид спорта не найден"
                   placeholder="Выбрать категорию"
                   :options="optionsSport"
+                  :selectionLimit="5"
                   @input="onSelectInput"
                 />
                 <div
@@ -160,6 +170,7 @@
                   v-model="data.is_professional"
                   name="proffesional"
                   label="Я профессионал"
+                  @input="checkCalculateProp('is_professional', $event)"
                 />
               </AppFormField>
             </div>
@@ -176,6 +187,7 @@
                   id="promocode"
                   v-model="data.promo"
                   component="InputText"
+                  @input="checkCalculateProp('promo', $event)"
                 />
                 </AppInputGroup>
               </AppFormField>
@@ -193,6 +205,7 @@
                   v-model="data.partner"
                   name="partner"
                   label="Я партнёр"
+                  @input="checkCalculateProp('partner', $event)"
                 />
               </AppFormField>
             </div>
@@ -208,6 +221,7 @@
                   v-model="data.rulespol"
                   class="ai-c"
                   binary
+                  @input="checkCalculateProp('rulespol', $event)"
                 >
                   <label
                     for="rulespol"
@@ -338,14 +352,24 @@ export default {
       }
     },
   },
+  watch: {
+    'data.type_of_sport'(value) {
+      if (value.length === 5) {
+        this.$refs.select.$el.classList.add('full');
+        return;
+      }
+      this.$refs.select.$el.classList.remove('full');
+    },
+  },
   mounted() {
     this.sliderHandleEl = document.querySelector('.p-slider-handle');
   },
   methods: {
-    onSelectInput(val) {
+    onSelectInput(value) {
       this.validateSelect();
+      this.checkCalculateProp('type_of_sport', value.join(';'));
     },
-    changeSlider() {
+    changeSlider(value) {
       let left = Number(this.sliderHandleEl.style.left.replace('%', ''));
       if (left < 4.7) {
         left = 4.7;
@@ -354,6 +378,8 @@ export default {
         left = 95.3;
       }
       this.$refs.term.style.left = left + '%';
+
+      this.checkCalculateProp('count_days', value);
     },
     async validateForm() {
       const isValidForm = await this.$refs.observerCalc.validate();
@@ -361,11 +387,6 @@ export default {
       if (!isValidForm || this.isErrorSelect) {
         return;
       }
-      const formData = { ...this.selectedRisks };
-      formData.is_professional = this.data.is_professional;
-      formData.count_days = this.data.count_days;
-      formData.type_of_sport = this.data.type_of_sport;
-
       this.$emit('fetch-calculate', this.prepareFormData());
     },
     prepareFormData() {
@@ -375,10 +396,15 @@ export default {
       formData.count_days = this.data.count_days;
       formData.type_of_sport = this.data.type_of_sport.join(';');
       formData.promo = this.data.promo;
+      formData.partner = this.data.partner;
       return formData;
     },
     validateSelect() {
       this.isErrorSelect = this.data.type_of_sport.length === 0;
+    },
+
+    checkCalculateProp(prop, value) {
+      this.$emit('check-calculate-prop', prop, value);
     },
   },
 }
@@ -429,6 +455,14 @@ export default {
   /* .form-calculate__dropdown */
   &__dropdown {
     width: 40rem;
+    &.full {
+      .p-multiselect-items {
+        cursor: default;
+      }
+      .p-multiselect-item:not(.p-highlight) {
+        opacity: .5;
+      }
+    }
     @media (max-width: 600px) {
       width: 100%;
     }

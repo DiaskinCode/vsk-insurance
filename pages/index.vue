@@ -6,10 +6,12 @@
     <TheStep />
     <TheFormCalculate
       :price="price"
+      @check-calculate-prop="checkCalculate"
       @fetch-calculate="fetchCalculate"
     />
     <TheFormOrder
       :is-enabled="isFormOrderEnabled"
+      :is-same-data="isSameData"
       @fetch-order="fetchSave"
     />
     <TheQuestion />
@@ -26,15 +28,45 @@ export default {
   props: {},
   data: () => ({
     price: null,
-    calculateData: null,
+    calculateData: {},
+    calculateDataAfter: {
+      accident_death: null,
+      accident_disability: null,
+      count_days: null,
+      is_professional: null,
+      is_sporttime: null,
+      promo: null,
+      timedisability_accident: null,
+      type_of_sport: null,
+    },
   }),
   computed: {
     isFormOrderEnabled() {
       return !!this.price;
     },
+    isSameData() {
+      if (!this.isFormOrderEnabled) {
+        return true;
+      }
+      for (const prop in this.calculateData) {
+        const valueAfter = JSON.stringify(this.calculateDataAfter[prop]);
+        const value = JSON.stringify(this.calculateData[prop]);
+        if (valueAfter !== value) {
+          return false;
+        }
+      }
+      return true;
+    },
   },
   methods: {
+    checkCalculate(prop, value) {
+      if (!this.isFormOrderEnabled) {
+        return;
+      }
+      this.calculateDataAfter[prop] = value;
+    },
     async fetchCalculate(data) {
+      this.calculateDataAfter = { ...data };
       const { response, fail } = await this.fetchCalculateAction(data);
       if (fail) {
         this.showError({ detail: response.data });
