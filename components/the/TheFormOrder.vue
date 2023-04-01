@@ -122,14 +122,14 @@
           label="Оформить"
           type="submit"
           :loading="loading"
-          :disabled="loading || !isEnabled"
+          :disabled="loading || !isEnabled || !isSameData"
         />
         <AppButton
           class="ml-25 ml-5-mb fg-1-mb"
           secondary
           label="Предпросмотр"
           :loading="loading"
-          :disabled="loading || !isEnabled"
+          :disabled="loading || !isEnabled || !isSameData"
         />
       </div>
     </AppForm>
@@ -139,6 +139,13 @@
     >
       Сначала необходимо<br class="d-n d-b-mb">
       рассчитать стоимость полиса.
+    </div>
+    <div
+      v-if="!isSameData"
+      class="fs-16 o-50 as-fs pl-100 mt-20 fs-12-mb pl-0-mb"
+    >
+      Даные в рассчетах изменены.<br class="d-n d-b-mb">
+      Необходимо рассчитать стоимость полиса.
     </div>
   </div>
 </template>
@@ -152,6 +159,10 @@ export default {
   ],
   props: {
     isEnabled: {
+      type: Boolean,
+      default: false,
+    },
+    isSameData: {
       type: Boolean,
       default: false,
     },
