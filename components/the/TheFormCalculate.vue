@@ -126,6 +126,9 @@
           <div>
             <div class="fw-6 fs-25 lh-140 mb-10 ws-nw">
               Категория спорта
+              <span class="fw-4 fs-12 o-50 ml-10 lh-110 d-b-mb ml-0-mb">
+                (до 5 видов спорта)
+              </span>
             </div>
             <div class="d-f ai-c fd-c-mb w-100-mb ai-fs-mb">
               <AppFormField
@@ -134,6 +137,7 @@
               >
                 <AppMultiSelect
                   id="sport"
+                  ref="select"
                   v-model="data.type_of_sport"
                   class="form-calculate__dropdown w-100-mb"
                   :class="{ 'error': isErrorSelect }"
@@ -142,6 +146,7 @@
                   emptyFilterMessage="Вид спорта не найден"
                   placeholder="Выбрать категорию"
                   :options="optionsSport"
+                  :selectionLimit="5"
                   @input="onSelectInput"
                 />
                 <div
@@ -338,6 +343,15 @@ export default {
       }
     },
   },
+  watch: {
+    'data.type_of_sport'(value) {
+      if (value.length === 5) {
+        this.$refs.select.$el.classList.add('full');
+        return;
+      }
+      this.$refs.select.$el.classList.remove('full');
+    },
+  },
   mounted() {
     this.sliderHandleEl = document.querySelector('.p-slider-handle');
   },
@@ -429,6 +443,14 @@ export default {
   /* .form-calculate__dropdown */
   &__dropdown {
     width: 40rem;
+    &.full {
+      .p-multiselect-items {
+        cursor: default;
+      }
+      .p-multiselect-item:not(.p-highlight) {
+        opacity: .5;
+      }
+    }
     @media (max-width: 600px) {
       width: 100%;
     }
