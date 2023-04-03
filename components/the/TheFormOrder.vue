@@ -28,6 +28,7 @@
               <AppInput
                 id="fio_policyholder"
                 v-model="data.fio_policyholder"
+                placeholder="Фамилия Имя Отчество"
                 component="InputText"
               />
             </AppFormField>
@@ -55,6 +56,7 @@
               <AppInput
                 id="fio_insured_person"
                 v-model="data.fio_insured_person"
+                placeholder="Фамилия Имя Отчество"
                 component="InputText"
               />
             </AppFormField>
@@ -110,6 +112,7 @@
                 id="email_policyholder"
                 v-model="data.email_policyholder"
                 type="email"
+                placeholder="yourmail@gmail.com"
                 component="InputText"
               />
             </AppFormField>
