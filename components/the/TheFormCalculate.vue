@@ -187,6 +187,7 @@
                   id="promocode"
                   v-model="data.promo"
                   component="InputText"
+                  placeholder="########"
                   @input="checkCalculateProp('promo', $event)"
                 />
                 </AppInputGroup>
