@@ -287,7 +287,12 @@ export default {
       count_days: 1,
       type_of_sport: [],
       is_professional: false,
-      risks: ['accident_death'],
+      risks: [
+        'accident_death',
+        'accident_disability',
+        'timedisability_accident',
+      ],
+
       is_sporttime: false,
 
       promo: '',
