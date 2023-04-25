@@ -4,10 +4,10 @@ from rest_framework import serializers
 class CalculatorSerializer(serializers.Serializer):
     count_days = serializers.IntegerField(label='Количество дней договора', write_only=True)
 
-    accident_death = serializers.BooleanField(label='Смерть страхуемого', default=False, write_only=True)
-    accident_disability = serializers.BooleanField(label='Инвалидность страхуемого', default=False, write_only=True)
+    accident_death = serializers.BooleanField(label='Смерть страхуемого', default=True, write_only=True)
+    accident_disability = serializers.BooleanField(label='Инвалидность страхуемого', default=True, write_only=True)
     timedisability_accident = serializers.BooleanField(label='Временная нетрудоспособность страхуемого',
-                                                       default=False, write_only=True)
+                                                       default=True, write_only=True)
 
     type_of_sport = serializers.CharField(label='Группа спорта', write_only=True)
 
