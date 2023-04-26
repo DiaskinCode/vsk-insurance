@@ -10,7 +10,7 @@ from parser.services.helpers import xml_render, get_static_params
 
 
 def login(phone: str) -> Tuple[bool, str]:
-    full_url = f'{MAIN_URL}/cxf/rest/partners/api/Sync/Policy/CalculatePolicy'
+    full_url = f'{MAIN_URL}/cxf/rest/partners/api/Sync/Auth/Login'
 
     body = xml_render(template_name='parser/templates/login.xml',
                       context={'phone': phone, 'id': str(random.randint(1, 9999))})

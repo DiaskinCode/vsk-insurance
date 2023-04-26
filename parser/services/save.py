@@ -34,7 +34,7 @@ def save(
     if not success:
         return False, session_id if session_id else 'Ошибка логина'
 
-    full_url = f'{MAIN_URL}/cxf/rest/partners/api/Sync/Policy/CalculatePolicy'
+    full_url = f'{MAIN_URL}/cxf/rest/partners/api/Sync/Policy/SavePolicy'
 
     date_create = datetime.today()
     date_start = date_create + timedelta(days=1)
@@ -76,6 +76,8 @@ def save(
 
     response = requests.post(full_url, data=body, **get_static_params())
     response_xml_as_string = response.text
+    if not response_xml_as_string:
+        return False, 'blank VSK response'
     response_xml = ElementTree.fromstring(response_xml_as_string)
     amount = response_xml.find('{http://www.vsk.ru/schema/partners/policy}amount')
     if amount is not None:
