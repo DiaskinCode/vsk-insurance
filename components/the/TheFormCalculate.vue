@@ -98,34 +98,6 @@
                   несчастного случая, произошедшего в период страхования
                 </label>
               </AppCheckbox>
-              <div class="d-f ai-c pt-20 ">
-                <AppCheckbox
-                  id="risks-4"
-                  binary
-                  v-model="data.is_sporttime"
-                  class="ai-c"
-                  @input="checkCalculateProp('is_sporttime', $event)"
-                >
-                  <label
-                    for="risks-4"
-                    class="ml-10"
-                  >
-                    НС во время занятий спортом
-                  </label>
-                </AppCheckbox>
-                <div
-                  class="ml-15 d-n-mb"
-                  v-tooltip="tooltipOptions"
-                >
-                  <i class="pi pi-question-circle fs-16 o-50" />
-                </div>
-                <div
-                  class="ml-15 d-n d-b-mb"
-                  v-tooltip="tooltipOptionsMobile"
-                >
-                  <i class="pi pi-question-circle fs-16 o-50" />
-                </div>
-              </div>
             </AppFormField>
           </div>
           <div>
@@ -228,7 +200,7 @@
                     for="rulespol"
                     class="ml-10 fs-16-mb"
                   >
-                    Я согласен с <AppLinkInner>правилами пользования</AppLinkInner>
+                    Я согласен с правилами пользования
                   </label>
                 </AppCheckbox>
               </AppFormField>
