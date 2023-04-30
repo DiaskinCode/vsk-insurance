@@ -1,7 +1,7 @@
 <template>
   <div class="form-order container fd-c ai-c py-100 py-50-mb">
     <h2 class="header-text mb-50 mb-25-mb">
-      Оформить заявку
+      Оформить полис
     </h2>
     <AppForm
       class="w-100 px-100 px-0-mb"
