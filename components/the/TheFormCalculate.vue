@@ -153,10 +153,11 @@
             </div>
             <div class="d-f ai-c fd-c-mb w-100-mb ai-fs-mb">
               <AppFormField
-                vid="sport"
+                vid="promo"
+                rules="required"
               >
                 <AppInput
-                  id="promocode"
+                  id="promo"
                   v-model="data.promo"
                   component="InputText"
                   placeholder="########"
@@ -267,7 +268,7 @@ export default {
 
       is_sporttime: false,
 
-      promo: '',
+      promo: null,
       partner: false,
       rulespol: false,
     },
