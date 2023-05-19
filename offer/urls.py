@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import calculate, save
+from .views import calculate, buy
 
 urlpatterns = [
     path('calculator/', calculate),
-    path('save/', save)
+    path('buy/', buy)
 ]

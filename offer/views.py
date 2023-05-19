@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from drf_spectacular.utils import extend_schema
 from rest_framework.decorators import api_view
 
+from parser.services.buy import buy_service
 from .serializers import CalculatorSerializer, SaveSerializer
 from parser.services import calculate as calculate_service
 from parser.services import save as save_service
@@ -27,11 +28,14 @@ def calculate(request):
     responses=SaveSerializer
 )
 @api_view(['POST'])
-def save(request):
+def buy(request):
     serializer = SaveSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     success, result = save_service(**serializer.validated_data)
     if success:
-        return JsonResponse({'total': result, 'detail': None}, status=200)
+        return JsonResponse(
+            {"data": buy_service(result)},
+            status=200,
+        )
     else:
         return JsonResponse({'total': -1, 'detail': result}, status=400)

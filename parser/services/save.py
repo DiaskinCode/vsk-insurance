@@ -1,6 +1,6 @@
 import random
 from datetime import datetime, timedelta
-from typing import Tuple
+from typing import Tuple, Union, Dict
 from xml.etree import ElementTree
 
 import requests
@@ -29,7 +29,7 @@ def save(
         accident_death: bool = False,
         accident_disability: bool = False,
         timedisability_accident: bool = False
-) -> Tuple[bool, str]:
+) -> Union[Tuple[bool, str], Tuple[bool, Dict[str, str]]]:
     success, session_id = login('7777777777')
     if not success:
         return False, session_id if session_id else 'Ошибка логина'
@@ -38,7 +38,7 @@ def save(
 
     date_create = datetime.today()
     date_start = date_create + timedelta(days=1)
-    date_end = date_start + timedelta(days=count_days-1)
+    date_end = date_start + timedelta(days=count_days - 1)
 
     date_create = date_create.strftime('%Y-%m-%d')
     date_start = date_start.strftime('%Y-%m-%d')
@@ -79,10 +79,20 @@ def save(
     if not response_xml_as_string:
         return False, 'blank VSK response'
     response_xml = ElementTree.fromstring(response_xml_as_string)
-    amount = response_xml.find('{http://www.vsk.ru/schema/partners/policy}amount')
-    if amount is not None:
-        return True, amount.text
 
     error = response_xml.find('{http://www.vsk.ru/schema/partners/common}error')
-    error = error.find('{http://www.vsk.ru/schema/partners/common}errorMessage')
-    return False, error.text
+    if error is not None:
+        return False, error.find('{http://www.vsk.ru/schema/partners/common}errorMessage').text
+
+    bpId = response_xml.find('{http://www.vsk.ru/schema/partners/common}bpId').text
+    policyId = response_xml.find('{http://www.vsk.ru/schema/partners/policy}policy').find(
+        '{http://www.vsk.ru/schema/partners/model}policyId').text
+    amount = response_xml.find('{http://www.vsk.ru/schema/partners/policy}amount').text
+    policyNumber = response_xml.find('{http://www.vsk.ru/schema/partners/policy}policy').find(
+        '{http://www.vsk.ru/schema/partners/model}policyNumber').text
+
+    return True, {'bpId': bpId,
+                  'policyId': policyId,
+                  'amount': amount,
+                  'policyNumber': policyNumber,
+                  'session_id': session_id}
