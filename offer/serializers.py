@@ -29,3 +29,22 @@ class SaveSerializer(CalculatorSerializer):
     phone_policyholder = serializers.CharField(label='Телефон страхователя', write_only=True)
     email_policyholder = serializers.CharField(label='Email страхователя', write_only=True)
 
+    error = serializers.CharField(max_length=255, read_only=True)
+    policyNumber = serializers.CharField(max_length=255, read_only=True)
+    policyId = serializers.CharField(max_length=255, read_only=True)
+    sessionId = serializers.CharField(max_length=255, read_only=True)
+    bpId = serializers.CharField(max_length=255, read_only=True)
+    amount = serializers.CharField(max_length=255, read_only=True)
+
+
+class BuySerializer(serializers.Serializer):
+    bpId = serializers.CharField(label='bpId', write_only=True)
+    sessionId = serializers.CharField(label='sessionId', write_only=True)
+    policyId = serializers.CharField(label='policyId', write_only=True)
+    policyNumber = serializers.CharField(label='policyNumber', write_only=True)
+    amount = serializers.CharField(label='amount', write_only=True)
+
+
+class GetDratSerializer(serializers.Serializer):
+    policyId = serializers.CharField(label='policyId', write_only=True)
+    policyNumber = serializers.CharField(label='policyNumber', write_only=True)

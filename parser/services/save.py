@@ -1,13 +1,13 @@
 import random
 from datetime import datetime, timedelta
-from typing import Tuple, Union, Dict
+from typing import Tuple
 from xml.etree import ElementTree
 
 import requests
 
 from core.settings import MAIN_URL
 from parser.services import login
-from parser.services.helpers import xml_render, get_static_params, bool_to_str, get_conditions_save
+from parser.services.helpers import xml_render, get_static_params, bool_to_str, get_conditions_save, find_in_xml
 
 
 def save(
@@ -29,16 +29,25 @@ def save(
         accident_death: bool = False,
         accident_disability: bool = False,
         timedisability_accident: bool = False
-) -> Union[Tuple[bool, str], Tuple[bool, Dict[str, str]]]:
-    success, session_id = login('7777777777')
+) -> Tuple[bool, dict]:
+    total_data = {
+        'error': None,
+        'policyNumber': None,
+        'policyId': None,
+        'sessionId': None,
+        'bpId': None,
+        'amount': None
+    }
+
+    success, sessionId = login('7777777777')
     if not success:
-        return False, session_id if session_id else 'Ошибка логина'
+        return False, {'error': sessionId if sessionId else 'Ошибка логина'}
 
     full_url = f'{MAIN_URL}/cxf/rest/partners/api/Sync/Policy/SavePolicy'
 
     date_create = datetime.today()
     date_start = date_create + timedelta(days=1)
-    date_end = date_start + timedelta(days=count_days - 1)
+    date_end = date_start + timedelta(days=count_days-1)
 
     date_create = date_create.strftime('%Y-%m-%d')
     date_start = date_start.strftime('%Y-%m-%d')
@@ -56,7 +65,7 @@ def save(
         template_name='parser/templates/savePolicy.xml',
         context={
             'message_id': str(random.randint(1, 999999)),
-            'session_id': session_id,
+            'session_id': sessionId,
             'date_create': date_create,
             'date_start': date_start,
             'date_end': date_end,
@@ -77,22 +86,31 @@ def save(
     response = requests.post(full_url, data=body, **get_static_params())
     response_xml_as_string = response.text
     if not response_xml_as_string:
-        return False, 'blank VSK response'
+        return False, {'error': 'blank VSK response'}
     response_xml = ElementTree.fromstring(response_xml_as_string)
+    data_dict = {
+        'amount': 'http://www.vsk.ru/schema/partners/policy',
+        'bpId': 'http://www.vsk.ru/schema/partners/common',
+        'sessionId': 'http://www.vsk.ru/schema/partners/common',
+        'policyId': 'http://www.vsk.ru/schema/partners/model',
+        'policyNumber': 'http://www.vsk.ru/schema/partners/model'
+    }
+    for key, value in data_dict.items():
+        total_data[key] = find_in_xml(response_xml, value, key)
+
+    addict_data = {
+        'policyId': 'http://www.vsk.ru/schema/partners/model',
+        'policyNumber': 'http://www.vsk.ru/schema/partners/model'
+    }
+    temp_xml = response_xml.find('{http://www.vsk.ru/schema/partners/policy}policy')
+    for key, value in addict_data.items():
+        total_data[key] = find_in_xml(temp_xml, value, key)
+
+
+    if all([value for key, value in total_data.items() if key != 'error']):
+        return True, total_data
 
     error = response_xml.find('{http://www.vsk.ru/schema/partners/common}error')
-    if error is not None:
-        return False, error.find('{http://www.vsk.ru/schema/partners/common}errorMessage').text
+    error = error.find('{http://www.vsk.ru/schema/partners/common}errorMessage')
+    return False, {'error': error.text}
 
-    bpId = response_xml.find('{http://www.vsk.ru/schema/partners/common}bpId').text
-    policyId = response_xml.find('{http://www.vsk.ru/schema/partners/policy}policy').find(
-        '{http://www.vsk.ru/schema/partners/model}policyId').text
-    amount = response_xml.find('{http://www.vsk.ru/schema/partners/policy}amount').text
-    policyNumber = response_xml.find('{http://www.vsk.ru/schema/partners/policy}policy').find(
-        '{http://www.vsk.ru/schema/partners/model}policyNumber').text
-
-    return True, {'bpId': bpId,
-                  'policyId': policyId,
-                  'amount': amount,
-                  'policyNumber': policyNumber,
-                  'session_id': session_id}

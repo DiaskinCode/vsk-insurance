@@ -1,12 +1,15 @@
-<policy:buyPolicyRequest
-        xmlns:common="http://www.vsk.ru/schema/partners/common"
-        xmlns:policy="http://www.vsk.ru/schema/partners/policy">
-    <common:messageId>(id)</common:messageId>
-    <common:bpId>(bpId)</common:bpId>
+<policy:buyPolicyRequest xmlns:policy="http://www.vsk.ru/schema/partners/policy"
+                         xmlns:common="http://www.vsk.ru/schema/partners/common"
+                         xmlns:model="http://www.vsk.ru/schema/partners/model"
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <common:messageId>(message_id)</common:messageId>
+    <common:bpId>(bp_id)</common:bpId>
     <common:sessionId>(session_id)</common:sessionId>
-    <policy:policyId>(policyId)</policy:policyId>
-    <policy:policyNumber>(policyNumber)</policy:policyNumber>
-    <policy:returnUrl>(return_url)</policy:returnUrl>
-    <policy:failUrl>(fail_url)</policy:failUrl>
+    <policy:policyId>(policy_id)</policy:policyId>
+    <policy:policyNumber>(policy_number)</policy:policyNumber>
+    <policy:returnUrl>https://vsk-ns.ru/response</policy:returnUrl>
+    <policy:failUrl>https://vsk-ns.ru/</policy:failUrl>
     <policy:amount>(amount)</policy:amount>
+
 </policy:buyPolicyRequest>

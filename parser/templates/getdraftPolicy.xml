@@ -1,0 +1,5 @@
+<policy:policyInPDFRequest xmlns:policy="http://www.vsk.ru/schema/partners/policy">
+    <common:messageId xmlns:common="http://www.vsk.ru/schema/partners/common">(id)</common:messageId>
+    <policy:policyNumber>(policyNumber)</policy:policyNumber>
+    <policy:policyId>(policyId)</policy:policyId>
+</policy:policyInPDFRequest>

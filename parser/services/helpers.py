@@ -1,5 +1,14 @@
+from xml.etree.ElementTree import ElementTree
+
+from docutils.parsers.rst.directives import body
+from lxml.etree import Element
+from sphinx.util import requests
+
+
 def xml_render(template_name: str, context: dict) -> bytes:
-    xml = open(template_name).read()
+    with open(template_name, 'r') as f:
+        xml = f.read()
+
     for key in context:
         xml = xml.replace(f'({key})', context[key])
     return xml.encode('utf-8')
@@ -41,3 +50,10 @@ def get_conditions_save(risk_code: str, date_start: str, date_end: str) -> str:
             </model:risk>
         </model:conditionProductRisks>
     </model:conditions>'''
+
+
+def find_in_xml(response_xml: Element, type_xml: str, arg: str) -> str or None:
+    search_result = response_xml.find('{%s}%s' % (type_xml, arg))
+    if search_result is not None:
+        return search_result.text
+
