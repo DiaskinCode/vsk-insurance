@@ -29,7 +29,7 @@ def calculate(request):
     responses=SaveSerializer
 )
 @api_view(['POST'])
-def buy(request):
+def save(request):
     serializer = SaveSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     success, result = save_service(**serializer.validated_data)
@@ -61,9 +61,6 @@ def getdraft(request):
     serializer.is_valid(raise_exception=True)
     success, result = getdraft_service(**serializer.validated_data)
     if success:
-        return JsonResponse(
-            {"data": buy_service(result)},
-            status=200,
-        )
+        return JsonResponse({'total': result, 'detail': None}, status=200)
     else:
         return JsonResponse({'total': -1, 'detail': result}, status=400)

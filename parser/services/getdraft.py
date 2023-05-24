@@ -24,16 +24,11 @@ def getdraft(
     )
     response = requests.post(full_url, data=body, **get_static_params())
     response_xml_as_string = response.text
-    print(response_xml_as_string)
 
     if not response_xml_as_string:
         return False, 'blank VSK response'
     response_xml = ElementTree.fromstring(response_xml_as_string)
-    # print(response_xml)
 
-    # error = response_xml.find('{http://www.vsk.ru/schema/partners/common}error')
-    # error = error.find('{http://www.vsk.ru/schema/partners/common}errorCode')
-    # return False, error.text
     if (error := response_xml.find('{http://www.vsk.ru/schema/partners}Response')) is not None:
         return False, error.text
 
