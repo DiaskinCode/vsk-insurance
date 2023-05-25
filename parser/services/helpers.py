@@ -1,8 +1,4 @@
-from xml.etree.ElementTree import ElementTree
-
-from docutils.parsers.rst.directives import body
 from lxml.etree import Element
-from sphinx.util import requests
 
 
 def xml_render(template_name: str, context: dict) -> bytes:
@@ -56,4 +52,3 @@ def find_in_xml(response_xml: Element, type_xml: str, arg: str) -> str or None:
     search_result = response_xml.find('{%s}%s' % (type_xml, arg))
     if search_result is not None:
         return search_result.text
-
