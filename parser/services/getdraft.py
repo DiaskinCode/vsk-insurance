@@ -1,3 +1,4 @@
+import base64
 import random
 from typing import Tuple
 from xml.etree import ElementTree
@@ -17,9 +18,9 @@ def getdraft(
     body = xml_render(
         template_name='parser/templates/getdraftPolicy.xml',
         context={
-            'message_id': str(random.randint(1, 999999)),
-            'policy_id': policyId,
-            'policy_number': policyNumber
+            'id': str(random.randint(1, 999999)),
+            'policyId': policyId,
+            'policyNumber': policyNumber
         }
     )
     response = requests.post(full_url, data=body, **get_static_params())
@@ -28,14 +29,5 @@ def getdraft(
     if not response_xml_as_string:
         return False, 'blank VSK response'
     response_xml = ElementTree.fromstring(response_xml_as_string)
-
-    if (error := response_xml.find('{http://www.vsk.ru/schema/partners}Response')) is not None:
-        return False, error.text
-
-
-
-
-
-
-
-
+    if (policy := response_xml.find('{http://www.vsk.ru/schema/partners/policy}policyInPDF')) is not None:
+        return True, policy.text
