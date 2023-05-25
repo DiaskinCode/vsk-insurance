@@ -1,4 +1,4 @@
-from lxml.etree import Element
+from xml.etree.ElementTree import Element
 
 
 def xml_render(template_name: str, context: dict) -> bytes:
