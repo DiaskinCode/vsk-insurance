@@ -35,10 +35,6 @@ def buy(
         return False, 'blank VSK response'
     response_xml = ElementTree.fromstring(response_xml_as_string)
 
-    if error := response_xml.find('{http://www.vsk.ru/schema/partners/common}error'):
-        error = error.find('{http://www.vsk.ru/schema/partners/common}errorMessage')
-        return False, error.text
-
     if (url := response_xml.find('{http://www.vsk.ru/schema/partners/policy}formUrl')) is not None:
         return True, url.text
     return False, 'unexcepted error'
