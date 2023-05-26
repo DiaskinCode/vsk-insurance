@@ -48,7 +48,7 @@ export default {
     showSuccess({
       detail,
       summary = 'Запрос успешно отправлен',
-      life = null,
+      life = 5000,
       closable = true,
       icon = 'pi pi-check-circle'
     }) {
