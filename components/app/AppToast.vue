@@ -79,6 +79,20 @@ export default {
     border-width: 0 0 0 .6rem;
     display: flex;
     align-items: center;
+    overflow: hidden;
+  }
+  .app-toast__right {
+    flex: 1;
+    overflow: hidden;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .p-toast-icon-close {
+    align-self: flex-start;
+  }
+  .app-toast__detail {
+    flex: 1;
   }
 }
 
