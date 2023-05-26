@@ -127,8 +127,8 @@ export default {
         .then(this.postBuySuccess)
         .catch(this.actionFail);
     },
-    postBuySuccess(response) {
-      console.log(response)
+    postBuySuccess({ data }) {
+      window.open(data.total, '_self');
     },
   },
 }
