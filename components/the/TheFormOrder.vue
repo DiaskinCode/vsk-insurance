@@ -8,7 +8,7 @@
       ref="observer"
       :gy="45"
       :gy-mb="25"
-      @submit="validateForm('fetch-order')"
+      @submit="validateForm('post-buy')"
     >
       <div>
         <div class="fw-6 fs-25 lh-140 mb-15 ws-nw">

@@ -12,7 +12,8 @@
     <TheFormOrder
       :is-enabled="isFormOrderEnabled"
       :is-same-data="isSameData"
-      @fetch-order="fetchSave"
+      @post-buy="postBuy"
+      @post-getdraft="postGetdraft"
     />
     <TheQuestion />
   </div>
@@ -20,6 +21,11 @@
 
 <script>
 import errorsMixin from '~/mixins/errors';
+import {
+  postSaveAction,
+  postBuyAction,
+  postGetdraftAction,
+} from '~/api/api';
 export default {
   name: 'PageIndex',
   mixins: [
@@ -83,23 +89,44 @@ export default {
       return responseObject;
     },
 
-    async fetchSave(data) {
-      const { response, fail } = await this.fetchSaveAction(data);
-      if (fail) {
-        this.showError({ detail: response.data });
+    async postGetdraft(formData) {
+      const body = {
+        ...this.calculateData,
+        ...formData,
+      }
+      const data = await postSaveAction(this, { body })
+        .catch(this.actionFail)
+
+      if (!data) {
         return;
       }
-      this.showSuccess({
-        summary: 'Заявка оформлена',
-        detail: 'Дальнейшие инструкции придут вам на почту',
-      });
+
+      return postGetdraftAction(this, { body: data })
+        .then(this.postGetdraftSuccess)
+        .catch(this.actionFail);
     },
-    async fetchSaveAction(data) {
-      const formData = { ...data, ...this.calculateData };
-      const responseObject = await this.$axios.post('save/', formData)
-        .then((response) => ({ response, fail: false }))
-        .catch((response) => ({ response, fail: true }));
-      return responseObject;
+    postGetdraftSuccess(response) {
+      console.log(response)
+    },
+
+    async postBuy(formData) {
+      const body = {
+        ...this.calculateData,
+        ...formData,
+      }
+      const data = await postSaveAction(this, { body })
+        .catch(this.actionFail)
+
+      if (!data) {
+        return;
+      }
+
+      return postBuyAction(this, { body: data })
+        .then(this.postBuySuccess)
+        .catch(this.actionFail);
+    },
+    postBuySuccess(response) {
+      console.log(response)
     },
   },
 }
