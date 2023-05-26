@@ -186,7 +186,7 @@ export default {
 
     data: {
       fio_policyholder: '123',
-      birth_policyholder: '12.12.2012',
+      birth_policyholder: '12.12.2000',
 
       fio_insured_person: '123 123 123',
       birth_insured_person: '12.12.2000',
@@ -208,7 +208,7 @@ export default {
       const formData = { ...this.data };
       formData.birth_policyholder = this.ruDateToISO(formData.birth_policyholder);
       formData.birth_insured_person = this.ruDateToISO(formData.birth_insured_person);
-      formData.phone_policyholder = formData.phone_policyholder.replace(/\D/g, '');
+      formData.phone_policyholder = '+' + formData.phone_policyholder.replace(/\D/g, '');
       return formData;
     },
   },

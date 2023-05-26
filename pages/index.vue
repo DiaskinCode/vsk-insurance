@@ -21,6 +21,7 @@
 
 <script>
 import errorsMixin from '~/mixins/errors';
+import { base64ToArrayBuffer, downloadBlob } from '~/helpers/pdf';
 import {
   postSaveAction,
   postBuyAction,
@@ -94,19 +95,20 @@ export default {
         ...this.calculateData,
         ...formData,
       }
-      const data = await postSaveAction(this, { body })
+      const res = await postSaveAction(this, { body })
         .catch(this.actionFail)
 
-      if (!data) {
+      if (!res) {
         return;
       }
 
-      return postGetdraftAction(this, { body: data })
+      return postGetdraftAction(this, { body: res.data })
         .then(this.postGetdraftSuccess)
         .catch(this.actionFail);
     },
     postGetdraftSuccess(response) {
-      console.log(response)
+      const pdf = base64ToArrayBuffer(response.data.total);
+      downloadBlob(pdf, 'Предпросмотр договора страхования.pdf', 'application/pdf');
     },
 
     async postBuy(formData) {
@@ -114,14 +116,14 @@ export default {
         ...this.calculateData,
         ...formData,
       }
-      const data = await postSaveAction(this, { body })
+      const res = await postSaveAction(this, { body })
         .catch(this.actionFail)
 
-      if (!data) {
+      if (!res) {
         return;
       }
 
-      return postBuyAction(this, { body: data })
+      return postBuyAction(this, { body: res.data })
         .then(this.postBuySuccess)
         .catch(this.actionFail);
     },
