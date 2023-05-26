@@ -8,7 +8,7 @@
       ref="observer"
       :gy="45"
       :gy-mb="25"
-      @submit="validateForm"
+      @submit="validateForm('fetch-order')"
     >
       <div>
         <div class="fw-6 fs-25 lh-140 mb-15 ws-nw">
@@ -133,6 +133,7 @@
           label="Предпросмотр"
           :loading="loading"
           :disabled="loading || !isEnabled || !isSameData"
+          @click="validateForm('post-getdraft')"
         />
       </div>
     </AppForm>
@@ -185,12 +186,12 @@ export default {
   }),
   computed: {},
   methods: {
-    async validateForm() {
+    async validateForm(method) {
       const isValidForm = await this.$refs.observer.validate();
       if (!isValidForm) {
         return;
       }
-      this.$emit('fetch-order', this.prepareFormData());
+      this.$emit(method, this.prepareFormData());
     },
     prepareFormData() {
       const formData = { ...this.data };
