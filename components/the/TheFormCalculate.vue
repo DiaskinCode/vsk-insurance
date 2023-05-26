@@ -268,7 +268,8 @@ export default {
 
       is_sporttime: false,
 
-      promo: null,
+      promo: 'VECTORSPORT',
+      // promo: null,
       partner: false,
       rulespol: false,
     },

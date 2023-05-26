@@ -12,7 +12,8 @@
     <TheFormOrder
       :is-enabled="isFormOrderEnabled"
       :is-same-data="isSameData"
-      @fetch-order="fetchSave"
+      @post-buy="postBuy"
+      @post-getdraft="postGetdraft"
     />
     <TheQuestion />
   </div>
@@ -20,6 +21,12 @@
 
 <script>
 import errorsMixin from '~/mixins/errors';
+import { base64ToArrayBuffer, downloadBlob } from '~/helpers/pdf';
+import {
+  postSaveAction,
+  postBuyAction,
+  postGetdraftAction,
+} from '~/api/api';
 export default {
   name: 'PageIndex',
   mixins: [
@@ -83,23 +90,45 @@ export default {
       return responseObject;
     },
 
-    async fetchSave(data) {
-      const { response, fail } = await this.fetchSaveAction(data);
-      if (fail) {
-        this.showError({ detail: response.data });
+    async postGetdraft(formData) {
+      const body = {
+        ...this.calculateData,
+        ...formData,
+      }
+      const res = await postSaveAction(this, { body })
+        .catch(this.actionFail)
+
+      if (!res) {
         return;
       }
-      this.showSuccess({
-        summary: 'Заявка оформлена',
-        detail: 'Дальнейшие инструкции придут вам на почту',
-      });
+
+      return postGetdraftAction(this, { body: res.data })
+        .then(this.postGetdraftSuccess)
+        .catch(this.actionFail);
     },
-    async fetchSaveAction(data) {
-      const formData = { ...data, ...this.calculateData };
-      const responseObject = await this.$axios.post('save/', formData)
-        .then((response) => ({ response, fail: false }))
-        .catch((response) => ({ response, fail: true }));
-      return responseObject;
+    postGetdraftSuccess(response) {
+      const pdf = base64ToArrayBuffer(response.data.total);
+      downloadBlob(pdf, 'Предпросмотр договора страхования.pdf', 'application/pdf');
+    },
+
+    async postBuy(formData) {
+      const body = {
+        ...this.calculateData,
+        ...formData,
+      }
+      const res = await postSaveAction(this, { body })
+        .catch(this.actionFail)
+
+      if (!res) {
+        return;
+      }
+
+      return postBuyAction(this, { body: res.data })
+        .then(this.postBuySuccess)
+        .catch(this.actionFail);
+    },
+    postBuySuccess({ data }) {
+      window.open(data.total, '_self');
     },
   },
 }
