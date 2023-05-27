@@ -173,27 +173,27 @@ export default {
   },
   data: () => ({
     loading: false,
-    // data: {
-    //   fio_policyholder: '',
-    //   birth_policyholder: '',
-
-    //   fio_insured_person: '',
-    //   birth_insured_person: '',
-
-    //   phone_policyholder: '',
-    //   email_policyholder: '',
-    // },
-
     data: {
-      fio_policyholder: '123',
-      birth_policyholder: '12.12.2000',
+      fio_policyholder: '',
+      birth_policyholder: '',
 
-      fio_insured_person: '123 123 123',
-      birth_insured_person: '12.12.2000',
+      fio_insured_person: '',
+      birth_insured_person: '',
 
       phone_policyholder: '',
-      email_policyholder: 'alex@alex.ru',
+      email_policyholder: '',
     },
+
+    // data: {
+    //   fio_policyholder: '123',
+    //   birth_policyholder: '12.12.2000',
+
+    //   fio_insured_person: '123 123 123',
+    //   birth_insured_person: '12.12.2000',
+
+    //   phone_policyholder: '',
+    //   email_policyholder: 'alex@alex.ru',
+    // },
   }),
   computed: {},
   methods: {
