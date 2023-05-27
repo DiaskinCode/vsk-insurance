@@ -35,7 +35,7 @@
             <AppFormField
               class="col-6 col-12-mb"
               vid="birth_policyholder"
-              rules="required|date|pastdate"
+              rules="required|date|policyholder-min"
               label="Дата рождения страхователя"
             >
               <AppInput
@@ -63,7 +63,7 @@
             <AppFormField
               class="col-6 col-12-mb"
               vid="birth_insured_person"
-              rules="required|date|pastdate"
+              rules="required|date|insured-person-min|insured-person-max"
               label="Дата рождения застрахованного лица"
             >
               <AppInput

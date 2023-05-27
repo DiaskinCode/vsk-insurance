@@ -6,6 +6,7 @@ import {
   setInteractionMode,
 } from 'vee-validate';
 import { required, email, length } from 'vee-validate/dist/rules';
+import moment from 'moment';
 
 setInteractionMode('eager');
 
@@ -30,21 +31,13 @@ extend('length', {
 
 extend('date', {
   validate: (value) => {
-    return Date.parse(value.split('.').reverse().join('-'));
-  },
-  message: 'Введите корректную дату'
-});
-
-extend('pastdate', {
-  validate: (value) => {
-    return Date.parse(value.split('.').reverse().join('-')) < Date.now();
+    return moment(value, 'DD.MM.YYYY').isValid();
   },
   message: 'Введите корректную дату'
 });
 
 extend('containitem', {
   validate: (value) => {
-    console.log(value.length)
     return value.length;
   },
   message: 'Обязательное поле'
@@ -55,4 +48,25 @@ extend('istrue', {
     return value;
   },
   message: 'Обязательное поле'
+});
+
+extend('insured-person-min', {
+  validate: (value) => {
+    return moment(value, 'DD.MM.YYYY').isBefore(moment().subtract(4, 'years'));
+  },
+  message: 'не моложе 4 лет'
+});
+
+extend('insured-person-max', {
+  validate: (value) => {
+    return moment(value, 'DD.MM.YYYY').isAfter(moment().subtract(70, 'years'));
+  },
+  message: 'не старше 70 лет'
+});
+
+extend('policyholder-min', {
+  validate: (value) => {
+    return moment(value, 'DD.MM.YYYY').isBefore(moment().subtract(18, 'years'));
+  },
+  message: 'не моложе 18 лет'
 });
