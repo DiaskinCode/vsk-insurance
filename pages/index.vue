@@ -13,6 +13,8 @@
     <TheFormOrder
       :is-enabled="isFormOrderEnabled"
       :is-same-data="isSameData"
+      :loading-buy="loadingBuy"
+      :loading-getdraft="loadingGetdraft"
       @post-buy="postBuy"
       @post-getdraft="postGetdraft"
     />
@@ -98,6 +100,7 @@ export default {
     },
 
     async postGetdraft(formData) {
+      this.loadingGetdraft = true;
       const body = {
         ...this.calculateData,
         ...formData,
@@ -106,12 +109,15 @@ export default {
         .catch(this.actionFail)
 
       if (!res) {
+        this.loadingGetdraft = false;
         return;
       }
 
-      return postGetdraftAction(this, { body: res.data })
+      await postGetdraftAction(this, { body: res.data })
         .then(this.postGetdraftSuccess)
         .catch(this.actionFail);
+
+      this.loadingGetdraft = false;
     },
     postGetdraftSuccess(response) {
       const pdf = base64ToArrayBuffer(response.data.total);
@@ -119,6 +125,7 @@ export default {
     },
 
     async postBuy(formData) {
+      this.loadingBuy = true;
       const body = {
         ...this.calculateData,
         ...formData,
@@ -127,12 +134,14 @@ export default {
         .catch(this.actionFail)
 
       if (!res) {
+        this.loadingBuy = false;
         return;
       }
 
-      return postBuyAction(this, { body: res.data })
+      await postBuyAction(this, { body: res.data })
         .then(this.postBuySuccess)
         .catch(this.actionFail);
+      this.loadingBuy = false;
     },
     postBuySuccess({ data }) {
       window.open(data.total, '_self');

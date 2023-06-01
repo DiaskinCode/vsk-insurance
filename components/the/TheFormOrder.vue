@@ -124,15 +124,15 @@
           class="fg-1-mb"
           label="Оформить"
           type="submit"
-          :loading="loading"
-          :disabled="loading || !isEnabled || !isSameData"
+          :loading="loadingBuy"
+          :disabled="loadingGetdraft || loadingBuy || !isEnabled || !isSameData"
         />
         <AppButton
           class="ml-25 ml-5-mb fg-1-mb"
           secondary
           label="Предпросмотр"
-          :loading="loading"
-          :disabled="loading || !isEnabled || !isSameData"
+          :loading="loadingGetdraft"
+          :disabled="loadingBuy || loadingGetdraft || !isEnabled || !isSameData"
           @click="validateForm('post-getdraft')"
         />
       </div>
@@ -170,9 +170,17 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    loadingGetdraft: {
+      type: Boolean,
+      default: false,
+    },
+    loadingBuy: {
+      type: Boolean,
+      default: false,
+    },
   },
   data: () => ({
-    loading: false,
     data: {
       fio_policyholder: '',
       birth_policyholder: '',
