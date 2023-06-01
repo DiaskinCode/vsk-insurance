@@ -5,6 +5,7 @@
     <TheBenefit />
     <TheStep />
     <TheFormCalculate
+      :loading="loadingCalculate"
       :price="price"
       @check-calculate-prop="checkCalculate"
       @fetch-calculate="fetchCalculate"
@@ -46,6 +47,10 @@ export default {
       timedisability_accident: null,
       type_of_sport: null,
     },
+
+    loadingCalculate: false,
+    loadingBuy: false,
+    loadingGetdraft: false,
   }),
   computed: {
     isFormOrderEnabled() {
@@ -73,6 +78,7 @@ export default {
       this.calculateDataAfter[prop] = value;
     },
     async fetchCalculate(data) {
+      this.loadingCalculate = true;
       this.calculateDataAfter = { ...data };
       const { response, fail } = await this.fetchCalculateAction(data);
       if (fail) {
@@ -82,6 +88,7 @@ export default {
       this.showSuccess({ detail: 'Стоимость полиса рассчитана' });
       this.price = Number(response.data.total) / 100;
       this.calculateData = { ...data };
+      this.loadingCalculate = false;
     },
     async fetchCalculateAction(data) {
       const responseObject = await this.$axios.post('calculator/', data)

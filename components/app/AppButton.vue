@@ -38,5 +38,9 @@ export default {
     color: $primary;
     background: $secondary;
   }
+
+  .p-button-icon-left {
+    margin-right: .5rem;
+  }
 }
 </style>

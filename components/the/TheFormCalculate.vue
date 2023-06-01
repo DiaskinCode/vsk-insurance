@@ -169,6 +169,8 @@
                 class="ml-20 ml-0-mb mt-15-mb ord-3-mb w-100-mb"
                 label="Рассчитать"
                 type="submit"
+                :loading="loading"
+                :disabled="loading"
               />
               <AppFormField
                 vid="sport"
@@ -253,9 +255,13 @@ export default {
       type: Number,
       default: null,
     },
+
+    loading: {
+      type: Boolean,
+      default: false,
+    },
   },
   data: () => ({
-    loading: false,
     data: {
       count_days: 1,
       type_of_sport: [],
