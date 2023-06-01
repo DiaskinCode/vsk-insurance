@@ -5,6 +5,7 @@
     <TheBenefit />
     <TheStep />
     <TheFormCalculate
+      :loading="loadingCalculate"
       :price="price"
       @check-calculate-prop="checkCalculate"
       @fetch-calculate="fetchCalculate"
@@ -12,6 +13,8 @@
     <TheFormOrder
       :is-enabled="isFormOrderEnabled"
       :is-same-data="isSameData"
+      :loading-buy="loadingBuy"
+      :loading-getdraft="loadingGetdraft"
       @post-buy="postBuy"
       @post-getdraft="postGetdraft"
     />
@@ -46,6 +49,10 @@ export default {
       timedisability_accident: null,
       type_of_sport: null,
     },
+
+    loadingCalculate: false,
+    loadingBuy: false,
+    loadingGetdraft: false,
   }),
   computed: {
     isFormOrderEnabled() {
@@ -73,6 +80,7 @@ export default {
       this.calculateDataAfter[prop] = value;
     },
     async fetchCalculate(data) {
+      this.loadingCalculate = true;
       this.calculateDataAfter = { ...data };
       const { response, fail } = await this.fetchCalculateAction(data);
       if (fail) {
@@ -82,6 +90,7 @@ export default {
       this.showSuccess({ detail: 'Стоимость полиса рассчитана' });
       this.price = Number(response.data.total) / 100;
       this.calculateData = { ...data };
+      this.loadingCalculate = false;
     },
     async fetchCalculateAction(data) {
       const responseObject = await this.$axios.post('calculator/', data)
@@ -91,6 +100,7 @@ export default {
     },
 
     async postGetdraft(formData) {
+      this.loadingGetdraft = true;
       const body = {
         ...this.calculateData,
         ...formData,
@@ -99,12 +109,15 @@ export default {
         .catch(this.actionFail)
 
       if (!res) {
+        this.loadingGetdraft = false;
         return;
       }
 
-      return postGetdraftAction(this, { body: res.data })
+      await postGetdraftAction(this, { body: res.data })
         .then(this.postGetdraftSuccess)
         .catch(this.actionFail);
+
+      this.loadingGetdraft = false;
     },
     postGetdraftSuccess(response) {
       const pdf = base64ToArrayBuffer(response.data.total);
@@ -112,6 +125,7 @@ export default {
     },
 
     async postBuy(formData) {
+      this.loadingBuy = true;
       const body = {
         ...this.calculateData,
         ...formData,
@@ -120,12 +134,14 @@ export default {
         .catch(this.actionFail)
 
       if (!res) {
+        this.loadingBuy = false;
         return;
       }
 
-      return postBuyAction(this, { body: res.data })
+      await postBuyAction(this, { body: res.data })
         .then(this.postBuySuccess)
         .catch(this.actionFail);
+      this.loadingBuy = false;
     },
     postBuySuccess({ data }) {
       window.open(data.total, '_self');
