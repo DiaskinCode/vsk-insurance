@@ -35,7 +35,7 @@
             <AppFormField
               class="col-6 col-12-mb"
               vid="birth_policyholder"
-              rules="required|date|policyholder-min"
+              :rules="rulesPolicyholder"
               label="Дата рождения страхователя"
             >
               <AppInput
@@ -47,7 +47,28 @@
                 placeholder="ДД.ММ.ГГГГ"
               />
             </AppFormField>
+
             <AppFormField
+              class="col-12"
+              vid="same-checkbox"
+            >
+              <AppCheckbox
+                id="same-checkbox"
+                v-model="isSame"
+                class="ai-c"
+                binary
+              >
+                <label
+                  for="same-checkbox"
+                  class="ml-10 fs-16 fs-15-mb"
+                >
+                  Застрахованное лицо является страхователем
+                </label>
+              </AppCheckbox>
+            </AppFormField>
+
+            <AppFormField
+              v-if="!isSame"
               class="col-6 col-12-mb"
               vid="fio_insured_person"
               rules="required"
@@ -61,6 +82,7 @@
               />
             </AppFormField>
             <AppFormField
+              v-if="!isSame"
               class="col-6 col-12-mb"
               vid="birth_insured_person"
               rules="required|date|insured-person-min|insured-person-max"
@@ -192,6 +214,8 @@ export default {
       email_policyholder: '',
     },
 
+    isSame: false,
+
     // data: {
     //   fio_policyholder: '123',
     //   birth_policyholder: '12.12.2000',
@@ -203,7 +227,16 @@ export default {
     //   email_policyholder: 'alex@alex.ru',
     // },
   }),
-  computed: {},
+  computed: {
+    rulesPolicyholder() {
+      return {
+        required: true,
+        date: true,
+        'policyholder-min': true,
+        'insured-person-max': this.isSame,
+      }
+    }
+  },
   methods: {
     async validateForm(method) {
       const isValidForm = await this.$refs.observer.validate();
@@ -217,6 +250,12 @@ export default {
       formData.birth_policyholder = this.ruDateToISO(formData.birth_policyholder);
       formData.birth_insured_person = this.ruDateToISO(formData.birth_insured_person);
       formData.phone_policyholder = '+' + formData.phone_policyholder.replace(/\D/g, '');
+
+      if (this.isSame) {
+        formData.fio_insured_person = formData.fio_policyholder;
+        formData.birth_insured_person = formData.birth_policyholder;
+      }
+
       return formData;
     },
   },
