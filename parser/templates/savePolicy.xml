@@ -21,9 +21,9 @@
                 <model:contractorType>
                     <model:contractorTypeCode>INDIVIDUAL</model:contractorTypeCode>
                 </model:contractorType>
-                <model:firstName></model:firstName>
-                <model:surname></model:surname>
-                <model:secondName></model:secondName>
+                <model:firstName>(firstName_policyholder)</model:firstName>
+                <model:surname>(surname_policyholder)</model:surname>
+                <model:secondName>(secondName_policyholder)</model:secondName>
                 <model:birthDate>(birth_insured_person)</model:birthDate>
                 <model:gender>1</model:gender>
                 <model:fullName>(fio_insured_person)</model:fullName>
@@ -43,18 +43,18 @@
                         <model:contactTypeCode>PHONE</model:contactTypeCode>
                     </model:contactType>
                     <model:contact>(phone_policyholder)</model:contact>
-                    <model:contactPerson></model:contactPerson>
+                    <model:contactPerson/>
                 </model:contacts>
                 <model:contacts>
                     <model:contactType>
                         <model:contactTypeCode>EMAIL</model:contactTypeCode>
                     </model:contactType>
                     <model:contact>(email_policyholder)</model:contact>
-                    <model:contactPerson></model:contactPerson>
+                    <model:contactPerson/>
                 </model:contacts>
-                <model:firstName></model:firstName>
-                <model:surname></model:surname>
-                <model:secondName></model:secondName>
+                <model:firstName>(first_name_policyholder)</model:firstName>
+                <model:surname>(surname_policyholder)</model:surname>
+                <model:secondName>(second_name_policyholder)</model:secondName>
                 <model:birthDate>(birth_policyholder)</model:birthDate>
                 <model:gender>1</model:gender>
                 <model:fullName>(fio_policyholder)</model:fullName>

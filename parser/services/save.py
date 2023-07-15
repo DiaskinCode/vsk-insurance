@@ -61,6 +61,12 @@ def save(
     if timedisability_accident:
         total_condition += get_conditions_save('timedisability_accident', date_start=date_start, date_end=date_end)
 
+    fio_list = fio_policyholder.split(' ')
+    if (fio_len := len(fio_list)) < 3:
+        fio_list += [None] * (3 - fio_len)
+
+    second_name, first_name, surname = fio_list
+
     body = xml_render(
         template_name='parser/templates/savePolicy.xml',
         context={
@@ -76,6 +82,9 @@ def save(
             'email_policyholder': email_policyholder,
             'birth_policyholder': birth_policyholder.strftime('%Y-%m-%d'),
             'fio_policyholder': fio_policyholder,
+            'first_name_policyholder': first_name,
+            'surname_policyholder': surname,
+            'second_name_policyholder': second_name,
             'type_of_sport': str(type_of_sport),
             'is_professional': bool_to_str(is_professional),
             'is_sporttime': bool_to_str(is_sporttime),
@@ -85,6 +94,7 @@ def save(
 
     response = requests.post(full_url, data=body, **get_static_params())
     response_xml_as_string = response.text
+    print(response.text)
     if not response_xml_as_string:
         return False, {'error': 'blank VSK response'}
     response_xml = ElementTree.fromstring(response_xml_as_string)

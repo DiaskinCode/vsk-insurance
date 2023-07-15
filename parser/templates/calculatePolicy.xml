@@ -1,6 +1,7 @@
 <policy:calculatePolicyRequest xmlns:common="http://www.vsk.ru/schema/partners/common"
                                xmlns:model="http://www.vsk.ru/schema/partners/model/calc"
-                               xmlns:policy="http://www.vsk.ru/schema/partners/policy">
+                               xmlns:policy="http://www.vsk.ru/schema/partners/policy"
+                               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <common:messageId>(message_id)</common:messageId>
     <policy:policy>
         <model:product>
