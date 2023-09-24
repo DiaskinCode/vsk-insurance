@@ -21,6 +21,7 @@ class CalculatorSerializer(serializers.Serializer):
 
 
 class SaveSerializer(CalculatorSerializer):
+    date_start = serializers.DateField(label='Дата начал действия договора', write_only=True)
     birth_insured_person = serializers.DateField(label='День рождения страхуемого', write_only=True)
     fio_insured_person = serializers.CharField(label='ФИО страхуемого', write_only=True)
 

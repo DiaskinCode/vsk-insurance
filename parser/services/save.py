@@ -1,5 +1,5 @@
 import random
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 from typing import Tuple
 from xml.etree import ElementTree
 
@@ -11,6 +11,7 @@ from parser.services.helpers import xml_render, get_static_params, bool_to_str, 
 
 
 def save(
+        date_start: date,
         count_days: int,
         type_of_sport: str or int,
         is_professional: str or bool,
@@ -46,7 +47,6 @@ def save(
     full_url = f'{MAIN_URL}/cxf/rest/partners/api/Sync/Policy/SavePolicy'
 
     date_create = datetime.today()
-    date_start = date_create + timedelta(days=1)
     date_end = date_start + timedelta(days=count_days-1)
 
     date_create = date_create.strftime('%Y-%m-%d')
