@@ -70,3 +70,10 @@ extend('policyholder-min', {
   },
   message: 'не моложе 18 лет'
 });
+
+extend('afternow', {
+  validate: (value) => {
+    return moment(value, 'DD.MM.YYYY').isAfter(moment());
+  },
+  message: 'Введите корректную дату'
+});

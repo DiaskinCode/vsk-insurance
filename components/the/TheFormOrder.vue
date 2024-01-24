@@ -97,6 +97,22 @@
                 placeholder="ДД.ММ.ГГГГ"
               />
             </AppFormField>
+
+            <AppFormField
+              class="col-6 col-12-mb"
+              vid="date_start"
+              rules="date|afternow"
+              label="Дата начала действия полиса"
+            >
+              <AppInput
+                id="date_start"
+                v-model="data.date_start"
+                component="InputText"
+                v-mask="'##.##.####'"
+                type="tel"
+                placeholder="ДД.ММ.ГГГГ"
+              />
+            </AppFormField>
           </AppFormRow>
         </div>
       </div>
@@ -212,6 +228,8 @@ export default {
 
       phone_policyholder: '',
       email_policyholder: '',
+
+      date_start: '',
     },
 
     isSame: false,
@@ -249,6 +267,7 @@ export default {
       const formData = { ...this.data };
       formData.birth_policyholder = this.ruDateToISO(formData.birth_policyholder);
       formData.birth_insured_person = this.ruDateToISO(formData.birth_insured_person);
+      formData.date_start = this.ruDateToISO(formData.date_start);
       formData.phone_policyholder = '+' + formData.phone_policyholder.replace(/\D/g, '');
 
       if (this.isSame) {

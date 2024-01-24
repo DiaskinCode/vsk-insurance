@@ -19,7 +19,7 @@
               Фиксированная страховая сумма
               <br class="d-n d-b-mb">
               <span class="fw-7">
-                200 000 рублей
+                300 000 рублей
               </span>
             </h2>
           </TopListItem>

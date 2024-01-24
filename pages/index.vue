@@ -84,7 +84,8 @@ export default {
       this.calculateDataAfter = { ...data };
       const { response, fail } = await this.fetchCalculateAction(data);
       if (fail) {
-        this.showError({ detail: response.data });
+        this.showError({ detail: response.response.data.detail });
+        this.loadingCalculate = false;
         return;
       }
       this.showSuccess({ detail: 'Стоимость полиса рассчитана' });
