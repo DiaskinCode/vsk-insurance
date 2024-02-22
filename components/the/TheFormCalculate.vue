@@ -15,7 +15,7 @@
           :gy-mb="25"
           @submit="validateForm"
         >
-          <div>
+          <div class="form-calculate__days">
             <div class="fw-6 fs-25 lh-140 mb-70 ws-nw">
               Срок страхования
             </div>
@@ -39,6 +39,35 @@
                 :min="1"
                 :max="365"
                 @change="changeSlider"
+              />
+            </AppFormField>
+          </div>
+          <div class="form-calculate__slider">
+            <div class="fw-6 fs-25 lh-140 mb-70 ws-nw mt-50">
+              Сумма страхования:
+            </div>
+            <AppFormField
+              class="px-20"
+              vid="sum"
+            >
+              <AppInput
+                v-if="$mq === 'mb'"
+                id="sumInput"
+                v-model="data.count_days"
+                type="tel"
+                class="form-calculate__sum form-calculate__sum--input"
+                component="InputNumber"
+                :min="50000"
+                :max="300000"
+                :step="50000"
+              />
+              <AppSlider
+                id="sum"
+                v-model="data.sum"
+                :min="50000"
+                :max="300000"
+                :step="50000"
+                @change="changeSliderSum"
               />
             </AppFormField>
           </div>
@@ -88,7 +117,7 @@
                 class-checkbox="mt-5"
                 value-label="timedisability_accident"
                 @input="checkCalculateProp('timedisability_accident',
-                  data.risks.includes('timedisability_accident'))"
+                                           data.risks.includes('timedisability_accident'))"
               >
                 <label
                   for="risks-3"
@@ -119,11 +148,11 @@
                   class="form-calculate__dropdown w-100-mb"
                   :class="{ 'error': isErrorSelect }"
                   filter
-                  filterPlaceholder="Найти вид спорта"
-                  emptyFilterMessage="Вид спорта не найден"
+                  filter-placeholder="Найти вид спорта"
+                  empty-filter-message="Вид спорта не найден"
                   placeholder="Выбрать категорию"
                   :options="optionsSport"
-                  :selectionLimit="5"
+                  :selection-limit="5"
                   @input="onSelectInput"
                 />
                 <div
@@ -189,7 +218,7 @@
               <AppFormField
                 vid="rulespol"
                 rules="istrue"
-                errorPosition="left"
+                error-position="left"
                 class=""
               >
                 <AppCheckbox
@@ -209,7 +238,7 @@
               </AppFormField>
             </div>
           </div>
-          <div class="d-f fd-c fs-25 lh-140 fs-22-mb lh-120-mb" v-if="priceString">
+          <div v-if="priceString" class="d-f fd-c fs-25 lh-140 fs-22-mb lh-120-mb">
             <div>Предварительная стоимость Вашего полиса:</div>
             <div class="fs-40 c-p fw-7 mt-15-mb">
               {{ priceString }}
@@ -224,7 +253,7 @@
     </div>
     <ClientOnly>
       <Teleport
-        to=".form-calculate .app-slider"
+        to=".form-calculate__days .app-slider"
       >
         <div
           ref="term"
@@ -234,11 +263,27 @@
         </div>
       </Teleport>
       <Teleport
+        to=".form-calculate__slider .app-slider"
+      >
+        <div
+          ref="sum"
+          class="form-calculate__sum bg-w b-1 br-5 py-10 d-f jc-c d-n-mb"
+        >
+          {{ termStringSum }}
+        </div>
+      </Teleport>
+      <Teleport
         to="#term"
       >
         <div class="form-calculate__term--mobile d-n d-b-mb">
           {{ termDay }}
         </div>
+        <div class="form-calculate__circle pos-a l-0 br-c" />
+        <div class="form-calculate__circle pos-a r-0 br-c" />
+      </Teleport>
+      <Teleport
+        to="#sum"
+      >
         <div class="form-calculate__circle pos-a l-0 br-c" />
         <div class="form-calculate__circle pos-a r-0 br-c" />
       </Teleport>
@@ -264,6 +309,7 @@ export default {
   data: () => ({
     data: {
       count_days: 1,
+      sum: 50000,
       type_of_sport: [],
       is_professional: false,
       risks: [
@@ -281,6 +327,7 @@ export default {
     },
     optionsSport: sportList,
     sliderHandleEl: null,
+    sliderHandleElSum: null,
     isErrorSelect: false,
 
     tooltipOptions: {
@@ -327,6 +374,9 @@ export default {
     termString() {
       return `${this.data.count_days} ${this.termDay}`;
     },
+    termStringSum() {
+      return `${this.data.sum} ₽`;
+    },
     priceString() {
       return this.price ? `${this.price.toLocaleString()} ₽` : null;
     },
@@ -348,9 +398,21 @@ export default {
     },
   },
   mounted() {
-    this.sliderHandleEl = document.querySelector('.p-slider-handle');
+    this.sliderHandleEl = document.querySelector('.form-calculate__days .p-slider-handle');
+    this.sliderHandleElSum = document.querySelector('.form-calculate__slider .p-slider-handle');
   },
   methods: {
+    changeSliderSum(value) {
+      let left = Number(this.sliderHandleElSum.style.left.replace('%', ''));
+      if (left < 4.7) {
+        left = 4.7;
+      }
+      if (left > 95.3) {
+        left = 95.3;
+      }
+      this.$refs.sum.style.left = left + '%';
+      this.checkCalculateProp('sum', value);
+    },
     onSelectInput(value) {
       this.validateSelect();
       this.checkCalculateProp('type_of_sport', value.join(';'));
@@ -376,7 +438,10 @@ export default {
       this.$emit('fetch-calculate', this.prepareFormData());
     },
     prepareFormData() {
-      const formData = { ...this.selectedRisks };
+      const formData = {};
+      formData.accident_death = this.selectedRisks.accident_death ? this.data.sum : 0
+      formData.accident_disability = this.selectedRisks.accident_disability ? this.data.sum : 0
+      formData.timedisability_accident = this.selectedRisks.timedisability_accident ? this.data.sum : 0
       formData.is_sporttime = this.data.is_sporttime;
       formData.is_professional = this.data.is_professional;
       formData.count_days = this.data.count_days;
@@ -397,6 +462,26 @@ export default {
 </script>
 
 <style lang="scss">
+  .form-calculate__slider {
+    .app-slider {
+    color: #444444;
+    &::before {
+      position: absolute;
+      left: 0;
+      top: 2rem;
+      transform: translateX(-29%);
+      content: '50000 ₽';
+    }
+    &::after {
+      position: absolute;
+      right: 0;
+      top: 2rem;
+      transform: translateX(20%);
+      content: '300000 ₽';
+    }
+  }
+}
+
 .form-calculate {
   /* .form-calculate__term */
   .app-input.form-calculate__term--input {
@@ -412,7 +497,7 @@ export default {
     }
   }
 
-  &__term {
+  &__term, &__sum {
     position: absolute;
     white-space: nowrap;
     border-color: #D2D2D2;
@@ -453,7 +538,8 @@ export default {
       width: 100%;
     }
   }
-  .app-slider {
+  &__days {
+    .app-slider {
     color: #444444;
     &::before {
       position: absolute;
@@ -470,6 +556,7 @@ export default {
       content: '365 дней';
     }
   }
+  }
   .p-slider-handle {
     z-index: 1;
     &::before {
@@ -480,6 +567,5 @@ export default {
     border: 1px solid $error;
     box-shadow: 0px 0rem .3rem rgba(255, 0, 0, 0.4) ;
   }
-
 }
 </style>

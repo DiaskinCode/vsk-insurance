@@ -10,14 +10,14 @@
         :layout="layout"
         :value="steps"
       >
-        <template v-slot:marker="{ index }">
+        <template #marker="{ index }">
           <div
             class="step__marker bg-gf5 br-c d-f ai-c jc-c fw-6 fs-25"
           >
             {{ index }}
           </div>
         </template>
-        <template v-slot:content="{ item }">
+        <template #content="{ item }">
           <div class="step__content ta-c px-20 ta-l-mb pl-20-mb">
             <div
               v-for="(text, i) in item"

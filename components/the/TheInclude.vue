@@ -3,8 +3,12 @@
     id="include"
     class="include container fd-c ai-c py-100 ai-fs-mb py-50-mb"
   >
-    <h2 class="header-text">Что включает полис</h2>
-    <div class="fw-5 fs-30 lh-140 mt-10 fs-25-mb">Риски:</div>
+    <h2 class="header-text">
+      Что включает полис
+    </h2>
+    <div class="fw-5 fs-30 lh-140 mt-10 fs-25-mb">
+      Риски:
+    </div>
     <div class="row gx-25 gy-10 fs-25 lh-140 mt-40 fs-16-mb lh-120-mb mt-15-mb">
       <IncludeListItem class="col">
         <h3>
@@ -22,7 +26,7 @@
       <IncludeListItem class="col">
         <h3>
           <span class="fw-7">Травмы</span>
-           в результате
+          в результате
           несчастного случая
         </h3>
       </IncludeListItem>

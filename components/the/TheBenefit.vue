@@ -4,12 +4,16 @@
     class="benefit container-wrapper bg-g"
   >
     <div class="container fd-c ai-c py-100 ai-fs-mb py-50-mb">
-      <h2 class="header-text">Преимущества</h2>
+      <h2 class="header-text">
+        Преимущества
+      </h2>
       <div class="mt-50">
-        <div class="
+        <div
+          class="
           row gy-30 fs-20 lh-140 px-100
           gy-50-mb fs-16-mb lh-130-mb px-0-mb
-        ">
+        "
+        >
           <BenefitListItem
             src="/benefit/1.svg"
           >
@@ -38,7 +42,6 @@
             </h3>
           </BenefitListItem>
         </div>
-
       </div>
     </div>
   </div>

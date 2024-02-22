@@ -7,8 +7,7 @@
       :value="value"
       v-bind="$attrs"
       v-on="$listeners"
-    >
-    </InputSwitch>
+    />
     <slot>
       <label
         :for="id"

@@ -4,8 +4,8 @@
       Оформить полис
     </h2>
     <AppForm
-      class="w-100 px-100 px-0-mb"
       ref="observer"
+      class="w-100 px-100 px-0-mb"
       :gy="45"
       :gy-mb="25"
       @submit="validateForm('post-buy')"
@@ -41,8 +41,8 @@
               <AppInput
                 id="birth_policyholder"
                 v-model="data.birth_policyholder"
-                component="InputText"
                 v-mask="'##.##.####'"
+                component="InputText"
                 type="tel"
                 placeholder="ДД.ММ.ГГГГ"
               />
@@ -91,8 +91,8 @@
               <AppInput
                 id="birth_insured_person"
                 v-model="data.birth_insured_person"
-                component="InputText"
                 v-mask="'##.##.####'"
+                component="InputText"
                 type="tel"
                 placeholder="ДД.ММ.ГГГГ"
               />
@@ -107,8 +107,8 @@
               <AppInput
                 id="date_start"
                 v-model="data.date_start"
-                component="InputText"
                 v-mask="'##.##.####'"
+                component="InputText"
                 type="tel"
                 placeholder="ДД.ММ.ГГГГ"
               />
@@ -134,8 +134,8 @@
               <AppInput
                 id="phone_policyholder"
                 v-model="data.phone_policyholder"
-                component="InputText"
                 v-mask="'+7 (###) ###-##-##'"
+                component="InputText"
                 type="tel"
                 placeholder="+7 (999) 999-99-99"
               />

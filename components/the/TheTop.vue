@@ -19,7 +19,7 @@
               Фиксированная страховая сумма
               <br class="d-n d-b-mb">
               <span class="fw-7">
-                300 000 рублей
+                до 300 000 рублей
               </span>
             </h2>
           </TopListItem>
@@ -49,7 +49,9 @@
           />
         </a>
         <div class="d-n d-f-mb ord-3-mb o-50 fs-14 lh-120 mt-10">
-          <div class="mr-5">*</div>
+          <div class="mr-5">
+            *
+          </div>
           <div>
             Полис начинает действовать
             на следующий день после оформления

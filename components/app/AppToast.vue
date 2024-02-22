@@ -5,7 +5,7 @@
     :position="position"
   >
     <template
-      v-slot:message="{ message }"
+      #message="{ message }"
     >
       <div
         v-if="message.src"

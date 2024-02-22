@@ -1,6 +1,6 @@
 <template>
   <div class="app-input-group d-f">
-    <slot ></slot>
+    <slot />
   </div>
 </template>
 

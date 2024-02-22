@@ -3,14 +3,14 @@
     class="app-dropdown"
     :value="value"
     :options="options"
-    :optionLabel="optionLabel"
-    :optionValue="optionValue"
+    :option-label="optionLabel"
+    :option-value="optionValue"
     v-bind="$attrs"
     v-on="$listeners"
   >
     <template
       v-for="(_, slot) of $scopedSlots"
-      v-slot:[slot]="scope"
+      #[slot]="scope"
     >
       <slot
         :name="slot"

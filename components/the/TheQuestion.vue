@@ -13,7 +13,7 @@
             <AppAccordion
               class="w-100 row gy-25 gx-0 gy-5-mb"
               multiple
-              :activeIndex="activeLeft"
+              :active-index="activeLeft"
             >
               <AccordionTab
                 class="col-12"
@@ -58,7 +58,7 @@
             <AppAccordion
               class="w-100 row gy-25 gx-0 gy-5-mb"
               multiple
-              :activeIndex="activeRight"
+              :active-index="activeRight"
             >
               <AccordionTab
                 class="col-12"

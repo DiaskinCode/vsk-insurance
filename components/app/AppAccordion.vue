@@ -1,14 +1,14 @@
 <template>
   <Accordion
     class="app-accordion"
-    expandIcon="pi-chevron-left"
-    collapseIcon="pi-chevron-left expand"
+    expand-icon="pi-chevron-left"
+    collapse-icon="pi-chevron-left expand"
     v-bind="$attrs"
     v-on="$listeners"
   >
     <template
       v-for="(_, slot) of $scopedSlots"
-      v-slot:[slot]="scope"
+      #[slot]="scope"
     >
       <slot
         :name="slot"
