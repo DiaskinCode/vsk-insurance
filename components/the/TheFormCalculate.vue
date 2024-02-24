@@ -50,17 +50,6 @@
               class="px-20"
               vid="sum"
             >
-              <AppInput
-                v-if="$mq === 'mb'"
-                id="sumInput"
-                v-model="data.count_days"
-                type="tel"
-                class="form-calculate__sum form-calculate__sum--input"
-                component="InputNumber"
-                :min="50000"
-                :max="300000"
-                :step="50000"
-              />
               <AppSlider
                 id="sum"
                 v-model="data.sum"
@@ -267,7 +256,7 @@
       >
         <div
           ref="sum"
-          class="form-calculate__sum bg-w b-1 br-5 py-10 d-f jc-c d-n-mb"
+          class="form-calculate__sum bg-w b-1 br-5 py-10 d-f jc-c"
         >
           {{ termStringSum }}
         </div>
