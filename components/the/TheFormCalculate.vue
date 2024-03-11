@@ -172,7 +172,6 @@
             <div class="d-f ai-c fd-c-mb w-100-mb ai-fs-mb">
               <AppFormField
                 vid="promo"
-                rules="required"
               >
                 <AppInput
                   id="promo"
