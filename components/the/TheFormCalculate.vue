@@ -428,9 +428,9 @@ export default {
     },
     prepareFormData() {
       const formData = {};
-      formData.accident_death = this.selectedRisks.accident_death ? this.data.sum : 0
-      formData.accident_disability = this.selectedRisks.accident_disability ? this.data.sum : 0
-      formData.timedisability_accident = this.selectedRisks.timedisability_accident ? this.data.sum : 0
+      formData.accident_death = this.selectedRisks.accident_death ? this.data.sum * 100 : 0
+      formData.accident_disability = this.selectedRisks.accident_disability ? this.data.sum * 100 : 0
+      formData.timedisability_accident = this.selectedRisks.timedisability_accident ? this.data.sum * 100 : 0
       formData.is_sporttime = this.data.is_sporttime;
       formData.is_professional = this.data.is_professional;
       formData.count_days = this.data.count_days;
