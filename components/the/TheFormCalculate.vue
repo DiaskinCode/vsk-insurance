@@ -426,16 +426,22 @@ export default {
       this.$emit('fetch-calculate', this.prepareFormData());
     },
     prepareFormData() {
-      const formData = {};
-      formData.accident_death = this.selectedRisks.accident_death ? this.data.sum * 100 : 0
-      formData.accident_disability = this.selectedRisks.accident_disability ? this.data.sum * 100 : 0
-      formData.timedisability_accident = this.selectedRisks.timedisability_accident ? this.data.sum * 100 : 0
-      formData.is_sporttime = this.data.is_sporttime;
-      formData.is_professional = this.data.is_professional;
-      formData.count_days = this.data.count_days;
-      formData.type_of_sport = this.data.type_of_sport.join(';');
-      formData.promo = this.data.promo;
-      formData.partner = this.data.partner;
+      const formData = {
+        accident_death: this.selectedRisks.accident_death ? this.data.sum : 0,
+        accident_disability: this.selectedRisks.accident_disability ? this.data.sum : 0,
+        time_disability_accident: this.selectedRisks.timedisability_accident ? this.data.sum : 0,
+        timedisability_accident: this.selectedRisks.timedisability_accident ? this.data.sum : 0,
+        is_sporttime: this.data.is_sporttime,
+        is_professional: this.data.is_professional,
+        count_days: this.data.count_days,
+        type_of_sport: this.data.type_of_sport.length > 0 ? this.data.type_of_sport.join(';') : undefined,
+        promo: this.data.promo,
+        partner: this.data.partner,
+      };
+
+      // Удаляем пустые ключи
+      Object.keys(formData).forEach(key => (formData[key] === undefined || formData[key] === null) && delete formData[key]);
+
       return formData;
     },
     validateSelect() {
