@@ -53,9 +53,9 @@
               <AppSlider
                 id="sum"
                 v-model="data.sum"
-                :min="50000"
+                :min="200000"
                 :max="300000"
-                :step="50000"
+                :step="25000"
                 @change="changeSliderSum"
               />
             </AppFormField>
@@ -297,7 +297,7 @@ export default {
   data: () => ({
     data: {
       count_days: 1,
-      sum: 50000,
+      sum: 200000,
       type_of_sport: [],
       is_professional: false,
       risks: [
@@ -464,7 +464,7 @@ export default {
       left: 0;
       top: 2rem;
       transform: translateX(-29%);
-      content: '50000 ₽';
+      content: '200000 ₽';
     }
     &::after {
       position: absolute;
