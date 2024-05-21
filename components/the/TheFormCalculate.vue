@@ -53,9 +53,9 @@
               <AppSlider
                 id="sum"
                 v-model="data.sum"
-                :min="200000"
+                :min="50000"
                 :max="300000"
-                :step="25000"
+                :step="50000"
                 @change="changeSliderSum"
               />
             </AppFormField>
@@ -464,7 +464,7 @@ export default {
       left: 0;
       top: 2rem;
       transform: translateX(-29%);
-      content: '200000 ₽';
+      content: '50000 ₽';
     }
     &::after {
       position: absolute;
@@ -504,6 +504,9 @@ export default {
       top: -5rem;
       left: 5rem;
     }
+  }
+  &__sum {
+    left: 60%;
   }
   /* .form-calculate__circle */
   &__circle {
