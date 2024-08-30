@@ -105,8 +105,7 @@
                 class="mt-10"
                 class-checkbox="mt-5"
                 value-label="timedisability_accident"
-                @input="checkCalculateProp('timedisability_accident',
-                                           data.risks.includes('timedisability_accident'))"
+                @input="checkCalculateProp('timedisability_accident', data.risks.includes('timedisability_accident'))"
               >
                 <label
                   for="risks-3"
@@ -178,9 +177,13 @@
                   v-model="data.promo"
                   component="InputText"
                   placeholder="########"
-                  @input="checkCalculateProp('promo', $event)"
+                  :class="{ 'error': promo_required_error }"
+                  @input="() => {promo_required_error = false; checkCalculateProp('promo', data.promo)}"
                 />
-                </AppInputGroup>
+                <div v-if="promo_required_error" class="app-form-field__error c-e pos-a fs-14 ws-nw l-0" style="margin-bottom: 4px">
+                  Необходимо ввести промокод!
+                </div>
+                <AppInputGroup />
               </AppFormField>
               <AppButton
                 class="ml-20 ml-0-mb mt-15-mb ord-3-mb w-100-mb"
@@ -313,6 +316,9 @@ export default {
       partner: false,
       rulespol: false,
     },
+
+    promo_required_error: false,
+
     optionsSport: sportList,
     sliderHandleEl: null,
     sliderHandleElSum: null,
@@ -419,10 +425,17 @@ export default {
     },
     async validateForm() {
       const isValidForm = await this.$refs.observerCalc.validate();
+
       this.validateSelect();
-      if (!isValidForm || this.isErrorSelect) {
+
+      if (!this.data.promo) {
+        this.promo_required_error = true;
+      }
+
+      if (!isValidForm || this.isErrorSelect || !this.data.promo) {
         return;
       }
+
       this.$emit('fetch-calculate', this.prepareFormData());
     },
     prepareFormData() {
@@ -562,7 +575,7 @@ export default {
   }
   .app-multi-select.error {
     border: 1px solid $error;
-    box-shadow: 0px 0rem .3rem rgba(255, 0, 0, 0.4) ;
+    box-shadow: 0 0 .3rem rgba(255, 0, 0, 0.4) ;
   }
 }
 </style>

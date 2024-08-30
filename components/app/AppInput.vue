@@ -44,6 +44,12 @@ export default {
 .app-input {
   padding-top: 1.8rem;
   padding-bottom: 1.8rem;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  &.error {
+    border-color: #f44336;
+    margin-bottom: 6px;
+    box-shadow: 0 0 0.3rem rgba(255, 0, 0, 0.4);
+  }
   & > * {
     width: 100%;
   }
