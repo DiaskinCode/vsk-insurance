@@ -31,7 +31,7 @@ def calculate(
     if timedisability_accident:
         total_condition += get_conditions_calculate('timedisability_accident')
 
-    date_start = datetime.today() + timedelta(days=1)
+    date_start = datetime.today()
     date_end = date_start + timedelta(days=count_days-1)
 
     body = xml_render(

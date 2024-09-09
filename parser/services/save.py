@@ -117,7 +117,7 @@ def save(
         total_data[key] = find_in_xml(temp_xml, value, key)
 
 
-    if all([value for key, value in total_data.items() if key != 'error']):
+    if all([value for key, value in total_data.items() if key != 'error' and value is not None]):
         return True, total_data
 
     error = response_xml.find('{http://www.vsk.ru/schema/partners/common}error')
