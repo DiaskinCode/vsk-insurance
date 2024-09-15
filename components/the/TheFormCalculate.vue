@@ -54,7 +54,7 @@
                 id="sum"
                 v-model="data.sum"
                 :min="50000"
-                :max="300000"
+                :max="1000000"
                 :step="50000"
                 @change="changeSliderSum"
               />
