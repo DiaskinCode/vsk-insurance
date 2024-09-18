@@ -484,7 +484,7 @@ export default {
       right: 0;
       top: 2rem;
       transform: translateX(20%);
-      content: '300000 ₽';
+      content: '1000000 ₽';
     }
   }
 }
