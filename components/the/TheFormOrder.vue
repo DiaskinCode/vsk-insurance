@@ -98,6 +98,7 @@
               />
             </AppFormField>
 
+            <!--
             <AppFormField
               class="col-6 col-12-mb"
               vid="date_start"
@@ -113,6 +114,7 @@
                 placeholder="ДД.ММ.ГГГГ"
               />
             </AppFormField>
+          -->
           </AppFormRow>
         </div>
       </div>
@@ -229,7 +231,7 @@ export default {
       phone_policyholder: '',
       email_policyholder: '',
 
-      date_start: '',
+      date_start: (new Date()).toLocaleDateString('ru-RU'),
     },
 
     isSame: false,
