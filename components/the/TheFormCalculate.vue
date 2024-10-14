@@ -44,7 +44,10 @@
           </div>
           <div class="form-calculate__slider">
             <div class="fw-6 fs-25 lh-140 mb-70 ws-nw mt-50">
-              Сумма страхования:
+              Сумма страхования
+            </div>
+            <div class="fw-4 fs-10 lh-140 mb-70 ws-nw mt-50">
+              Смерть Застрахованного в результате несчастного<br> случая, происшедшего в период страхования
             </div>
             <AppFormField
               class="px-20"
@@ -60,6 +63,51 @@
               />
             </AppFormField>
           </div>
+
+          <div class="form-calculate__slider">
+            <div class="fw-4 fs-10 lh-140 mb-70 ws-nw mt-50">
+              Установление Застрахованному I или II или<br>
+              III группы инвалидности в результате несчастного<br>
+              случая, происшедшего в период страхования
+            </div>
+            <AppFormField
+              class="px-20"
+              vid="sum_disability"
+            >
+              <AppSlider
+                id="sum_disability"
+                v-model="data.sum_disability"
+                :disabled="!selectedRisks.accident_disability"
+                :min="50000"
+                :max="50000000"
+                :step="50000"
+                @change="changeSliderSumDisabilty"
+              />
+            </AppFormField>
+          </div>
+
+          <div class="form-calculate__slider">
+            <div class="fw-4 fs-10 lh-140 mb-70 ws-nw mt-50">
+              Временная нетрудоспособность Застрахованного<br>
+              в результате несчастного случая, произошедшего<br>
+              в период страхования
+            </div>
+            <AppFormField
+              class="px-20"
+              vid="sum_accident"
+            >
+              <AppSlider
+                id="sum_accident"
+                v-model="data.sum_accident"
+                :disabled="!selectedRisks.timedisability_accident"
+                :min="50000"
+                :max="30000000"
+                :step="50000"
+                @change="changeSliderSumAccident"
+              />
+            </AppFormField>
+          </div>
+
           <div class="lh-140 fs-16-mb">
             <div class="fw-6 fs-25 lh-140 my-20 ws-nw mt-50-mb">
               Риски
@@ -254,7 +302,7 @@
         </div>
       </Teleport>
       <Teleport
-        to=".form-calculate__slider .app-slider"
+        to=".form-calculate__slider #sum"
       >
         <div
           ref="sum"
@@ -263,6 +311,29 @@
           {{ termStringSum }}
         </div>
       </Teleport>
+
+      <Teleport
+        to=".form-calculate__slider #sum_disability"
+      >
+        <div
+          ref="sum_disability"
+          class="form-calculate__sum bg-w b-1 br-5 py-10 d-f jc-c"
+        >
+          {{ termStringSumDisability }}
+        </div>
+      </Teleport>
+
+      <Teleport
+        to=".form-calculate__slider #sum_accident"
+      >
+        <div
+          ref="sum_accident"
+          class="form-calculate__sum bg-w b-1 br-5 py-10 d-f jc-c"
+        >
+          {{ termStringSumAccident }}
+        </div>
+      </Teleport>
+
       <Teleport
         to="#term"
       >
@@ -301,6 +372,8 @@ export default {
     data: {
       count_days: 1,
       sum: 200000,
+      sum_disability: 200000,
+      sum_accident: 200000,
       type_of_sport: [],
       is_professional: false,
       risks: [
@@ -322,6 +395,8 @@ export default {
     optionsSport: sportList,
     sliderHandleEl: null,
     sliderHandleElSum: null,
+    sliderHandleElSumDisability: null,
+    sliderHandleElSumAccident: null,
     isErrorSelect: false,
 
     tooltipOptions: {
@@ -371,6 +446,12 @@ export default {
     termStringSum() {
       return `${this.data.sum} ₽`;
     },
+    termStringSumDisability() {
+      return `${this.data.sum_disability} ₽`;
+    },
+    termStringSumAccident() {
+      return `${this.data.sum_accident} ₽`;
+    },
     priceString() {
       return this.price ? `${this.price.toLocaleString()} ₽` : null;
     },
@@ -393,7 +474,9 @@ export default {
   },
   mounted() {
     this.sliderHandleEl = document.querySelector('.form-calculate__days .p-slider-handle');
-    this.sliderHandleElSum = document.querySelector('.form-calculate__slider .p-slider-handle');
+    this.sliderHandleElSum = document.querySelector('.form-calculate__slider #sum .p-slider-handle');
+    this.sliderHandleElSumDisability = document.querySelector('.form-calculate__slider #sum_disability .p-slider-handle');
+    this.sliderHandleElSumAccident = document.querySelector('.form-calculate__slider #sum_accident .p-slider-handle');
   },
   methods: {
     changeSliderSum(value) {
@@ -406,6 +489,28 @@ export default {
       }
       this.$refs.sum.style.left = left + '%';
       this.checkCalculateProp('sum', value);
+    },
+    changeSliderSumDisabilty(value) {
+      let left = Number(this.sliderHandleElSumDisability.style.left.replace('%', ''));
+      if (left < 4.7) {
+        left = 4.7;
+      }
+      if (left > 95.3) {
+        left = 95.3;
+      }
+      this.$refs.sum_disability.style.left = left + '%';
+      this.checkCalculateProp('sum_disability', value);
+    },
+    changeSliderSumAccident(value) {
+      let left = Number(this.sliderHandleElSumAccident.style.left.replace('%', ''));
+      if (left < 4.7) {
+        left = 4.7;
+      }
+      if (left > 95.3) {
+        left = 95.3;
+      }
+      this.$refs.sum_accident.style.left = left + '%';
+      this.checkCalculateProp('sum_accident', value);
     },
     onSelectInput(value) {
       this.validateSelect();
@@ -440,10 +545,10 @@ export default {
     },
     prepareFormData() {
       const formData = {
-        accident_death: this.selectedRisks.accident_death ? this.data.sum : 0,
-        accident_disability: this.selectedRisks.accident_disability ? this.data.sum : 0,
-        time_disability_accident: this.selectedRisks.timedisability_accident ? this.data.sum : 0,
-        timedisability_accident: this.selectedRisks.timedisability_accident ? this.data.sum : 0,
+        accident_death: this.selectedRisks.accident_death ? this.data.sum / 100 : 0,
+        accident_disability: this.selectedRisks.accident_disability ? this.data.sum_disability / 100 : 0,
+        time_disability_accident: this.selectedRisks.timedisability_accident ? this.data.sum_accident / 100 : 0,
+        timedisability_accident: this.selectedRisks.timedisability_accident ? this.data.sum_accident / 100 : 0,
         is_sporttime: this.data.is_sporttime,
         is_professional: this.data.is_professional,
         count_days: this.data.count_days,
@@ -471,23 +576,55 @@ export default {
 <style lang="scss">
   .form-calculate__slider {
     .app-slider {
-    color: #444444;
-    &::before {
-      position: absolute;
-      left: 0;
-      top: 2rem;
-      transform: translateX(-29%);
-      content: '50000 ₽';
+      color: #444444;
+      &::before {
+        position: absolute;
+        left: 0;
+        top: 2rem;
+        transform: translateX(-29%);
+      }
+      &::after {
+        position: absolute;
+        right: 0;
+        top: 2rem;
+        transform: translateX(20%);
+      }
     }
-    &::after {
-      position: absolute;
-      right: 0;
-      top: 2rem;
-      transform: translateX(20%);
-      content: '1000000 ₽';
+
+    .app-slider[disabled="disabled"] {
+      opacity: 0.5
+    }
+
+    #sum {
+      color: #444444;
+      &::before {
+        content: '50000 ₽';
+      }
+      &::after {
+        content: '1000000 ₽';
+      }
+    }
+
+    #sum_disability {
+      color: #444444;
+      &::before {
+        content: '50000 ₽';
+      }
+      &::after {
+        content: '50000000 ₽';
+      }
+    }
+
+    #sum_accident {
+      color: #444444;
+      &::before {
+        content: '50000 ₽';
+      }
+      &::after {
+        content: '30000000 ₽';
+      }
     }
   }
-}
 
 .form-calculate {
   /* .form-calculate__term */
@@ -508,7 +645,7 @@ export default {
     position: absolute;
     white-space: nowrap;
     border-color: #D2D2D2;
-    width: 12rem;
+    width: 15rem;
     left: 4.7%;
     top: -6rem;
     transform: translateX(-50%);
