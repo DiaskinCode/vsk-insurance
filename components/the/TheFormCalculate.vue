@@ -79,7 +79,7 @@
                 v-model="data.sum_disability"
                 :disabled="!selectedRisks.accident_disability"
                 :min="50000"
-                :max="50000000"
+                :max="500000"
                 :step="50000"
                 @change="changeSliderSumDisabilty"
               />
@@ -101,7 +101,7 @@
                 v-model="data.sum_accident"
                 :disabled="!selectedRisks.timedisability_accident"
                 :min="50000"
-                :max="30000000"
+                :max="300000"
                 :step="50000"
                 @change="changeSliderSumAccident"
               />
@@ -545,10 +545,10 @@ export default {
     },
     prepareFormData() {
       const formData = {
-        accident_death: this.selectedRisks.accident_death ? this.data.sum / 100 : 0,
-        accident_disability: this.selectedRisks.accident_disability ? this.data.sum_disability / 100 : 0,
-        time_disability_accident: this.selectedRisks.timedisability_accident ? this.data.sum_accident / 100 : 0,
-        timedisability_accident: this.selectedRisks.timedisability_accident ? this.data.sum_accident / 100 : 0,
+        accident_death: this.selectedRisks.accident_death ? this.data.sum : 0,
+        accident_disability: this.selectedRisks.accident_disability ? this.data.sum_disability : 0,
+        time_disability_accident: this.selectedRisks.timedisability_accident ? this.data.sum_accident : 0,
+        timedisability_accident: this.selectedRisks.timedisability_accident ? this.data.sum_accident : 0,
         is_sporttime: this.data.is_sporttime,
         is_professional: this.data.is_professional,
         count_days: this.data.count_days,
@@ -611,7 +611,7 @@ export default {
         content: '50000 ₽';
       }
       &::after {
-        content: '50000000 ₽';
+        content: '500000 ₽';
       }
     }
 
@@ -621,7 +621,7 @@ export default {
         content: '50000 ₽';
       }
       &::after {
-        content: '30000000 ₽';
+        content: '300000 ₽';
       }
     }
   }
