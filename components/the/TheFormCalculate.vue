@@ -478,6 +478,9 @@ export default {
     this.sliderHandleElSumDisability = document.querySelector('.form-calculate__slider #sum_disability .p-slider-handle');
     this.sliderHandleElSumAccident = document.querySelector('.form-calculate__slider #sum_accident .p-slider-handle');
   },
+  created() {
+    this.getPromoFromUrl();
+  },
   methods: {
     changeSliderSum(value) {
       let left = Number(this.sliderHandleElSum.style.left.replace('%', ''));
@@ -564,6 +567,13 @@ export default {
     },
     validateSelect() {
       this.isErrorSelect = this.data.type_of_sport.length === 0;
+    },
+
+    getPromoFromUrl() {
+      const promocode = this.$route.query.promocode;
+      if (promocode) {
+        this.data.promo = promocode;
+      }
     },
 
     checkCalculateProp(prop, value) {
