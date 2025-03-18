@@ -15,6 +15,17 @@
           :gy-mb="25"
           @submit="validateForm"
         >
+          <!-- VIP Switch -->
+          <div class="vip-switch">
+            <AppInputSwitch
+              id="vip"
+              v-model="data.isVip"
+              name="vip"
+              label="Я VIP клиент"
+              @change="toggleVip"
+            />
+          </div>
+
           <div class="form-calculate__days">
             <div class="fw-6 fs-25 lh-140 mb-70 ws-nw">
               Срок страхования
@@ -42,6 +53,14 @@
               />
             </AppFormField>
           </div>
+          <div class="form-calculate__date">
+            <div class="fw-6 fs-25 lh-140 mb-20 mt-50 ws-nw">
+              Дата начала действия договора
+            </div>
+            <AppFormField vid="contractDate">
+              <AppDateField v-model="data.contractDate" :is-without-sport="data.withoutSport" />
+            </AppFormField>
+          </div>
           <div class="form-calculate__slider">
             <div class="fw-6 fs-25 lh-140 mb-70 ws-nw mt-50">
               Сумма страхования
@@ -57,7 +76,8 @@
                 id="sum"
                 v-model="data.sum"
                 :min="50000"
-                :max="1000000"
+                :style="`--sum-max: '${getMaxSum('death_accident')} ₽'`"
+                :max="getMaxSum('death_accident')"
                 :step="50000"
                 @change="changeSliderSum"
               />
@@ -79,7 +99,8 @@
                 v-model="data.sum_disability"
                 :disabled="!selectedRisks.accident_disability"
                 :min="50000"
-                :max="500000"
+                :max="getMaxSum('disability_accident')"
+                :style="`--disability-max: '${getMaxSum('disability_accident')} ₽'`"
                 :step="50000"
                 @change="changeSliderSumDisabilty"
               />
@@ -101,7 +122,8 @@
                 v-model="data.sum_accident"
                 :disabled="!selectedRisks.timedisability_accident"
                 :min="50000"
-                :max="300000"
+                :max="getMaxSum('timedisability_accident')"
+                :style="`--timedisability-max: '${getMaxSum('timedisability_accident')} ₽'`"
                 :step="50000"
                 @change="changeSliderSumAccident"
               />
@@ -165,7 +187,26 @@
               </AppCheckbox>
             </AppFormField>
           </div>
-          <div>
+          <div class="d-f ai-c">
+            <AppInputSwitch
+              id="withSport"
+              v-model="data.withSport"
+              name="withSport"
+              label="С занятиями спортом"
+              @change="toggleSport(true)"
+            />
+            <AppInputSwitch
+              id="withoutSport"
+              v-model="data.withoutSport"
+              class="ml-50"
+              name="withoutSport"
+              label="Без спорта"
+              @change="toggleSport(false)"
+            />
+          </div>
+
+          <!-- Поля "Категория спорта" и "Я профессионал" скрываются, если выбран "Без спорта" -->
+          <div v-if="data.withSport">
             <div class="fw-6 fs-25 lh-140 mb-10 ws-nw">
               Категория спорта
               <span class="fw-4 fs-12 o-50 ml-10 lh-110 d-b-mb ml-0-mb">
@@ -173,10 +214,7 @@
               </span>
             </div>
             <div class="d-f ai-c fd-c-mb w-100-mb ai-fs-mb">
-              <AppFormField
-                class="w-100-mb"
-                vid="sport"
-              >
+              <AppFormField class="w-100-mb" vid="sport">
                 <AppMultiSelect
                   id="sport"
                   ref="select"
@@ -198,10 +236,8 @@
                   Необходимо выбрать хотя бы 1 вид спорта
                 </div>
               </AppFormField>
-              <AppFormField
-                vid="proffesional"
-                class="ml-20 ml-0-mb mt-30-mb"
-              >
+
+              <AppFormField vid="proffesional" class="ml-20 ml-0-mb mt-30-mb">
                 <AppInputSwitch
                   id="proffesional"
                   v-model="data.is_professional"
@@ -212,6 +248,7 @@
               </AppFormField>
             </div>
           </div>
+
           <div>
             <div class="fw-6 fs-25 lh-140 mb-10 ws-nw">
               Промокод
@@ -371,6 +408,10 @@ export default {
   data: () => ({
     data: {
       count_days: 1,
+      isVipClient: false,
+      contractDate: null,
+      withSport: false,
+      withoutSport: true,
       sum: 200000,
       sum_disability: 200000,
       sum_accident: 200000,
@@ -382,12 +423,18 @@ export default {
         'timedisability_accident',
       ],
 
+      selectedRisks: {
+        accident_disability: false,
+        timedisability_accident: false,
+      },
+
       is_sporttime: false,
 
       // promo: 'VECTORSPORT',
       promo: null,
       partner: false,
       rulespol: false,
+      isVip: false, // Добавлено поле для VIP
     },
 
     promo_required_error: false,
@@ -400,12 +447,11 @@ export default {
     isErrorSelect: false,
 
     tooltipOptions: {
-      content: `
+      content: ` 
         «НС во время занятий спортом» означает, что страхование распространяется только на время,
         когда спортсмен тренируется или участвует в соревнованиях. Если признак не установлен,
         то страхование распространяется как на время тренировок/соревнований, так и другое время,
-        когда спортсмен не занимается спортом
-      `,
+        когда спортсмен не занимается спортом`,
       placement: 'right',
     },
     tooltipOptionsMobile: {
@@ -413,13 +459,21 @@ export default {
         «НС во время занятий спортом» означает, что страхование распространяется только на время,
         когда спортсмен тренируется или участвует в соревнованиях. Если признак не установлен,
         то страхование распространяется как на время тренировок/соревнований, так и другое время,
-        когда спортсмен не занимается спортом
-      `,
+        когда спортсмен не занимается спортом`,
       trigger: 'click',
       // placement: 'right',
     },
   }),
   computed: {
+    cssVars() {
+      return {
+        '--sum-max': this.data.isVip
+          ? '2000000 ₽'
+          : this.data.withSport ? '2000000 ₽' : '1000000 ₽',
+        '--disability-max': this.data.isVip ? '2000000 ₽' : '500000 ₽',
+        '--timedisability-max': this.data.isVip ? '2000000 ₽' : '300000 ₽'
+      }
+    },
     termDay() {
       const div = (val, by) => {
         return (val - val % by) / by;
@@ -482,6 +536,29 @@ export default {
     this.getPromoFromUrl();
   },
   methods: {
+    toggleVip() {
+      this.isVipClient = !this.isVipClient;
+    },
+    toggleSport(value) {
+      this.data.withSport = value;
+      this.data.withoutSport = !value;
+    },
+    getMaxSum(riskType) {
+      if (this.isVipClient) {
+        return 2000000;
+      }
+      if (riskType === 'death_accident') {
+        return this.data.withSport ? 2000000 : 1000000;
+      }
+      if (riskType === 'disability_accident') {
+        return 500000;
+      }
+      if (riskType === 'timedisability_accident') {
+        return 300000;
+      }
+
+      return 1000000;
+    },
     changeSliderSum(value) {
       let left = Number(this.sliderHandleElSum.style.left.replace('%', ''));
       if (left < 4.7) {
@@ -611,7 +688,7 @@ export default {
         content: '50000 ₽';
       }
       &::after {
-        content: '1000000 ₽';
+        content: var(--sum-max, '2000000 ₽');
       }
     }
 
@@ -621,7 +698,7 @@ export default {
         content: '50000 ₽';
       }
       &::after {
-        content: '500000 ₽';
+        content: var(--disability-max, '2000000 ₽');
       }
     }
 
@@ -631,7 +708,7 @@ export default {
         content: '50000 ₽';
       }
       &::after {
-        content: '300000 ₽';
+        content: var(--timedisability-max, '2000000 ₽');
       }
     }
   }
