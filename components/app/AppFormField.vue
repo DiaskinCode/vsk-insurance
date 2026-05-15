@@ -8,6 +8,7 @@
     class="app-form-field d-f fd-c pos-r"
     tag="div"
     :vid="vid"
+    :rules="rules"
   >
     <div
       class="app-form-field__content d-f f-1"

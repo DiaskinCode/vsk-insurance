@@ -610,8 +610,12 @@ export default {
     },
     async validateForm() {
       const isValidForm = await this.$refs.observerCalc.validate();
-
-      this.validateSelect();
+      // Если выбран "Без спорта", то пропускаем валидацию выбора видов спорта
+      if (this.data.withoutSport) {
+        this.isErrorSelect = false;
+      } else {
+        this.validateSelect();
+      }
 
       if (!this.data.promo) {
         this.promo_required_error = true;
@@ -628,22 +632,24 @@ export default {
         accident_death: this.selectedRisks.accident_death ? this.data.sum : 0,
         accident_disability: this.selectedRisks.accident_disability ? this.data.sum_disability : 0,
         time_disability_accident: this.selectedRisks.timedisability_accident ? this.data.sum_accident : 0,
-        timedisability_accident: this.selectedRisks.timedisability_accident ? this.data.sum_accident : 0,
         is_sporttime: this.data.is_sporttime,
         is_professional: this.data.is_professional,
         count_days: this.data.count_days,
-        type_of_sport: this.data.type_of_sport.length > 0 ? this.data.type_of_sport.join(';') : undefined,
         promo: this.data.promo,
         partner: this.data.partner,
+        type_of_sport: this.data.withSport ? this.data.type_of_sport.join(';') : 'Другое', // Передаем пустую строку, если "Без спорта"
       };
 
-      // Удаляем пустые ключи
       Object.keys(formData).forEach(key => (formData[key] === undefined || formData[key] === null) && delete formData[key]);
 
       return formData;
     },
     validateSelect() {
-      this.isErrorSelect = this.data.type_of_sport.length === 0;
+      if (this.data.withoutSport) {
+        this.isErrorSelect = false;
+      } else {
+        this.isErrorSelect = this.data.type_of_sport.length === 0;
+      }
     },
 
     getPromoFromUrl() {
